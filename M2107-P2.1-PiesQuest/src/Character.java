@@ -46,6 +46,14 @@ public class Character {
 	}
 	
 	/**
+	 * Gives the current position of the Character
+	 * @return the position of the player
+	 */
+	public Position getPosition() {
+		return this.position;
+	}
+	
+	/**
 	 * Moves the player in a give direction
 	 * @param direction the direction in which the player will move
 	 */
