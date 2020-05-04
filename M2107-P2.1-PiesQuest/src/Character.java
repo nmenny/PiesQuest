@@ -18,8 +18,16 @@ public class Character {
 	 */
 	private Position position;
 	
-	
-	
+	/**
+	 * Creates a new Character with given attributes
+	 * @param theName The name of the character
+	 * @param theHealth the health of the character
+	 */
+	public Character(String theName, int theHealth) {
+		this.name = theName;
+		this.health = theHealth;
+		this.position = new Position();
+	}
 	
 	
 }
