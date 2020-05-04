@@ -11,12 +11,12 @@ public class Game {
 	/**
 	 * the player's character
 	 */
-	private Character character;
+	private final Character character;
 	
 	/**
 	 * the parameter which will give some information about the window
 	 */
-	private Parameter parameter;
+	private final Parameter parameter;
 	
 	/**
 	 * The levels of the game
@@ -26,6 +26,8 @@ public class Game {
 	/**
 	 * The interface between the game and the player
 	 */
-	private IHM_Player ihm;
+	private final IHM_Player ihm;
+	
+	
 	
 }
