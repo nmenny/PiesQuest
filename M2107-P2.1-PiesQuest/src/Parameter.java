@@ -16,7 +16,7 @@ public class Parameter {
 	/**
 	 * The game in which the parameters will apply
 	 */
-	private Game theGame;
+	private Game game;
 	
 	/**
 	 * Give standard parameters
@@ -25,7 +25,7 @@ public class Parameter {
 	public Parameter(Game theGame) {
 		this.volume = 50;
 		this.displayFormat = "1920x1080";
-		this.theGame = theGame;
+		this.game = theGame;
 	}
 	
 	/**
