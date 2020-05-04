@@ -11,6 +11,8 @@ public class Character {
 	/**
 	 * The name of the Character
 	 */
-	private String name;
+	private final String name;
+	
+	
 	
 }
