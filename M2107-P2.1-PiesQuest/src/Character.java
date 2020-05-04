@@ -44,4 +44,12 @@ public class Character {
 	public String getName() {
 		return this.name;
 	}
+	
+	/**
+	 * Moves the player in a give direction
+	 * @param direction the direction in which the player will move
+	 */
+	public void move(int direction) {
+		
+	}
 }
