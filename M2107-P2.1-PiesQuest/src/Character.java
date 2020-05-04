@@ -59,4 +59,11 @@ public class Character {
 	public void jump() {
 		
 	}
+	
+	/**
+	 * the player dies
+	 */
+	public void die() {
+		
+	}
 }
