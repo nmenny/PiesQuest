@@ -1,7 +1,7 @@
 /**
  * The interface between the player and the game
  */
-public class IHM_Joueur {
+public class IHM_Player {
 	
 	/**
 	 * The game being played
