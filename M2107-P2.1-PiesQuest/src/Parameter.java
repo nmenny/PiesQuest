@@ -14,11 +14,18 @@ public class Parameter {
 	private String displayFormat;
 	
 	/**
-	 * Give standard parameters
+	 * The game in which the parameters will apply
 	 */
-	public Parameter() {
+	private Game theGame;
+	
+	/**
+	 * Give standard parameters
+	 * @param theGame the game which will receive the parameters
+	 */
+	public Parameter(Game theGame) {
 		this.volume = 50;
 		this.displayFormat = "1920x1080";
+		this.theGame = theGame;
 	}
 	
 	/**
