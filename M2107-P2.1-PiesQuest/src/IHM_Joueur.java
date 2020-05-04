@@ -13,6 +13,12 @@ public class IHM_Joueur {
 	 */
 	private Parameter theParameters;
 	
-	
+	/**
+	 * Displays a message to the player
+	 * @param message the message to transmit
+	 */
+	public void inform(String message) {
+		
+	}
 	
 }
