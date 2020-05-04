@@ -21,4 +21,45 @@ public class Parameter {
 		this.displayFormat = "1920x1080";
 	}
 	
+	/**
+	 * Displays the menu at the screen
+	 */
+	public void displayMenu() {
+		
+	}
+	
+	/**
+	 * Sets the new volume
+	 * @param theVolume the new volume
+	 */
+	public void setVolume(int theVolume) {
+		
+	}
+	
+	/**
+	 * Sets the new format of the screen
+	 * @param theFormat the new format of the screen
+	 */
+	public void setFormat(String theFormat) {
+		
+	}
+	
+	/**
+	 * Gives the current volume of the game
+	 * @return the volume of the game
+	 */
+	public int getVolume() {
+		return this.volume;
+	}
+	
+	/**
+	 * Gives the current display format of the game
+	 * @return the current format of the screen
+	 */
+	public String getDisplayFormat() {
+		return this.displayFormat;
+	}
+	
+	
+	
 }
