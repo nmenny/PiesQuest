@@ -32,7 +32,7 @@ public class Parameter {
 	 * Displays the menu at the screen
 	 */
 	public void displayMenu() {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class Parameter {
 	 * @param theVolume the new volume
 	 */
 	public void setVolume(int theVolume) {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class Parameter {
 	 * @param theFormat the new format of the screen
 	 */
 	public void setFormat(String theFormat) {
-		
+		//TODO implement the method
 	}
 	
 	/**

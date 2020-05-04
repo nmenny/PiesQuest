@@ -44,14 +44,14 @@ public class Game {
 	 * @param theNewFormat the new screen format
 	 */
 	public void applyModification(int theNewVolume, String theNewFormat) {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * Displays all the levels at the screen
 	 */
 	public void displayAllLevels() {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class Game {
 	 * @param levelId the index of the level
 	 */
 	public void chooseLevel(int levelId) {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class Game {
 	 * @param levelId the index of the level
 	 */
 	public void displayLevel(int levelId) {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -75,14 +75,14 @@ public class Game {
 	 * @param direction the given direction
 	 */
 	public void movePlayer(int direction) {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * Allows the player to jump
 	 */
 	public void jumpPlayer() {
-		
+		//TODO implement the method
 	}
 	
 	/**
@@ -97,34 +97,34 @@ public class Game {
 	 * displays the game over screen to the player
 	 */
 	public void displayGameOver() {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * Load a game save file
 	 */
 	public void loadElements() {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * displays the main screen to the player
 	 */
 	public void displayMainScreen() {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * displays the victory screen to the player
 	 */
 	public void displayVictoryScreen() {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * saves the game into a game save file
 	 */
 	public void save() {
-		
+		//TODO implement the method
 	}
 }

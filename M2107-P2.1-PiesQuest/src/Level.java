@@ -36,7 +36,7 @@ public class Level {
 	 * Load the level in memory
 	 */
 	public void load() {
-		
+		//TODO implement the method
 	}
 	
 	/**

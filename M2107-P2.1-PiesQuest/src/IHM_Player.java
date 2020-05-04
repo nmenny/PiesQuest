@@ -18,7 +18,7 @@ public class IHM_Player {
 	 * @param message the message to transmit
 	 */
 	public void inform(String message) {
-		
+		//TODO implement the method
 	}
 	
 }

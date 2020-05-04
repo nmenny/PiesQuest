@@ -58,20 +58,20 @@ public class Character {
 	 * @param direction the direction in which the player will move
 	 */
 	public void move(int direction) {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * makes the player jump
 	 */
 	public void jump() {
-		
+		//TODO implement the method
 	}
 	
 	/**
 	 * the player dies
 	 */
 	public void die() {
-		
+		//TODO implement the method
 	}
 }
