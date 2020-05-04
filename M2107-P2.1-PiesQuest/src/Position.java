@@ -13,4 +13,11 @@ public class Position {
 	 */
 	public int y;
 	
+	/**
+	 * Set the position to the origin (0, 0)
+	 */
+	public Position() {
+		this.x = this.y = 0;
+	}
+	
 }
