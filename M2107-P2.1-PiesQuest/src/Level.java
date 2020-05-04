@@ -21,5 +21,14 @@ public class Level {
 	 */
 	private boolean isLock;
 	
-	
+	/**
+	 * Creates a new level with given proprieties
+	 * @param theName the name of the level
+	 * @param theDescription the description of the level
+	 */
+	public Level(String theName, String theDescription) {
+		this.name = theName;
+		this.description = theDescription;
+		this.isLock = true;
+	}
 }
