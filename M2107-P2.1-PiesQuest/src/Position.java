@@ -23,7 +23,7 @@ public class Position {
 	/**
 	 * Set the position at given coordinates
 	 * @param theX the position in the x axis
-	 * @param the the position in the y axis
+	 * @param theY the position in the y axis
 	 */
 	public Position(int theX, int theY) {
 		this.x = theX;
