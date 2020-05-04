@@ -52,4 +52,11 @@ public class Character {
 	public void move(int direction) {
 		
 	}
+	
+	/**
+	 * makes the player jump
+	 */
+	public void jump() {
+		
+	}
 }
