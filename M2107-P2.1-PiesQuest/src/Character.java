@@ -29,5 +29,19 @@ public class Character {
 		this.position = new Position();
 	}
 	
+	/**
+	 * gives the current health of the character
+	 * @return the health of the character
+	 */
+	public int getHealth() {
+		return this.health;
+	}
 	
+	/**
+	 * gives the name of the character
+	 * @return the name of the character
+	 */
+	public String getName() {
+		return this.name;
+	}
 }
