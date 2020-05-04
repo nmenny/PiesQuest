@@ -31,4 +31,44 @@ public class Level {
 		this.description = theDescription;
 		this.isLock = true;
 	}
+	
+	/**
+	 * Load the level in memory
+	 */
+	public void load() {
+		
+	}
+	
+	/**
+	 * is the level locked ?
+	 * @return <tt>true</tt> the level has been finished or <tt>false</tt> the level has not been finished yet
+	 */
+	public boolean isLock() {
+		return this.isLock;
+	}
+	
+	/**
+	 * Unlocks the current level
+	 */
+	public void unlock() {
+		this.isLock = false;
+	}
+	
+	/**
+	 * Gives the name of the level
+	 * @return the name of the level
+	 */
+	public String getName() {
+		return this.name;
+	}
+	
+	/**
+	 * Gives the description of the level
+	 * @return the description of the level
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+	
+	
 }
