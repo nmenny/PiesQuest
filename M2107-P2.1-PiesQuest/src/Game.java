@@ -28,6 +28,14 @@ public class Game {
 	 */
 	private final IHM_Player ihm;
 	
-	
+	/**
+	 * creates a new Game ready to be played
+	 * @param theIhm the interface between the game and the player
+	 */
+	public Game(IHM_Player theIhm) {
+		this.ihm = theIhm;
+		this.character = new Character("Player1", 100);
+		this.parameter = new Parameter(this);
+	}
 	
 }
