@@ -13,6 +13,13 @@ public class Character {
 	 */
 	private final String name;
 	
+	/**
+	 * The position of the Character at the screen
+	 */
+	private Position position;
+	
+	
+	
 	
 	
 }
