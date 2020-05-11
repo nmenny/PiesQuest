@@ -42,6 +42,11 @@ public class Game {
 	public int menuDisplayed;
 	
 	/**
+	 * The selection of the options in the menus
+	 */
+	private int currentSelection;
+	
+	/**
 	 * creates a new Game ready to be played
 	 * @param theIhm the interface between the game and the player
 	 */
