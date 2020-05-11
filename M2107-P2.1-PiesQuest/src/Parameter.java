@@ -67,6 +67,20 @@ public class Parameter {
 		return this.displayFormat;
 	}
 	
+	/**
+	 * Gets screen width
+	 * @return the width of the screen
+	 */
+	public int getWidth() {
+		return Integer.parseInt(this.displayFormat.split("x")[0]);
+	}
 	
+	/**
+	 * Gets the screen height
+	 * @return the height of the screen
+	 */
+	public int getHeight() {
+		return Integer.parseInt(this.displayFormat.split("x")[1]);
+	}
 	
 }
