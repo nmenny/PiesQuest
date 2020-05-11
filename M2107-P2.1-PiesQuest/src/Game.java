@@ -29,6 +29,17 @@ public class Game {
 	private final IHM_Player ihm;
 	
 	/**
+	 * Allows us to know which screen has to be displayed by looking at the indexes
+	 * 0 - main menu displayed
+	 * 1 - parameters displayed
+	 * 2 - level selection displayed
+	 * 3 - level displayed
+	 * 4 - game over screen displayed
+	 * 5 - victory screen displayed
+	 */
+	public boolean[] mainMenuDisplayed;
+	
+	/**
 	 * creates a new Game ready to be played
 	 * @param theIhm the interface between the game and the player
 	 */
