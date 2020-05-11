@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,6 +20,26 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private Game theGame;
 	
 	/**
+	 * Is the game running
+	 */
+	private boolean isRunning;
+	
+	/**
+	 * The thread to handle the game
+	 */
+	private Thread gameThread;
+	
+	/**
+	 * Frame Per Seconds to render the game
+	 */
+	private static final int FPS = 60;
+	
+	/**
+	 * The time to wait between each frame
+	 */
+	private static final long targetTime = 1000 / IHM_Player.FPS;
+	
+	/**
 	 * The parameters of the current game
 	 */
 	private Parameter theParameters;
@@ -29,6 +50,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	public IHM_Player() {
 		this.theGame = new Game(this);
 		this.theParameters = this.theGame.getParameter();
+		
 	}
 	
 	/**
