@@ -79,8 +79,37 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param e the key pressed
 	 */
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		//Depending on the menu, the action possible are different
+		switch(this.theGame.menuDisplayed) {
+		case 0: //The main menu
+			//If we press the up arrow, we move up in the menu
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				this.theGame.gotoSelect(+1);
+			}
+			//If we press the down arrow, we move down in the menu
+			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				this.theGame.gotoSelect(-1);
+			}
+			
+			break;
+		case 1: //The parameters menu
+			
+			break;
+		case 2: //The level selection menu
+			
+			break;
+		case 3: //The level
+			
+			break;
+		case 4: //The game over menu
+			
+			break;
+		case 5: //The victory menu
+			
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
