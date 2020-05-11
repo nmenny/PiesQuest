@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -127,6 +128,14 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			
 		}
+	}
+	
+	/**
+	 * Display a component at the screen
+	 * @param g the graphical component
+	 */
+	public void paintComponent(Graphics g) {
+		
 	}
 	
 }
