@@ -94,13 +94,13 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
-					
+					//TODO handle events to start at level 1
 					break;
 				case 1: //Level selection option
-					
+					//TODO handle events to choose a level
 					break;
 				case 2: //Parameters Option
-					
+					//TODO handle events to open parameters menu
 					break;
 				case 3: //Quit option
 					System.exit(0);
@@ -112,19 +112,19 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			
 			break;
 		case 1: //The parameters menu
-			
+			//TODO handle events for the parameters
 			break;
 		case 2: //The level selection menu
-			
+			//TODO handle events for the selection menu
 			break;
 		case 3: //The level
-			
+			//TODO handle events for the level when it's being played
 			break;
 		case 4: //The game over menu
-			
+			//TODO handle events for the game over
 			break;
 		case 5: //The victory menu
-			
+			//TODO handle events for the victory
 			break;
 		default:
 			break;
