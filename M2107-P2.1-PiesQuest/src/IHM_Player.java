@@ -1,7 +1,11 @@
+import java.awt.event.KeyListener;
+
+import javax.swing.JPanel;
+
 /**
  * The interface between the player and the game
  */
-public class IHM_Player {
+public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	
 	/**
 	 * The game being played
