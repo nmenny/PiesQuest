@@ -49,6 +49,9 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 100);
 		this.parameter = new Parameter(this);
+		
+		//At the initialization, the main menu is displayed
+		this.menuDisplayed = 0;
 	}
 	
 	/**
@@ -65,7 +68,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayAllLevels(Graphics g) {
-		//TODO implement the method
+		this.menuDisplayed = 2;
 	}
 	
 	/**
@@ -82,7 +85,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(int levelId, Graphics g) {
-		//TODO implement the method
+		this.menuDisplayed = 3;
 	}
 	
 	/**
@@ -121,7 +124,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		//TODO implement the method
+		this.menuDisplayed = 4;
 	}
 	
 	/**
@@ -136,7 +139,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayMainScreen(Graphics g) {
-		//TODO implement the method
+		this.menuDisplayed = 0;
 	}
 	
 	/**
@@ -144,7 +147,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayVictoryScreen(Graphics g) {
-		//TODO implement the method
+		this.menuDisplayed = 5;
 	}
 	
 	/**
