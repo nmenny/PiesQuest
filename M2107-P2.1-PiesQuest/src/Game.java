@@ -80,6 +80,14 @@ public class Game {
 	}
 	
 	/**
+	 * display the current level at the screen
+	 * @param g the drawing object
+	 */
+	public void displayLevel(Graphics g) {
+		this.menuDisplayed = 3;
+	}
+	
+	/**
 	 * displays the selected level at the screen
 	 * @param levelId the index of the level
 	 * @param g the drawing object
