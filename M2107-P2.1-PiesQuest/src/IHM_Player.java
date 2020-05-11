@@ -15,12 +15,10 @@ public class IHM_Player {
 	
 	/**
 	 * Creates a new player for the game
-	 * @param param the parameters of the game
-	 * @param game the game played by the player
 	 */
-	public IHM_Player(Parameter param, Game game) {
-		this.theGame = game;
-		this.theParameters = param;
+	public IHM_Player() {
+		this.theGame = new Game(this);
+		this.theParameters = this.theGame.getParameter();
 	}
 	
 	/**
