@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -163,8 +164,6 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		default:
 			break;
 		}
-		
-		g.drawRect(this.theParameters.getWidth() / 2 - 25, this.theParameters.getHeight() / 2 - 25, 50, 50);
 	}
 	
 }

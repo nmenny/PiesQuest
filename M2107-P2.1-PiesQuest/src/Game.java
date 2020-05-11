@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -152,7 +154,22 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayMainScreen(Graphics g) {
-		//TODO implement the method
+		String[] menus = {"Start", "Choose level", "Parameters", "Quit"};
+		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
+		
+		g.setColor(new Color(0, 0, 0));
+		g.drawRect(0, 0, width, height);
+		
+		for(int menu = 0; menu < menus.length; menu++) {
+			if(menu == this.currentSelection) {
+				g.setColor(Color.GREEN);
+			} else {
+				g.setColor(Color.WHITE);
+			}
+			
+			g.setFont(new Font("Arial", Font.PLAIN, 50));
+			g.drawString(menus[menu], (width / 2) - (menus[menu].length() / 2), 120 + menu * 120);
+		}
 	}
 	
 	/**
