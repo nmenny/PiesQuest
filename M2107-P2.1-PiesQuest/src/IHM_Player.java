@@ -114,14 +114,14 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			repaint();
 			
 			elapsed = System.nanoTime() - start;
-			wait = this.targetTime - elapsed / 1000000;
+			wait = IHM_Player.targetTime - elapsed / 1000000;
 			
 			if(wait <= 0) {
 				wait = 5;
 			}
 			
 			try {
-				this.gameThread.sleep(wait);
+				Thread.sleep(wait);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
