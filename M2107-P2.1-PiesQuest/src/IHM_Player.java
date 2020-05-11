@@ -84,11 +84,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		case 0: //The main menu
 			//If we press the up arrow, we move up in the menu
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				this.theGame.gotoSelect(+1);
+				this.theGame.gotoSelect(-1);
 			}
 			//If we press the down arrow, we move down in the menu
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				this.theGame.gotoSelect(-1);
+				this.theGame.gotoSelect(+1);
 			}
 			
 			break;
