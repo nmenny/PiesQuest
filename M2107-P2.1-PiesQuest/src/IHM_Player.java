@@ -52,11 +52,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.theGame = new Game(this);
 		this.theParameters = this.theGame.getParameter();
 		
-		int width = 800;
-		int height = 600;
-		
 		//Configure the screen
-		setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(this.theParameters.getWidth(), this.theParameters.getHeight()));
 		 
 		addKeyListener(this);
 		setFocusable(true);
@@ -135,7 +132,10 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param g the graphical component
 	 */
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.clearRect(0,  0,  WIDTH, HEIGHT);
 		
+		g.drawRect(WIDTH / 2 - 25, HEIGHT / 2 - 25, 50, 50);
 	}
 	
 }
