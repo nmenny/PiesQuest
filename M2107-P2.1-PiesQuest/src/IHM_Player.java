@@ -133,9 +133,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.clearRect(0,  0,  WIDTH, HEIGHT);
+		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
 		
-		g.drawRect(WIDTH / 2 - 25, HEIGHT / 2 - 25, 50, 50);
+		g.drawRect(this.theParameters.getWidth() / 2 - 25, this.theParameters.getHeight() / 2 - 25, 50, 50);
 	}
 	
 }
