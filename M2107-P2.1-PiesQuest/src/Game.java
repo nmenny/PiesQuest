@@ -46,7 +46,7 @@ public class Game {
 	/**
 	 * The selection of the options in the menus
 	 */
-	private int currentSelection;
+	public int currentSelection;
 	
 	/**
 	 * creates a new Game ready to be played
