@@ -157,8 +157,9 @@ public class Game {
 		String[] menus = {"Start", "Choose level", "Parameters", "Quit"};
 		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
 		
-		g.setColor(new Color(0, 0, 0));
-		g.drawRect(0, 0, width, height);
+		//Background
+		g.setColor(new Color(50, 150, 200));
+		g.fillRect(0,  0,  width, height);
 		
 		for(int menu = 0; menu < menus.length; menu++) {
 			if(menu == this.currentSelection) {
@@ -168,7 +169,7 @@ public class Game {
 			}
 			
 			g.setFont(new Font("Arial", Font.PLAIN, 50));
-			g.drawString(menus[menu], (width / 2) - (menus[menu].length() / 2), 120 + menu * 120);
+			g.drawString(menus[menu], (width / 2) - 120, 120 + menu * 120);
 		}
 	}
 	
