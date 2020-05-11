@@ -68,7 +68,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayAllLevels(Graphics g) {
-		this.menuDisplayed = 2;
+		//TODO implement the method
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(Graphics g) {
-		this.menuDisplayed = 3;
+		//TODO implement the method
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(int levelId, Graphics g) {
-		this.menuDisplayed = 3;
+		//TODO implement the method
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		this.menuDisplayed = 4;
+		//TODO implement the method
 	}
 	
 	/**
@@ -147,7 +147,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayMainScreen(Graphics g) {
-		this.menuDisplayed = 0;
+		//TODO implement the method
 	}
 	
 	/**
@@ -155,7 +155,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayVictoryScreen(Graphics g) {
-		this.menuDisplayed = 5;
+		//TODO implement the method
 	}
 	
 	/**

@@ -32,7 +32,7 @@ public class Parameter {
 	 * Displays the menu at the screen
 	 */
 	public void displayMenu() {
-		this.game.menuDisplayed = 1;
+		//TODO implement the method
 	}
 	
 	/**
