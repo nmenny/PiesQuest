@@ -225,4 +225,12 @@ public class Game {
 			return 0;
 		}
 	}
+	
+	/**
+	 * Gets the current option in the displayed menu
+	 * @return the current option selected in the displayed menu
+	 */
+	public int getCurrentSelection() {
+		return this.currentSelection;
+	}
 }
