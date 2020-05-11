@@ -101,6 +101,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					//TODO handle events to choose a level
 					break;
 				case 2: //Parameters Option
+					this.theGame.menuDisplayed = 1;
 					this.theParameters.displayMenu(this);
 					break;
 				case 3: //Quit option
