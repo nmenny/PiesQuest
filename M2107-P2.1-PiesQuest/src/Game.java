@@ -31,7 +31,7 @@ public class Game {
 	private final IHM_Player ihm;
 	
 	/**
-	 * Allows us to know which screen has to be displayed by looking at the indexes
+	 * Allows us to know which screen has to be displayed by looking at the value
 	 * 0 - main menu displayed
 	 * 1 - parameters displayed
 	 * 2 - level selection displayed
@@ -39,7 +39,7 @@ public class Game {
 	 * 4 - game over screen displayed
 	 * 5 - victory screen displayed
 	 */
-	public boolean[] mainMenuDisplayed;
+	public int menuDisplayed;
 	
 	/**
 	 * creates a new Game ready to be played
@@ -49,7 +49,6 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 100);
 		this.parameter = new Parameter(this);
-		this.mainMenuDisplayed = new boolean[6];
 	}
 	
 	/**
