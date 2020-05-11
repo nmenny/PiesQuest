@@ -14,6 +14,16 @@ public class IHM_Player {
 	private Parameter theParameters;
 	
 	/**
+	 * Creates a new player for the game
+	 * @param param the parameters of the game
+	 * @param game the game played by the player
+	 */
+	public IHM_Player(Parameter param, Game game) {
+		this.theGame = game;
+		this.theParameters = param;
+	}
+	
+	/**
 	 * Displays a message to the player
 	 * @param message the message to transmit
 	 */
