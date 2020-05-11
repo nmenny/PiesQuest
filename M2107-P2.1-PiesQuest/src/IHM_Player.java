@@ -106,8 +106,27 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * The render loop of our game
 	 */
 	public void run() {
-		// TODO Auto-generated method stub
+		long start, elapsed, wait;
 		
+		while(this.isRunning) {
+			start = System.nanoTime();
+			
+			repaint();
+			
+			elapsed = System.nanoTime() - start;
+			wait = this.targetTime - elapsed / 1000000;
+			
+			if(wait <= 0) {
+				wait = 5;
+			}
+			
+			try {
+				this.gameThread.sleep(wait);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 }
