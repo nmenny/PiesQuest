@@ -189,7 +189,19 @@ public class Game {
 		//TODO implement the method
 	}
 	
-
+	/**
+	 * Moves the selection attribute in a given direction
+	 * @param go the direction of the move
+	 */
+	public void gotoSelect(int go) {
+		this.currentSelection += go;
+		if(this.currentSelection < 0) {
+			this.currentSelection = this.getNumberOption() - 1;
+		}
+		if(this.currentSelection >= this.getNumberOption()) {
+			this.currentSelection = 0;
+		}
+	}
 	
 	/**
 	 * Gets the number of options possible for the current menu
