@@ -45,12 +45,25 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private Parameter theParameters;
 	
 	/**
-	 * Creates a new player for the game
+	 * Creates a new player for the game and starts the game
 	 */
 	public IHM_Player() {
 		this.theGame = new Game(this);
 		this.theParameters = this.theGame.getParameter();
 		
+		int width = 800;
+		int height = 600;
+		
+		//Configure the screen
+		setPreferredSize(new Dimension(width, height));
+		 
+		addKeyListener(this);
+		setFocusable(true);
+		
+		//Launches the game
+		this.isRunning = true;
+		this.gameThread = new Thread(this);
+		this.gameThread.start();
 	}
 	
 	/**
