@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 /**
  * Represents a game of Pies's Quest
  */
@@ -60,8 +62,9 @@ public class Game {
 	
 	/**
 	 * Displays all the levels at the screen
+	 * @param g the drawing object
 	 */
-	public void displayAllLevels() {
+	public void displayAllLevels(Graphics g) {
 		//TODO implement the method
 	}
 	
@@ -76,8 +79,9 @@ public class Game {
 	/**
 	 * displays the selected level at the screen
 	 * @param levelId the index of the level
+	 * @param g the drawing object
 	 */
-	public void displayLevel(int levelId) {
+	public void displayLevel(int levelId, Graphics g) {
 		//TODO implement the method
 	}
 	
@@ -114,8 +118,9 @@ public class Game {
 	
 	/**
 	 * displays the game over screen to the player
+	 * @param g the drawing object
 	 */
-	public void displayGameOver() {
+	public void displayGameOver(Graphics g) {
 		//TODO implement the method
 	}
 	
@@ -128,15 +133,17 @@ public class Game {
 	
 	/**
 	 * displays the main screen to the player
+	 * @param g the drawing object
 	 */
-	public void displayMainScreen() {
+	public void displayMainScreen(Graphics g) {
 		//TODO implement the method
 	}
 	
 	/**
 	 * displays the victory screen to the player
+	 * @param g the drawing object
 	 */
-	public void displayVictoryScreen() {
+	public void displayVictoryScreen(Graphics g) {
 		//TODO implement the method
 	}
 	
