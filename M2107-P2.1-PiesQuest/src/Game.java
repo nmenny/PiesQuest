@@ -59,6 +59,7 @@ public class Game {
 		
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
+		this.currentSelection = 0;
 	}
 	
 	/**
