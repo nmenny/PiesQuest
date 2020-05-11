@@ -8,7 +8,7 @@ public class Game {
 	/**
 	 * The level which is being played
 	 */
-	public int currentLevel;
+	private int currentLevel;
 	
 	/**
 	 * the player's character
