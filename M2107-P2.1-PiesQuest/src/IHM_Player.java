@@ -141,7 +141,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theGame.displayMainScreen(g);
 			break;
 		case 1: //The parameters menu
-			this.theParameters.displayMenu();
+			this.theParameters.displayMenu(g);
 			break;
 		case 2: //The level selection menu
 			this.theGame.displayAllLevels(g);
