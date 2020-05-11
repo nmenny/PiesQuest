@@ -49,6 +49,7 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 100);
 		this.parameter = new Parameter(this);
+		this.mainMenuDisplayed = new boolean[6];
 	}
 	
 	/**
