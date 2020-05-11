@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 /**
  * Represents the parameters of the game to configure it
  */
@@ -30,8 +32,9 @@ public class Parameter {
 	
 	/**
 	 * Displays the menu at the screen
+	 * @param g the drawing object
 	 */
-	public void displayMenu() {
+	public void displayMenu(Graphics g) {
 		//TODO implement the method
 	}
 	
