@@ -1,3 +1,7 @@
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+
 /**
  * Launch a game of Pie's Quest
  */
@@ -8,7 +12,14 @@ public class GameLauncher {
 	 * @param args arguments of the main, not used
 	 */
 	public static void main(String[] args) {
-		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLayout(new BorderLayout());
+		frame.add(new IHM_Player(), BorderLayout.CENTER);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 }
