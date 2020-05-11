@@ -1,7 +1,10 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
 
 /**
  * Represents the parameters of the game to configure it
@@ -39,6 +42,17 @@ public class Parameter {
 	 */
 	public void displayMenu(IHM_Player ihm) {
 		
+		JLabel labelVolume = new JLabel("Volume:");
+		JTextPane volume = new JTextPane();
+		JLabel labelFormat = new JLabel("Screen format:");
+		JTextPane screenFormat = new JTextPane();
+		JButton btn = new JButton("Valider");
+		
+		ihm.add(labelVolume);
+		ihm.add(volume);
+		ihm.add(labelFormat);
+		ihm.add(screenFormat);
+		ihm.add(btn);
 	}
 	
 	/**

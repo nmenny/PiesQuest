@@ -101,8 +101,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					//TODO handle events to choose a level
 					break;
 				case 2: //Parameters Option
-					this.theGame.menuDisplayed = 1;
-					this.theParameters.displayMenu(this);
+					//TODO handle events to open the parameters menu
 					break;
 				case 3: //Quit option
 					System.exit(0);
@@ -162,7 +161,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		
 		while(this.isRunning) {
 			start = System.nanoTime();
-			
+
 			repaint();
 			
 			elapsed = System.nanoTime() - start;
@@ -187,7 +186,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		//Clears the screen
 		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
 		
@@ -197,7 +196,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theGame.displayMainScreen(g);
 			break;
 		case 1: //The parameters menu
-			//this.theParameters.displayMenu(this);
+			this.theParameters.displayMenu(this);
 			break;
 		case 2: //The level selection menu
 			this.theGame.displayAllLevels(g);
@@ -214,6 +213,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		default:
 			break;
 		}
+		
 	}
 	
 }
