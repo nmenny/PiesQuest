@@ -75,24 +75,36 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	}
 
 	@Override
+	/**
+	 * when a key is pressed
+	 */
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	/**
+	 * When a key is released
+	 */
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	/**
+	 * When a key is typed
+	 */
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	/**
+	 * The render loop of our game
+	 */
 	public void run() {
 		// TODO Auto-generated method stub
 		
