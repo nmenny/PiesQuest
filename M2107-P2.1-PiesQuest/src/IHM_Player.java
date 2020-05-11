@@ -90,6 +90,25 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 				this.theGame.gotoSelect(+1);
 			}
+			//If we press on "enter", we open the current menu
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(this.theGame.getCurrentSelection()) {
+				case 0: //Start level 1 option
+					
+					break;
+				case 1: //Level selection option
+					
+					break;
+				case 2: //Parameters Option
+					
+					break;
+				case 3: //Quit option
+					System.exit(0);
+					break;
+				default: 
+					break;
+				}
+			}
 			
 			break;
 		case 1: //The parameters menu
