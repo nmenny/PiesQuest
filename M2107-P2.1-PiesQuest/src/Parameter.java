@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
 import java.awt.Graphics;
+
+import javax.swing.JButton;
 
 /**
  * Represents the parameters of the game to configure it
@@ -32,10 +35,10 @@ public class Parameter {
 	
 	/**
 	 * Displays the menu at the screen
-	 * @param g the drawing object
+	 * @param ihm the container to put elements in
 	 */
-	public void displayMenu(Graphics g) {
-		//TODO implement the method
+	public void displayMenu(IHM_Player ihm) {
+		
 	}
 	
 	/**

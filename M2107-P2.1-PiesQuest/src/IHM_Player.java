@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -195,7 +196,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theGame.displayMainScreen(g);
 			break;
 		case 1: //The parameters menu
-			this.theParameters.displayMenu(g);
+			this.theParameters.displayMenu(this);
 			break;
 		case 2: //The level selection menu
 			this.theGame.displayAllLevels(g);
