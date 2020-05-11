@@ -135,6 +135,30 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		super.paintComponent(g);
 		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
 		
+		//The element displayed varies depending on the menu displayed
+		switch(this.theGame.menuDisplayed) {
+		case 0: //The main menu
+			
+			break;
+		case 1: //The parameters menu
+			
+			break;
+		case 2: //The level selection menu
+			
+			break;
+		case 3: //The level
+			
+			break;
+		case 4: //The game over Screen
+			
+			break;
+		case 5: //The victory Screen
+			
+			break;
+		default:
+			break;
+		}
+		
 		g.drawRect(this.theParameters.getWidth() / 2 - 25, this.theParameters.getHeight() / 2 - 25, 50, 50);
 	}
 	
