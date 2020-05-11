@@ -94,6 +94,14 @@ public class Game {
 	}
 	
 	/**
+	 * Gets the current parameters of the game
+	 * @return the parameter of the game
+	 */
+	public Parameter getParameter() {
+		return this.parameter;
+	}
+	
+	/**
 	 * displays the game over screen to the player
 	 */
 	public void displayGameOver() {
