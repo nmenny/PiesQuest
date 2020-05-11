@@ -138,22 +138,22 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		//The element displayed varies depending on the menu displayed
 		switch(this.theGame.menuDisplayed) {
 		case 0: //The main menu
-			
+			this.theGame.displayMainScreen(g);
 			break;
 		case 1: //The parameters menu
-			
+			this.theParameters.displayMenu();
 			break;
 		case 2: //The level selection menu
-			
+			this.theGame.displayAllLevels(g);
 			break;
 		case 3: //The level
-			
+			this.theGame.displayLevel(g);
 			break;
 		case 4: //The game over Screen
-			
+			this.theGame.displayGameOver(g);
 			break;
 		case 5: //The victory Screen
-			
+			this.theGame.displayVictoryScreen(g);
 			break;
 		default:
 			break;
