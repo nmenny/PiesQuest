@@ -75,8 +75,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	@Override
 	/**
 	 * when a key is pressed
+	 * @param e the key pressed
 	 */
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -84,8 +85,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	@Override
 	/**
 	 * When a key is released
+	 * @param e the key released
 	 */
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -93,8 +95,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	@Override
 	/**
 	 * When a key is typed
+	 * @param e the key typed
 	 */
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -133,6 +136,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		//Clears the screen
 		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
 		
 		//The element displayed varies depending on the menu displayed
