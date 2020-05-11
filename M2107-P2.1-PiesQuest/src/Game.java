@@ -188,4 +188,29 @@ public class Game {
 	public void save() {
 		//TODO implement the method
 	}
+	
+
+	
+	/**
+	 * Gets the number of options possible for the current menu
+	 * @return the number of option of the current menu
+	 */
+	private int getNumberOption() {
+		switch(this.currentLevel) {
+		case 0:
+			return 4;
+		case 1:
+
+		case 2:
+
+		case 3:
+
+		case 4:
+
+		case 5: 
+
+		default: 
+			return 0;
+		}
+	}
 }
