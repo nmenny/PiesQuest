@@ -130,7 +130,7 @@ public class Level {
 				line = br.readLine();
 				String[] levelInformations = line.split(",");
 				if(levelInformations.length == 2) {
-					levels[i] = new Level(levelInformations[0], levelInformations[1]);
+					levels[i] = new Level((i+1) +"_" +levelInformations[0], levelInformations[1]);
 				} else {
 					throw new LevelException();
 				}
