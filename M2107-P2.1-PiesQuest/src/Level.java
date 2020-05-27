@@ -36,6 +36,16 @@ public class Level {
 	private List<String> loadedLevel;
 	
 	/**
+	 * The width of the tiles
+	 */
+	private int width;
+	
+	/**
+	 * The height of the tiles
+	 */
+	private int height;
+	
+	/**
 	 * Creates a new level with given proprieties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
@@ -55,8 +65,9 @@ public class Level {
 		System.out.println(levelName);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			String tileSize = br.readLine();
-			
+			String[] tileSize = br.readLine().split(" ");
+			this.width = Integer.parseInt(tileSize[0]); 
+			this.height = Integer.parseInt(tileSize[1]);
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -109,7 +120,11 @@ public class Level {
 	public void display(Graphics g) {
 		Iterator<String> it = this.loadedLevel.iterator();
 		while(it.hasNext()) {
-			System.out.println(it.next());
+			for(char c : it.next().toCharArray()) {
+				if(c == 'x') {
+					
+				}
+			}
 		}
 	}
 	
