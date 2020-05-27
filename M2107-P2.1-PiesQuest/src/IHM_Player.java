@@ -53,7 +53,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	/**
 	 * The states of the jump
 	 */
-	private boolean playerJumping, playerFalling;
+	private boolean playerJumping;
 	
 	/**
 	 * Creates a new player for the game and starts the game
@@ -73,7 +73,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread = new Thread(this);
 		this.gameThread.start();
 		
-		this.playerMovingLeft = this.playerMovingRight = this.playerFalling = this.playerJumping = false;
+		this.playerMovingLeft = this.playerMovingRight = this.playerJumping = false;
 	}
 	
 	/**
