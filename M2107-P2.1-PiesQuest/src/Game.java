@@ -91,14 +91,7 @@ public class Game {
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
 		this.levels[this.currentLevel].load();
-		this.placeCharacter();
-	}
-	
-	/**
-	 * Places the character on the screen
-	 */
-	private void placeCharacter() {
-		
+		this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
 	}
 
 	/**
