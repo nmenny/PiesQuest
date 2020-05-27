@@ -100,6 +100,8 @@ public class Game {
 	 */
 	public void displayLevel(Graphics g) {
 		this.levels[this.currentLevel].display(g, this.parameter.getWidth(), this.parameter.getHeight());
+		g.setColor(EnumTiles.Player.tileColor);
+		g.fillRect(this.character.getPosition().x, this.character.getPosition().y, Character.SIZE, Character.SIZE);
 	}
 	
 	/**
