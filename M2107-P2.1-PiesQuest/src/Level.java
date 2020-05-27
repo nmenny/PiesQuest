@@ -133,11 +133,6 @@ public class Level {
 					g.fillRect(x * this.width, y, this.width, this.height);
 					
 				}
-				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
-					g.setColor(EnumTiles.Player.tileColor);
-					g.fillRect(x * this.width, y, this.width, this.height);
-				
-				}
 				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect(x * this.width, y, this.width, this.height);
@@ -177,6 +172,26 @@ public class Level {
 			System.err.println("File error !");
 		}
 		return levels;
+	}
+
+	/**
+	 * Returns the initial position of the character
+	 * @param gameHeight the height of the game
+	 * @return The initial position of the player
+	 */
+	public Position getInitialPlayerPosition(int gameHeight) {
+		Position pos = null;
+		int y = gameHeight - this.height;
+		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
+			String line = this.loadedLevel.get(level);
+			for(int x = 0; x < line.length(); x++) {
+				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
+					pos = new Position(x * this.width, y);
+				}
+			}
+			y -= this.height;
+		}
+		return pos;
 	}
 	
 	
