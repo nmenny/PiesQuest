@@ -210,5 +210,17 @@ public class Level {
 		return pos;
 	}
 	
+	/**
+	 * Translates the level tiles
+	 * @param direction the direction of the translation
+	 */
+	public void translation(int direction) {
+		if(direction > 0) { //Moves to the right
+			
+		} else if(direction < 0) { //Moves to the left
+			
+		}
+	}
+	
 	
 }
