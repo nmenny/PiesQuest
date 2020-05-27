@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Represents a level of our game
  */
@@ -36,7 +41,16 @@ public class Level {
 	 * Load the level in memory
 	 */
 	public void load() {
-		//TODO implement the method
+		String levelName = "./levels/level" +this.name.split("_")[0] +".txt";
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(levelName));
+			System.out.println(br.readLine());
+		} catch (FileNotFoundException e) {
+			System.err.println("Error, level not found !");
+		} catch (IOException e) {
+			System.err.println("File error !");
+		}
+		
 	}
 	
 	/**
