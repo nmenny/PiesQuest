@@ -1,8 +1,10 @@
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -51,7 +53,6 @@ public class Level {
 	public void load() {
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
 		System.out.println(levelName);
-		this.displayableLevel = new String[1];
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
 			String tileSize = br.readLine();
@@ -59,7 +60,7 @@ public class Level {
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
-				this.displayableLevel[0] = br.readLine();
+				this.loadedLevel.add(line);
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -101,8 +102,15 @@ public class Level {
 		return this.description;
 	}
 	
-	public String[] getDisplay() {
-		return this.displayableLevel.clone();
+	/**
+	 * Displays the level at the screen
+	 * @param g the graphical component
+	 */
+	public void display(Graphics g) {
+		Iterator<String> it = this.loadedLevel.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 	
 	
