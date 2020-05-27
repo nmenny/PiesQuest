@@ -27,6 +27,11 @@ public class Level {
 	private boolean isLock;
 	
 	/**
+	 * contains the entire level loaded from a file
+	 */
+	private String[] displayableLevel;
+	
+	/**
 	 * Creates a new level with given proprieties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
