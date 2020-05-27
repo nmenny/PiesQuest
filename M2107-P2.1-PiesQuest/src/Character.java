@@ -24,6 +24,22 @@ public class Character {
 	public static final int MOVING_SPEED = 10;
 	
 	/**
+	 * The jumping speed
+	 */
+	public static final double JUMPING_SPEED = 5;
+	
+	/**
+	 * The falling speed of the player
+	 */
+	public static final double FALLING_SPEED = 5;
+	
+	/**
+	 * The current jump of falling speed of the player
+	 */
+	public double currentFallingSpeed, currentJumpSpeed;
+	
+	
+	/**
 	 * Creates a new Character with given attributes
 	 * @param theName The name of the character
 	 * @param theHealth the health of the character
@@ -32,6 +48,8 @@ public class Character {
 		this.name = theName;
 		this.health = theHealth;
 		this.position = new Position();
+		this.currentFallingSpeed = 0.1;
+		this.currentJumpSpeed = Character.JUMPING_SPEED;
 	}
 	
 	/**
@@ -75,6 +93,14 @@ public class Character {
 		this.position = new Position(thePosition.x, thePosition.y);
 	}
 	
+	public double getCurrentJumpSpeed() {
+		return this.currentJumpSpeed;
+	}
+	
+	public void initJumpSpeed() {
+		this.currentJumpSpeed = Character.JUMPING_SPEED;
+	}
+	
 	/**
 	 * Moves the player in a give direction
 	 * @param direction the direction in which the player will move
@@ -94,13 +120,28 @@ public class Character {
 	 * makes the player jump
 	 */
 	public void jump() {
-		//TODO implement the method
+		this.position.y -= this.currentJumpSpeed;
+		
+		this.currentJumpSpeed -= 0.1;
 	}
 	
 	/**
 	 * the player dies
 	 */
 	public void die() {
-		//TODO implement the method
+		if(this.position.y < 0) {
+			this.health = 0;
+		}
+	}
+	
+	/**
+	 * Makes the player fall
+	 */
+	public void fall() {
+		this.position.y += this.currentFallingSpeed;
+		
+		if(this.currentFallingSpeed < Character.FALLING_SPEED) {
+			this.currentFallingSpeed += 0.1;
+		}
 	}
 }
