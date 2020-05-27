@@ -103,7 +103,8 @@ public class Game {
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
 		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
-		if(this.character.getPosition().y < 0) {
+		if(this.character.getPosition().y > this.parameter.getHeight()) {
+			System.out.println("draw death");
 			this.character.die();
 		}
 	}
@@ -126,11 +127,9 @@ public class Game {
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves
 		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0)) {
 			this.levels[this.currentLevel].translation(1);
-			System.out.println(this.levels[this.currentLevel].getOffsetX());
 		//Else, if the player position is less than the 1/3 of the screen width and if the tiles are not back to normal (the starting offset) the tiles are moving the other way
 		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)){
 			this.levels[this.currentLevel].translation(-1);
-			System.out.println(this.levels[this.currentLevel].getOffsetX());
 		} else  {  //The player moves
 			this.character.move(direction);
 		}
