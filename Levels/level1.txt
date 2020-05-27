@@ -1,1 +1,5 @@
-xxxxxxx
+50 50
+xxxxxxxxxxx
+
+  o       p
+xxxxxxxxxxx
