@@ -26,7 +26,7 @@ public class Character {
 	/**
 	 * The moving speed of the character
 	 */
-	public static final int MOVING_SPEED = 3;
+	public static final int MOVING_SPEED = 20;
 	
 	/**
 	 * Creates a new Character with given attributes
