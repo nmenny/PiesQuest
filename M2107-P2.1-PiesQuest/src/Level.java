@@ -119,10 +119,12 @@ public class Level {
 	 * @throws LevelException If the level file does not contain enough information about the level
 	 */
 	public static Level[] loadAllLevels() throws LevelException {
+		Level[] levels = null;
+		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Save/LevelNames.txt"));
 			int nbLevels = Integer.parseInt(br.readLine());
-			Level[] levels = new Level[nbLevels];
+			levels = new Level[nbLevels];
 			String line;
 			for(int i = 0; i < nbLevels; i++) {
 				line = br.readLine();
@@ -140,8 +142,7 @@ public class Level {
 		} catch (IOException e) {
 			System.err.println("File error !");
 		}
-		
-		return null;
+		return levels;
 	}
 	
 	
