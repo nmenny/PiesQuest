@@ -95,7 +95,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
-					//TODO handle events to start at level 1
+					this.theGame.menuDisplayed = 3;
 					break;
 				case 1: //Level selection option
 					//TODO handle events to choose a level

@@ -46,7 +46,8 @@ public class Level {
 	 * Load the level in memory
 	 */
 	public void load() {
-		String levelName = "./levels/level" +this.name.split("_")[0] +".txt";
+		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
+		System.out.println(levelName);
 		this.displayableLevel = new String[1];
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
@@ -89,6 +90,10 @@ public class Level {
 	 */
 	public String getDescription() {
 		return this.description;
+	}
+	
+	public String[] getDisplay() {
+		return this.displayableLevel.clone();
 	}
 	
 	

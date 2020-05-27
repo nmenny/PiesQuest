@@ -60,6 +60,9 @@ public class Game {
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
 		this.currentSelection = 0;
+		this.levels = new Level[1];
+		this.levels[0] = new Level("1_levelOne", "An amazing advanture");
+		this.currentLevel = 0;
 	}
 	
 	/**
@@ -92,7 +95,8 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(Graphics g) {
-		//TODO implement the method
+		this.levels[this.currentLevel].load();
+		System.out.println(this.levels[this.currentLevel].getDisplay());
 	}
 	
 	/**
