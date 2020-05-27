@@ -54,6 +54,15 @@ public class Character {
 	}
 	
 	/**
+	 * Place the character somewhere on the screen
+	 * @param x the coordinate on the x axis
+	 * @param y the coordinate on the y axis
+	 */
+	public void setPosition(int x, int y) {
+		this.position = new Position(x, y);
+	}
+	
+	/**
 	 * Moves the player in a give direction
 	 * @param direction the direction in which the player will move
 	 */
