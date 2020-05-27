@@ -233,6 +233,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(this.playerMovingRight) {
 				this.theGame.movePlayer(1);
 			}
+			if(this.playerJumping) {
+				this.theGame.jumpPlayer();
+			}
 			this.theGame.displayLevel(g);
 			break;
 		case 4: //The game over Screen
