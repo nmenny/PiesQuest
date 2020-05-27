@@ -116,9 +116,31 @@ public class Level {
 	/**
 	 * Loads all the levels of the game
 	 * @return an array containing all the levels
+	 * @throws LevelException If the level file does not contain enough information about the level
 	 */
-	public static Level[] loadAllLevels() {
-		// TODO Auto-generated method stub
+	public static Level[] loadAllLevels() throws LevelException {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("Save/LevelNames.txt"));
+			int nbLevels = Integer.parseInt(br.readLine());
+			Level[] levels = new Level[nbLevels];
+			String line;
+			for(int i = 0; i < nbLevels; i++) {
+				line = br.readLine();
+				String[] levelInformations = line.split(",");
+				if(levelInformations.length == 2) {
+					levels[i] = new Level(levelInformations[0], levelInformations[1]);
+				} else {
+					throw new LevelException();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("File not found !");
+		} catch (NumberFormatException e) {
+			System.err.println("The first line of the level file is not a number !");
+		} catch (IOException e) {
+			System.err.println("File error !");
+		}
+		
 		return null;
 	}
 	

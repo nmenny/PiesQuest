@@ -60,7 +60,11 @@ public class Game {
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
 		this.currentSelection = 0;
-		this.levels = Level.loadAllLevels();
+		try {
+			this.levels = Level.loadAllLevels();
+		} catch (LevelException e) {
+			System.err.println("Error while loading the levels, missing level information !");
+		}
 	}
 	
 	/**
