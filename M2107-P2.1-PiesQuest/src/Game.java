@@ -118,7 +118,7 @@ public class Game {
 	 * @param direction the given direction
 	 */
 	public void movePlayer(int direction) {
-		//TODO implement the method
+		this.character.move(direction);
 	}
 	
 	/**
