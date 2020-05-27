@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a level of our game
@@ -29,7 +31,7 @@ public class Level {
 	/**
 	 * contains the entire level loaded from a file
 	 */
-	private String[] displayableLevel;
+	private List<String> loadedLevel;
 	
 	/**
 	 * Creates a new level with given proprieties
@@ -40,6 +42,7 @@ public class Level {
 		this.name = theName;
 		this.description = theDescription;
 		this.isLock = true;
+		this.loadedLevel = new ArrayList<String>();
 	}
 	
 	/**
@@ -51,8 +54,14 @@ public class Level {
 		this.displayableLevel = new String[1];
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			System.out.println(br.readLine());
-			this.displayableLevel[0] = br.readLine();
+			String tileSize = br.readLine();
+			
+			String line;
+			while((line = br.readLine()) != null) {
+				System.out.println(line);
+				this.displayableLevel[0] = br.readLine();
+			}
+			
 		} catch (FileNotFoundException e) {
 			System.err.println("Error, level not found !");
 		} catch (IOException e) {
