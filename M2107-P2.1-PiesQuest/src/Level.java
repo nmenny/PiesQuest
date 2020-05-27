@@ -121,13 +121,27 @@ public class Level {
 	 * @param gameHeight the height of the game
 	 */
 	public void display(Graphics g, int gameWidth, int gameHeight) {
-		Iterator<String> it = this.loadedLevel.iterator();
 		int y = gameHeight - this.height;
-		while(it.hasNext()) {
-			String line = it.next();
+		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
+			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
+					g.fillRect(x * this.width, y, this.width, this.height);
+					
+				}
+				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
+					g.setColor(EnumTiles.End.tileColor);
+					g.fillRect(x * this.width, y, this.width, this.height);
+					
+				}
+				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
+					g.setColor(EnumTiles.Player.tileColor);
+					g.fillRect(x * this.width, y, this.width, this.height);
+				
+				}
+				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect(x * this.width, y, this.width, this.height);
 				}
 			}
