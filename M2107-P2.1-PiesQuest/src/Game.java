@@ -90,7 +90,7 @@ public class Game {
 	 */
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
-		this.levels[currentLevel].load();
+		this.levels[this.currentLevel].load();
 	}
 	
 	/**
