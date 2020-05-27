@@ -46,9 +46,14 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private Parameter theParameters;
 	
 	/**
-	 * Adding attributes to know where is the player moving to
+	 * Allows us to know where is the player moving to
 	 */
 	private boolean playerMovingLeft, playerMovingRight;
+	
+	/**
+	 * The states of the jump
+	 */
+	private boolean playerJumping, playerFalling;
 	
 	/**
 	 * Creates a new player for the game and starts the game
@@ -68,7 +73,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread = new Thread(this);
 		this.gameThread.start();
 		
-		this.playerMovingLeft = this.playerMovingRight = false;
+		this.playerMovingLeft = this.playerMovingRight = this.playerFalling = this.playerJumping = false;
 	}
 	
 	/**
@@ -130,6 +135,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				this.playerMovingRight = true;
+			}
+			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+				
 			}
 			break;
 		case 4: //The game over menu
