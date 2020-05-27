@@ -49,6 +49,11 @@ public class Game {
 	private int currentSelection;
 	
 	/**
+	 * Stores the previous direction of the player movement
+	 */
+	private int previousDirection;
+	
+	/**
 	 * creates a new Game ready to be played
 	 * @param theIhm the interface between the game and the player
 	 */
@@ -60,6 +65,7 @@ public class Game {
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
 		this.currentSelection = 0;
+		this.previousDirection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
 		} catch (LevelException e) {
@@ -119,6 +125,9 @@ public class Game {
 	 * @param direction the given direction
 	 */
 	public void movePlayer(int direction) {
+		if(direction < 0) {
+			this.character.move(direction);
+		}
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves
 		if(this.character.getPosition().x + Character.MOVING_SPEED >= ((2 * this.parameter.getWidth()) / 3)) {
 			this.levels[this.currentLevel].translation(direction);
