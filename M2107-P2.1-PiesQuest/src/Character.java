@@ -24,6 +24,11 @@ public class Character {
 	public static final int SIZE = 50;
 	
 	/**
+	 * The moving speed of the character
+	 */
+	public static final int MOVING_SPEED = 3;
+	
+	/**
 	 * Creates a new Character with given attributes
 	 * @param theName The name of the character
 	 * @param theHealth the health of the character
@@ -80,7 +85,14 @@ public class Character {
 	 * @param direction the direction in which the player will move
 	 */
 	public void move(int direction) {
-		//TODO implement the method
+		switch(direction) {
+			case 1:
+				
+			break;
+			case -1:
+			
+			break;
+		}
 	}
 	
 	/**
