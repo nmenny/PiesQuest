@@ -46,6 +46,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private Parameter theParameters;
 	
 	/**
+	 * Adding attributes to know where is the player moving to
+	 */
+	private boolean playerMovingLeft, playerMovingRight;
+	
+	/**
 	 * Creates a new player for the game and starts the game
 	 */
 	public IHM_Player() {
@@ -142,8 +147,17 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param e the key released
 	 */
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		//Depending on the menu, the action possible are different
+		switch(this.theGame.menuDisplayed) {
+			case 3: //The level
+				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+					this.theGame.movePlayer(-1);
+				}
+				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					this.theGame.movePlayer(1);
+				}
+			break;
+		}
 	}
 
 	@Override
