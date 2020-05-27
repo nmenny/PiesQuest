@@ -87,7 +87,7 @@ public class Game {
 	 * @param levelId the index of the level
 	 */
 	public void chooseLevel(int levelId) {
-		//TODO implement the method
+		this.currentLevel = levelId;
 	}
 	
 	/**
