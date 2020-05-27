@@ -117,19 +117,21 @@ public class Level {
 	/**
 	 * Displays the level at the screen
 	 * @param g the graphical component
+	 * @param gameWidth the width of the game
+	 * @param gameHeight the height of the game
 	 */
-	public void display(Graphics g) {
+	public void display(Graphics g, int gameWidth, int gameHeight) {
 		Iterator<String> it = this.loadedLevel.iterator();
-		int y = 0;
+		int y = gameHeight - this.height;
 		while(it.hasNext()) {
 			String line = it.next();
 			for(int x = 0; x < line.length(); x++) {
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
-					g.fillRect(x * this.width, y * this.height, this.width, this.height);
+					g.fillRect(x * this.width, y, this.width, this.height);
 				}
 			}
-			y++;
+			y -= this.height;
 		}
 	}
 	
