@@ -21,7 +21,7 @@ public class Character {
 	/**
 	 * The moving speed of the player
 	 */
-	private int speed;
+	public static final int MOVING_SPEED = 10;
 	
 	/**
 	 * Creates a new Character with given attributes
@@ -32,7 +32,6 @@ public class Character {
 		this.name = theName;
 		this.health = theHealth;
 		this.position = new Position();
-		this.speed = 10;
 	}
 	
 	/**
@@ -83,10 +82,10 @@ public class Character {
 	public void move(int direction) {
 		switch(direction) {
 			case 1:
-				this.position = new Position(this.position.x + this.speed, this.position.y);
+				this.position = new Position(this.position.x + Character.MOVING_SPEED, this.position.y);
 			break;
 			case -1:
-				this.position = new Position(this.position.x - this.speed, this.position.y);
+				this.position = new Position(this.position.x - Character.MOVING_SPEED, this.position.y);
 			break;
 		}
 	}
