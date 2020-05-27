@@ -137,7 +137,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				this.playerMovingRight = true;
 			}
 			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-				
+				this.playerJumping = true;
 			}
 			break;
 		case 4: //The game over menu
