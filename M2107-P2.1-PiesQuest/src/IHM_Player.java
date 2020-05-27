@@ -118,7 +118,12 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			//TODO handle events for the selection menu
 			break;
 		case 3: //The level
-			//TODO handle events for the level when it's being played
+			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				this.theGame.movePlayer(1);
+			}
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				this.theGame.movePlayer(-1);
+			}
 			break;
 		case 4: //The game over menu
 			//TODO handle events for the game over
