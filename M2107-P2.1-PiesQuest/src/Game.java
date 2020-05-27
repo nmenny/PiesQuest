@@ -91,8 +91,16 @@ public class Game {
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
 		this.levels[this.currentLevel].load();
+		this.placeCharacter();
 	}
 	
+	/**
+	 * Places the character on the screen
+	 */
+	private void placeCharacter() {
+		
+	}
+
 	/**
 	 * display the current level at the screen
 	 * @param g the drawing object
