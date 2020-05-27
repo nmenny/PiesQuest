@@ -60,8 +60,7 @@ public class Game {
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
 		this.currentSelection = 0;
-		this.levels = new Level[1];
-		this.levels[0] = new Level("1_levelOne", "An amazing advanture");
+		this.levels = Level.loadAllLevels();
 	}
 	
 	/**

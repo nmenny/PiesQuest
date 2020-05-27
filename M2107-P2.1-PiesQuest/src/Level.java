@@ -113,5 +113,14 @@ public class Level {
 		}
 	}
 	
+	/**
+	 * Loads all the levels of the game
+	 * @return an array containing all the levels
+	 */
+	public static Level[] loadAllLevels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 }
