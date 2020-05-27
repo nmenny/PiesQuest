@@ -96,7 +96,7 @@ public class Game {
 	 */
 	public void displayLevel(Graphics g) {
 		this.levels[this.currentLevel].load();
-		System.out.println(this.levels[this.currentLevel].getDisplay());
+		this.levels[this.currentLevel].display(g);
 	}
 	
 	/**
