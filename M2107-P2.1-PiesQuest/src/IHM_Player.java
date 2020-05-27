@@ -222,6 +222,12 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theGame.displayAllLevels(g);
 			break;
 		case 3: //The level
+			if(this.playerMovingLeft) {
+				this.theGame.movePlayer(1);
+			}
+			if(this.playerMovingRight) {
+				this.theGame.movePlayer(-1);
+			}
 			this.theGame.displayLevel(g);
 			break;
 		case 4: //The game over Screen
