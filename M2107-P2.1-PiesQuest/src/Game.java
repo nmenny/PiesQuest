@@ -25,7 +25,7 @@ public class Game {
 	/**
 	 * The levels of the game
 	 */
-	private Level[] levels;
+	private Set<Level> levels;
 	
 	/**
 	 * The interface between the game and the player
