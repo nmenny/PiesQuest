@@ -85,11 +85,12 @@ public class Game {
 	}
 	
 	/**
-	 * selects a level into the levels
+	 * selects a level into the levels and loads it in memory
 	 * @param levelId the index of the level
 	 */
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
+		this.levels[currentLevel].load();
 	}
 	
 	/**

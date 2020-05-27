@@ -131,7 +131,6 @@ public class Level {
 				String[] levelInformations = line.split(",");
 				if(levelInformations.length == 2) {
 					levels[i] = new Level(levelInformations[0], levelInformations[1]);
-					levels[i].load();
 				} else {
 					throw new LevelException();
 				}
