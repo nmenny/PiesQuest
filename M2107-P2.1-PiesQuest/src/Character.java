@@ -19,6 +19,11 @@ public class Character {
 	private Position position;
 	
 	/**
+	 * The size of a character
+	 */
+	public static final int SIZE = 50;
+	
+	/**
 	 * Creates a new Character with given attributes
 	 * @param theName The name of the character
 	 * @param theHealth the health of the character
