@@ -45,6 +45,11 @@ public class Level {
 	private int height;
 	
 	/**
+	 * The offset on the x axis of the tiles
+	 */
+	private int offsetX;
+	
+	/**
 	 * Creates a new level with given proprieties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
@@ -54,6 +59,7 @@ public class Level {
 		this.description = theDescription;
 		this.isLock = true;
 		this.loadedLevel = new ArrayList<String>();
+		this.offsetX = 0;
 	}
 	
 	/**
@@ -141,17 +147,17 @@ public class Level {
 			for(int x = 0; x < line.length(); x++) {
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
-					g.fillRect(x * this.width, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
 					
 				}
 				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
 					g.setColor(EnumTiles.End.tileColor);
-					g.fillRect(x * this.width, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
 					
 				}
 				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
-					g.fillRect(x * this.width, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
 				}
 			}
 			y -= this.height;
@@ -216,9 +222,9 @@ public class Level {
 	 */
 	public void translation(int direction) {
 		if(direction > 0) { //Moves to the right
-			
+			this.offsetX -= Character.MOVING_SPEED;
 		} else if(direction < 0) { //Moves to the left
-			
+			this.offsetX += Character.MOVING_SPEED;
 		}
 	}
 	
