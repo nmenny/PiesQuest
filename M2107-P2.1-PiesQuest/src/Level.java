@@ -151,7 +151,7 @@ public class Level {
 		Level[] levels = null;
 		
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("Save/LevelNames.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
 			int nbLevels = Integer.parseInt(br.readLine());
 			levels = new Level[nbLevels];
 			String line;
