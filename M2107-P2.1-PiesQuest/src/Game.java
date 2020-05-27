@@ -102,7 +102,7 @@ public class Game {
 		Level currentLevel = this.levels[this.currentLevel];
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
-		g.fillRect(this.character.getPosition().x, this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
+		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
 	}
 	
 	/**
@@ -137,7 +137,12 @@ public class Game {
 	 * Allows the player to jump
 	 */
 	public void jumpPlayer() {
-		//TODO implement the method
+		 if(this.character.getCurrentJumpSpeed() <= 0) {
+			 //Falling begun
+			 this.character.fall();
+		 } else {
+			 this.character.jump();
+		 }
 	}
 	
 	/**
