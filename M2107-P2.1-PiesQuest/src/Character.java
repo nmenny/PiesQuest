@@ -87,10 +87,10 @@ public class Character {
 	public void move(int direction) {
 		switch(direction) {
 			case 1:
-				
+				this.position = new Position(this.position.x + Character.MOVING_SPEED, this.position.y);
 			break;
 			case -1:
-			
+				this.position = new Position(this.position.x - Character.MOVING_SPEED, this.position.y);
 			break;
 		}
 	}
