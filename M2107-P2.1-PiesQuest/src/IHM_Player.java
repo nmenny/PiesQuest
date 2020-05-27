@@ -167,10 +167,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * When a key is typed
 	 * @param e the key typed
 	 */
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
 	/**
