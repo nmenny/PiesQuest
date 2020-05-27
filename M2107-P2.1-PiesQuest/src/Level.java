@@ -113,6 +113,22 @@ public class Level {
 	}
 	
 	/**
+	 * Gets the width of the tiles
+	 * @return the width of the tiles
+	 */
+	public int getTileWidth() {
+		return this.width;
+	}
+	
+	/**
+	 * Gets the height of the tiles
+	 * @return the height of the tiles
+	 */
+	public int getTileHeight() {
+		return this.height;
+	}
+	
+	/**
 	 * Displays the level at the screen
 	 * @param g the graphical component
 	 * @param gameWidth the width of the game
