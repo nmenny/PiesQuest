@@ -62,7 +62,6 @@ public class Game {
 		this.currentSelection = 0;
 		this.levels = new Level[1];
 		this.levels[0] = new Level("1_levelOne", "An amazing advanture");
-		this.currentLevel = 0;
 	}
 	
 	/**
