@@ -97,7 +97,6 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(Graphics g) {
-		this.levels[this.currentLevel].load();
 		this.levels[this.currentLevel].display(g);
 	}
 	
