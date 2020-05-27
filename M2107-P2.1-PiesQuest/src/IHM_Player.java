@@ -67,6 +67,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.isRunning = true;
 		this.gameThread = new Thread(this);
 		this.gameThread.start();
+		
+		this.playerMovingLeft = this.playerMovingRight = false;
 	}
 	
 	/**
