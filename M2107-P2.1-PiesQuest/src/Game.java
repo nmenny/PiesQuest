@@ -99,9 +99,10 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(Graphics g) {
-		this.levels[this.currentLevel].display(g, this.parameter.getWidth(), this.parameter.getHeight());
+		Level currentLevel = this.levels[this.currentLevel];
+		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
-		g.fillRect(this.character.getPosition().x, this.character.getPosition().y, Character.SIZE, Character.SIZE);
+		g.fillRect(this.character.getPosition().x, this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
 	}
 	
 	/**
