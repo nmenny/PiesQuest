@@ -125,13 +125,12 @@ public class Game {
 	 * @param direction the given direction
 	 */
 	public void movePlayer(int direction) {
-		if(direction < 0) {
-			this.character.move(direction);
-		}
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves
-		if(this.character.getPosition().x + Character.MOVING_SPEED >= ((2 * this.parameter.getWidth()) / 3)) {
-			this.levels[this.currentLevel].translation(direction);
-		} else { //The player moves
+		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0)) {
+			this.levels[this.currentLevel].translation(1);
+		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)){
+			this.levels[this.currentLevel].translation(-1);
+		} else  {  //The player moves
 			this.character.move(direction);
 		}
 	}
