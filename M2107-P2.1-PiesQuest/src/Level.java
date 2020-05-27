@@ -47,9 +47,11 @@ public class Level {
 	 */
 	public void load() {
 		String levelName = "./levels/level" +this.name.split("_")[0] +".txt";
+		this.displayableLevel = new String[1];
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
 			System.out.println(br.readLine());
+			this.displayableLevel[0] = br.readLine();
 		} catch (FileNotFoundException e) {
 			System.err.println("Error, level not found !");
 		} catch (IOException e) {
