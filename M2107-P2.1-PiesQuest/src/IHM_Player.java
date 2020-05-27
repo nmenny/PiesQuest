@@ -119,10 +119,10 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			break;
 		case 3: //The level
 			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-				this.theGame.movePlayer(1);
+				this.theGame.movePlayer(-1);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				this.theGame.movePlayer(-1);
+				this.theGame.movePlayer(1);
 			}
 			break;
 		case 4: //The game over menu
