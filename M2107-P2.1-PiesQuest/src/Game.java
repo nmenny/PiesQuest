@@ -111,7 +111,8 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(int levelId, Graphics g) {
-		//TODO implement the method
+		this.currentLevel = levelId;
+		this.displayLevel(g);
 	}
 	
 	/**
