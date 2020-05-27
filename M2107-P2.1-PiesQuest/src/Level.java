@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -119,12 +120,16 @@ public class Level {
 	 */
 	public void display(Graphics g) {
 		Iterator<String> it = this.loadedLevel.iterator();
+		int y = 0;
 		while(it.hasNext()) {
-			for(char c : it.next().toCharArray()) {
-				if(c == 'x') {
-					
+			String line = it.next();
+			for(int x = 0; x < line.length(); x++) {
+				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
+					g.setColor(EnumTiles.Wall.tileColor);
+					g.fillRect(x * this.width, y * this.height, this.width, this.height);
 				}
 			}
+			y++;
 		}
 	}
 	
