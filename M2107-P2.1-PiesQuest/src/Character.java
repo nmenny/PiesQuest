@@ -63,6 +63,14 @@ public class Character {
 	}
 	
 	/**
+	 * Place the character somewhere on the screen
+	 * @param thePosition the position of the character
+	 */
+	public void setPosition(Position thePosition) {
+		this.position = new Position(thePosition.x, thePosition.y);
+	}
+	
+	/**
 	 * Moves the player in a give direction
 	 * @param direction the direction in which the player will move
 	 */
