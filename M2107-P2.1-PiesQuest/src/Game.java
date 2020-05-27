@@ -103,6 +103,9 @@ public class Game {
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
 		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
+		if(this.character.getPosition().y < 0) {
+			this.character.die();
+		}
 	}
 	
 	/**

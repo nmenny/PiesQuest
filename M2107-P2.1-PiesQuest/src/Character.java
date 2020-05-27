@@ -128,10 +128,8 @@ public class Character {
 	/**
 	 * the player dies
 	 */
-	public void die() {
-		if(this.position.y < 0) {
-			this.health = 0;
-		}
+	public void die() {	
+		System.exit(0);
 	}
 	
 	/**
