@@ -228,5 +228,11 @@ public class Level {
 		}
 	}
 	
-	
+	/**
+	 * Returns the value of the offset on the x axis
+	 * @return the value of the offset on the x axis
+	 */
+	public int getOffsetX() {
+		return this.offsetX;
+	}
 }
