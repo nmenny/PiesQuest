@@ -254,4 +254,13 @@ public class Level {
 		
 		return (xMax <= gameWidth);
 	}
+	
+	@Override
+	/**
+	 * Gets the String representation of a level
+	 * @return the level with String format
+	 */
+	public String toString() {
+		return this.loadedLevel.toString();
+	}
 }
