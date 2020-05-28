@@ -153,17 +153,17 @@ public class Level {
 			for(int x = 0; x < line.length(); x++) {
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
-					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX, y + this.offsetY, this.width, this.height);
 					
 				}
 				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
 					g.setColor(EnumTiles.End.tileColor);
-					g.fillRect((x * this.width) + this.offsetX,  y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
 					
 				}
 				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
-					g.fillRect((x * this.width) + this.offsetX,  y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
 				}
 			}
 			y -= this.height;
@@ -242,7 +242,7 @@ public class Level {
 		if(direction > 0) { //Moves Up
 			this.offsetY += Character.JUMPING_SPEED;
 		} else if(direction < 0) { //Moves Down
-			this.offsetY -= Character.FALLING_SPEED;
+			this.offsetY -= Character.JUMPING_SPEED;
 		}
 	}
 	

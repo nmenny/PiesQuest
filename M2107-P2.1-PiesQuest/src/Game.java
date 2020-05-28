@@ -145,22 +145,20 @@ public class Game {
 	 * Allows the player to jump
 	 */
 	public boolean jumpPlayer() {
-		
-		 if(this.character.getCurrentJumpSpeed() <= 0) {
-			 //Falling begun
-			 this.character.fall();
-		 } else {
-			 this.character.jump();
-		 }
-			boolean[] collisions = this.checkCollisions();
-			if(collisions[2]) {
-				this.character.currentJumpSpeed = 0;
-			}
-			if(collisions[3]) {
-				this.character.currentJumpSpeed = Character.JUMPING_SPEED;
-				this.character.currentFallingSpeed = 1;
-				return true;
-			}
+		if(this.character.getCurrentJumpSpeed() <= 0) {
+			this.character.fall(); 
+		} else{
+			this.character.jump();
+		}
+		boolean[] collisions = this.checkCollisions();
+		if(collisions[2]) {
+			this.character.currentJumpSpeed = 0;
+		}
+		if(collisions[3]) {
+			this.character.currentJumpSpeed = Character.JUMPING_SPEED;
+			this.character.currentFallingSpeed = 1;
+			return true;
+		}
 			
 		return false;
 	}
@@ -195,7 +193,7 @@ public class Game {
 		for(int line = level.length - 1; line >= 0; line--) {
 			for(int x = 0; x < level[line].length(); x++) {
 				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX() - tileWidth;
-				int minTileHeight = y;
+				int minTileHeight = y + this.levels[this.currentLevel].getOffsetY();
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = y + tileHeight;
 				
