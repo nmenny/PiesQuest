@@ -158,7 +158,7 @@ public class Game {
 			}
 			if(collisions[3]) {
 				this.character.currentJumpSpeed = Character.JUMPING_SPEED;
-				this.character.currentFallingSpeed = 0.1;
+				this.character.currentFallingSpeed = 1;
 				return true;
 			}
 			
@@ -180,8 +180,8 @@ public class Game {
 		int tileHeight = this.levels[this.currentLevel].getTileHeight();
 		int tileWidth = this.levels[this.currentLevel].getTileWidth();
 		
-		double playerX = this.character.getPosition().x;
-		double playerY = this.character.getPosition().y;
+		int playerX = (int)this.character.getPosition().x;
+		int playerY = (int)this.character.getPosition().y + 1;
 		
 		//Checking the collision with the edges
 		if(playerX <= 0) {
@@ -194,10 +194,12 @@ public class Game {
 		int y = this.parameter.getHeight() - tileHeight;
 		for(int line = level.length - 1; line >= 0; line--) {
 			for(int x = 0; x < level[line].length(); x++) {
-				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX();
+				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX() - tileWidth;
 				int minTileHeight = y;
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = y + tileHeight;
+				
+				//Rectangle tile = new Rectangle(minTileWidth, minTileHeight, tileWidth, tileHeight);
 				
 				//If the tile is a wall
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
@@ -212,14 +214,24 @@ public class Game {
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX <= maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							collisions[3] = true;
 						}
 					}
 					
-					//Collision on the left
-					//TODO implementing LEFT / RIGHT collisions
-					//TODO Make more usable Collision detection
+					//Collisions Right
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if((playerX + tileWidth) == minTileWidth) {
+							collisions[0] = true;
+						}
+					}
+					
+					//Collisions Left
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if(playerX == (minTileWidth + tileWidth)) {
+							collisions[1] = true;
+						}
+					}
 				}
 				/*
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
