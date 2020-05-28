@@ -223,10 +223,10 @@ public class Level {
 	}
 	
 	/**
-	 * Translates the level tiles
+	 * Translates the level on the x axis tiles
 	 * @param direction the direction of the translation
 	 */
-	public void translation(int direction) {
+	public void translationX(int direction) {
 		if(direction > 0) { //Moves to the right
 			this.offsetX -= Character.MOVING_SPEED;
 		} else if(direction < 0) { //Moves to the left
