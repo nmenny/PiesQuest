@@ -124,6 +124,7 @@ public class Game {
 	 * @param direction the given direction
 	 */
 	public void movePlayer(int direction) {
+		boolean[] collisions = this.checkCollisions();
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves (if the end of the level is not reached)
 		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()))) {
 			this.levels[this.currentLevel].translation(1);
@@ -131,7 +132,12 @@ public class Game {
 		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)){
 			this.levels[this.currentLevel].translation(-1);
 		} else  {  //The player moves
-			this.character.move(direction);
+			if(direction < 0 && !collisions[2]) {
+				this.character.move(direction);
+			} else if (direction > 0 && !collisions[1]) {
+				this.character.move(direction);
+			}
+			
 		}
 	}
 	
@@ -145,6 +151,62 @@ public class Game {
 		 } else {
 			 this.character.jump();
 		 }
+		 this.checkCollisions();
+	}
+	
+	/**
+	 * Checks the collisions with the player
+	 * @return 5 booleans, each indexes has its signification
+	 * 			0 => No collisions
+	 * 			1 => Collision on the right
+	 * 			2 => Collision on the left
+	 * 			3 => Collision on top
+	 * 			4 => Collision on bottom
+	 */
+	private boolean[] checkCollisions() {
+		boolean[] collisions = {false, false, false, false, false};
+		
+		String[] level = this.levels[this.currentLevel].getMap();
+		int tileHeight = this.levels[this.currentLevel].getTileHeight();
+		int tileWidth = this.levels[this.currentLevel].getTileWidth();
+		
+		double playerX = this.character.getPosition().x;
+		double playerY = this.character.getPosition().y;
+		
+		//Checking the collision with the edges
+		if(playerX <= 0) {
+			collisions[2] = true;
+		}
+		if((playerX + tileWidth) >= this.parameter.getWidth()) {
+			collisions[1] = true;
+		}
+		/*
+		int y = this.parameter.getHeight() - tileHeight;
+		for(int line = level.length - 1; line >= 0; line--) {
+			for(int x = 0; x < level[line].length(); x++) {
+				int minTileWidth = x * tileWidth;
+				int minTileHeight = y;
+				int maxTileWidth = minTileWidth + tileWidth;
+				int maxTileHeight = y + tileHeight;
+				
+				//If the tile is a wall, the end or a strawberry, we calculate the collision with the player
+				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation || level[line].charAt(x) == EnumTiles.End.charRepresentation || level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+
+					//TODO complete method collision
+				}
+				
+				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+					
+				}
+				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+				}
+				
+			}
+			y -= tileHeight;
+		}
+		*/
+		
+		return collisions;
 	}
 	
 	/**
