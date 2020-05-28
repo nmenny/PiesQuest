@@ -26,12 +26,12 @@ public class Character {
 	/**
 	 * The jumping speed
 	 */
-	public static final double JUMPING_SPEED = 5;
+	public static final double JUMPING_SPEED = 20;
 	
 	/**
 	 * The falling speed of the player
 	 */
-	public static final double FALLING_SPEED = 5;
+	public static final double FALLING_SPEED = 15;
 	
 	/**
 	 * The current jump of falling speed of the player
@@ -48,7 +48,7 @@ public class Character {
 		this.name = theName;
 		this.health = theHealth;
 		this.position = new Position();
-		this.currentFallingSpeed = 0.1;
+		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
 	}
 	
@@ -120,9 +120,9 @@ public class Character {
 	 * makes the player jump
 	 */
 	public void jump() {
-		this.position.y -= this.currentJumpSpeed;
+		this.position.y -= (int) this.currentJumpSpeed;
 		
-		this.currentJumpSpeed -= 0.1;
+		this.currentJumpSpeed -= 1;
 	}
 	
 	/**
@@ -138,10 +138,10 @@ public class Character {
 	 * Makes the player fall
 	 */
 	public void fall() {
-		this.position.y += this.currentFallingSpeed;
+		this.position.y += (int) this.currentFallingSpeed;
 		
 		if(this.currentFallingSpeed < Character.FALLING_SPEED) {
-			this.currentFallingSpeed += 0.1;
+			this.currentFallingSpeed += 1;
 		}
 	}
 }
