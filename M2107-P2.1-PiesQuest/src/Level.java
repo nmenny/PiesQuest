@@ -65,6 +65,7 @@ public class Level {
 		this.isLock = true;
 		this.loadedLevel = new ArrayList<String>();
 		this.offsetX = 0;
+		this.offsetY = 0;
 	}
 	
 	/**
