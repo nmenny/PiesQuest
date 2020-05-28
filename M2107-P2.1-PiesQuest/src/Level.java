@@ -50,6 +50,11 @@ public class Level {
 	private int offsetX;
 	
 	/**
+	 * The offset on the y axis of the tiles
+	 */
+	private int offsetY;
+	
+	/**
 	 * Creates a new level with given proprieties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
