@@ -234,7 +234,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				this.theGame.movePlayer(1);
 			}
 			if(this.playerJumping) {
-				this.theGame.jumpPlayer();
+				if(this.theGame.jumpPlayer()) {
+					this.playerJumping = false;
+				}
+			} else {
+				this.theGame.makeFall();
 			}
 			this.theGame.displayLevel(g);
 			break;
