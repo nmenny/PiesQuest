@@ -158,12 +158,12 @@ public class Level {
 				}
 				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
 					g.setColor(EnumTiles.End.tileColor);
-					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX,  y, this.width, this.height);
 					
 				}
 				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
-					g.fillRect((x * this.width) + this.offsetX, y, this.width, this.height);
+					g.fillRect((x * this.width) + this.offsetX,  y, this.width, this.height);
 				}
 			}
 			y -= this.height;
@@ -240,6 +240,14 @@ public class Level {
 	 */
 	public int getOffsetX() {
 		return this.offsetX;
+	}
+	
+	/**
+	 * Returns the value of the offset on the y axis
+	 * @return the value of the offset on the y axis
+	 */
+	public int getOffsetY() {
+		return this.offsetY;
 	}
 	
 	/**
