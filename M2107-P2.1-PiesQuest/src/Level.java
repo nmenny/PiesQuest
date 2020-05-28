@@ -263,4 +263,20 @@ public class Level {
 	public String toString() {
 		return this.loadedLevel.toString();
 	}
+	
+	/**
+	 * Gets the 2d representation of a level
+	 * @return the 2d representation of a level
+	 */
+	public String[] getMap() {
+		String level = this.toString();
+		
+		//Taking the brackets off the string
+		level = level.substring(1);
+		level = level.substring(0, level.length() - 1);
+		
+		String[] layers = level.split(",");
+		
+		return layers;
+	}
 }
