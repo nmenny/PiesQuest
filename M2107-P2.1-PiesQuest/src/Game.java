@@ -132,9 +132,9 @@ public class Game {
 		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)){
 			this.levels[this.currentLevel].translation(-1);
 		} else  {  //The player moves
-			if(direction < 0 && !collisions[2]) {
+			if(direction < 0 && !collisions[1]) {
 				this.character.move(direction);
-			} else if (direction > 0 && !collisions[1]) {
+			} else if (direction > 0 && !collisions[0]) {
 				this.character.move(direction);
 			}
 			
@@ -144,27 +144,37 @@ public class Game {
 	/**
 	 * Allows the player to jump
 	 */
-	public void jumpPlayer() {
+	public boolean jumpPlayer() {
+		
 		 if(this.character.getCurrentJumpSpeed() <= 0) {
 			 //Falling begun
 			 this.character.fall();
 		 } else {
 			 this.character.jump();
 		 }
-		 this.checkCollisions();
+			boolean[] collisions = this.checkCollisions();
+			if(collisions[2]) {
+				this.character.currentJumpSpeed = 0;
+			}
+			if(collisions[3]) {
+				this.character.currentJumpSpeed = Character.JUMPING_SPEED;
+				this.character.currentFallingSpeed = 0.1;
+				return true;
+			}
+			
+		return false;
 	}
 	
 	/**
 	 * Checks the collisions with the player
-	 * @return 5 booleans, each indexes has its signification
-	 * 			0 => No collisions
-	 * 			1 => Collision on the right
-	 * 			2 => Collision on the left
-	 * 			3 => Collision on top
-	 * 			4 => Collision on bottom
+	 * @return 4 booleans, each indexes has its signification
+	 * 			0 => Collision on the right
+	 * 			1 => Collision on the left
+	 * 			2 => Collision on top
+	 * 			3 => Collision on bottom
 	 */
 	private boolean[] checkCollisions() {
-		boolean[] collisions = {false, false, false, false, false};
+		boolean[] collisions = {false, false, false, false};
 		
 		String[] level = this.levels[this.currentLevel].getMap();
 		int tileHeight = this.levels[this.currentLevel].getTileHeight();
@@ -175,36 +185,50 @@ public class Game {
 		
 		//Checking the collision with the edges
 		if(playerX <= 0) {
-			collisions[2] = true;
-		}
-		if((playerX + tileWidth) >= this.parameter.getWidth()) {
 			collisions[1] = true;
 		}
-		/*
+		if((playerX + tileWidth) >= this.parameter.getWidth()) {
+			collisions[0] = true;
+		}
+		
 		int y = this.parameter.getHeight() - tileHeight;
 		for(int line = level.length - 1; line >= 0; line--) {
 			for(int x = 0; x < level[line].length(); x++) {
-				int minTileWidth = x * tileWidth;
+				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX();
 				int minTileHeight = y;
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = y + tileHeight;
 				
-				//If the tile is a wall, the end or a strawberry, we calculate the collision with the player
-				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation || level[line].charAt(x) == EnumTiles.End.charRepresentation || level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
-
+				//If the tile is a wall
+				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 					//TODO complete method collision
+					//Collision on the top
+					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+						//System.out.println(playerX + ", " +minTileWidth +", " +maxTileWidth);
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							//System.out.println("True");
+							collisions[2] = true;
+						}
+					}
+					
+					//Collision on the bottom
+					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+						if((playerX >= minTileWidth && playerX <= maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							collisions[3] = true;
+						}
+					}
 				}
-				
+				/*
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
 					
 				}
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 				}
-				
+				*/
 			}
 			y -= tileHeight;
 		}
-		*/
+		
 		
 		return collisions;
 	}
@@ -322,5 +346,15 @@ public class Game {
 	 */
 	public int getCurrentSelection() {
 		return this.currentSelection;
+	}
+
+	/**
+	 * Makes the player fall if it's not jumping and there's nothing under it
+	 */
+	public void makeFall() {
+		boolean[] coll = this.checkCollisions();
+		if(!coll[3]) {
+			this.character.fall();
+		}
 	}
 }
