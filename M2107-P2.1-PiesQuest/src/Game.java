@@ -201,7 +201,6 @@ public class Game {
 				
 				//If the tile is a wall
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
-					//TODO complete method collision
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
 						//System.out.println(playerX + ", " +minTileWidth +", " +maxTileWidth);
@@ -217,6 +216,10 @@ public class Game {
 							collisions[3] = true;
 						}
 					}
+					
+					//Collision on the left
+					//TODO implementing LEFT / RIGHT collisions
+					//TODO Make more usable Collision detection
 				}
 				/*
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
