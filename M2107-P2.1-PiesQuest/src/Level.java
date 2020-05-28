@@ -235,6 +235,18 @@ public class Level {
 	}
 	
 	/**
+	 * Translates the level on the y axis
+	 * @param direction the direction of the translation
+	 */
+	public void translationY(int direction) {
+		if(direction > 0) { //Moves Up
+			this.offsetY += Character.JUMPING_SPEED;
+		} else if(direction < 0) { //Moves Down
+			this.offsetY -= Character.FALLING_SPEED;
+		}
+	}
+	
+	/**
 	 * Returns the value of the offset on the x axis
 	 * @return the value of the offset on the x axis
 	 */
