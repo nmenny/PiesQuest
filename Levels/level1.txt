@@ -1,5 +1,5 @@
 50 50
-xxxxxxxxxxx
+xxxxxxxxxxxx
 
-  p       e
-xxxxxxxxxxx
+  p   x    e
+xxxxxxxxxxxx
