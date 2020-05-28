@@ -141,6 +141,7 @@ public class Game {
 		}
 	}
 	
+	//TODO Handle the translation of the level on the y axis
 	/**
 	 * Allows the player to jump
 	 */
