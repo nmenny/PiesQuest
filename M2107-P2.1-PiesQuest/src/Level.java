@@ -235,4 +235,23 @@ public class Level {
 	public int getOffsetX() {
 		return this.offsetX;
 	}
+	
+	/**
+	 * Allows us to know if we've reached the edge of the level
+	 * @param gameWidth the width of the screen
+	 * @return <tt>true</tt> if the end is reached, <tt>false</tt> else
+	 */
+	public boolean translationMaxReached(int gameWidth) {
+		int xMax = 0;
+		for(int line = 0; line < this.loadedLevel.size(); line++) {
+			for(int x = 0; x < this.loadedLevel.get(line).length(); x++) {
+				if(this.loadedLevel.get(line).charAt(x) == 'x') {
+					if(((x * this.width) + this.offsetX) > xMax)
+						xMax = (x * this.width) + this.offsetX;
+				}
+			}
+		}
+		
+		return (xMax <= gameWidth);
+	}
 }
