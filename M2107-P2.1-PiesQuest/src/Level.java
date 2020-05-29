@@ -64,6 +64,14 @@ public class Level {
 		this.description = theDescription;
 		this.isLock = true;
 		this.loadedLevel = new ArrayList<String>();
+		this.init();
+	}
+	
+
+	/**
+	 * Initializes the level attributes
+	 */
+	public void init() {
 		this.offsetX = 0;
 		this.offsetY = 0;
 	}
@@ -305,4 +313,5 @@ public class Level {
 		
 		return layers;
 	}
+
 }
