@@ -131,9 +131,7 @@ public class Character {
 	 * the player dies
 	 */
 	public void die() {
-		this.health = 0;
-		System.out.println("Player Dead !");
-		System.exit(0);
+		this.health--;
 	}
 	
 	/**
