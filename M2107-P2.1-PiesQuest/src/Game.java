@@ -107,7 +107,14 @@ public class Game {
 		
 		int y = 0;
 		int x = 0;
-		for(int level = 0; level < this.levels.length; level++) {
+		int levelInitialIndex = 0;
+		int levelSelection = this.currentSelection;
+		while(levelSelection > 8) {
+			levelInitialIndex += 3;
+			levelSelection -= 3;
+		}
+		for(int level = levelInitialIndex; level < this.levels.length; level++) {
+			
 			if(level == this.currentSelection) {
 				g.setColor(Color.GREEN);
 			} else if(this.levels[level].isLock()){
@@ -115,7 +122,7 @@ public class Game {
 			} else {
 				g.setColor(Color.WHITE);
 			}
-			if(level % 3 == 0 && level != 0) {
+			if(level % 3 == 0 && level != levelInitialIndex) {
 				y += 1;
 				x = 0;
 			}
