@@ -112,6 +112,7 @@ public class Game {
 			if(this.character.getHealth() <= 0) {
 				this.menuDisplayed = 4;
 				this.currentSelection = 0;
+				this.character.giveHealth(3);
 			} else {
 				this.levels[this.currentLevel].init();
 				this.ihm.initMovements();
@@ -321,7 +322,6 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		this.character.giveHealth(3);
 		String[] menus = {"Back to main menu"};
 		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
 	
