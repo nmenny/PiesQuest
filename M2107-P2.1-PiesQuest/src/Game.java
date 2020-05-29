@@ -285,6 +285,35 @@ public class Game {
 				/*
 				//If the player hits a strawberry, it collects it
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+				
+					//Collision on the top
+					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							
+						}
+					}
+					
+					//Collision on the bottom
+					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							
+						}
+					}
+					
+					//Collisions Right
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if((playerX + tileWidth) == minTileWidth) {
+							
+						}
+					}
+					
+					//Collisions Left
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if(playerX == (minTileWidth + tileWidth)) {
+							
+						}
+					}
+				
 				}
 				*/
 			}
