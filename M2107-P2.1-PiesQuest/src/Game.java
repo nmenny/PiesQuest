@@ -304,11 +304,12 @@ public class Game {
 				
 				//If the player hits a strawberry, it collects it
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-				
+					boolean collisionDone = false;
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
 						}
 					}
 					
@@ -316,6 +317,7 @@ public class Game {
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
 						}
 					}
 					
@@ -323,6 +325,7 @@ public class Game {
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if((playerX + tileWidth) == minTileWidth) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
 						}
 					}
 					
@@ -330,6 +333,15 @@ public class Game {
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if(playerX == (minTileWidth + tileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
+					}
+					
+					//If a collision is done and we collected a 10th we gain a life
+					if(collisionDone) {
+						this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
+						if((this.character.getNbStrawberriesCollected() % 10) == 0) {
+							this.character.giveHealth(1);
 						}
 					}
 				
