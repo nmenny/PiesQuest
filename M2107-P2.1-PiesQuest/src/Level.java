@@ -179,7 +179,7 @@ public class Level {
 					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
 					
 				}
-				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.width) + this.offsetX, y + this.offsetY)))) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
 				}
