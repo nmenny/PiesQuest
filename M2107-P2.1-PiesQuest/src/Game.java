@@ -58,7 +58,7 @@ public class Game {
 		this.parameter = new Parameter(this);
 		
 		//At the initialization, the main menu is displayed
-		this.menuDisplayed = 0;
+		this.menuDisplayed = 5;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
@@ -352,8 +352,28 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayVictoryScreen(Graphics g) {
-		System.out.println("Victory ! You've reached the end !");
-		System.exit(0);
+		String[] menus = {"Back to main menu"};
+		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
+	
+		
+		//Background
+		g.setColor(new Color(50, 150, 200));
+		g.fillRect(0,  0,  width, height);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 100));
+		g.drawString("VICTORY", (width / 2) - 210, height / 3);
+		
+		for(int menu = 0; menu < menus.length; menu++) {
+			if(menu == this.currentSelection) {
+				g.setColor(Color.GREEN);
+			} else {
+				g.setColor(Color.WHITE);
+			}
+			
+			g.setFont(new Font("Arial", Font.PLAIN, 50));
+			g.drawString(menus[menu], (width / 2) - 210, 2 *height / 3);
+		}
 	}
 	
 	/**
