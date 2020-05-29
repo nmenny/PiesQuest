@@ -80,6 +80,7 @@ public class Level {
 	 * Load the level in memory
 	 */
 	public void load() {
+		this.loadedLevel = new ArrayList<String>();
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
 		System.out.println(levelName);
 		try {
