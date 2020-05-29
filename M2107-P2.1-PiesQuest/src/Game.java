@@ -105,6 +105,7 @@ public class Game {
 	 */
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
+		this.collectedStrawberries.get(this.currentLevel).clear();
 		this.levels[this.currentLevel].unlock();
 		this.levels[this.currentLevel].init();
 		this.ihm.initMovements();
