@@ -116,7 +116,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					this.theGame.menuDisplayed = 3;
 					break;
 				case 1: //Level selection option
-					//TODO handle events to choose a level
+					this.theGame.menuDisplayed = 2;
 					break;
 				case 2: //Parameters Option
 					//TODO handle events to open the parameters menu
@@ -146,7 +146,10 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				this.theGame.gotoSelect(-3);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				
+				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLock()) {
+					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
+					this.theGame.menuDisplayed = 3;
+				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.theGame.menuDisplayed = 0;

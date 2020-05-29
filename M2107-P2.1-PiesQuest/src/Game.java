@@ -75,6 +75,7 @@ public class Game {
 			for(int level = 0; level < this.levels.length; level++) {
 				this.collectedStrawberries.put(level, new HashSet<Position>());
 			}
+			this.levels[0].unlock();
 		} catch (LevelException e) {
 			System.err.println("Error while loading the levels, missing level information !");
 		}
