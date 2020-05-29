@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a game of Pies's Quest
@@ -49,6 +51,11 @@ public class Game {
 	private int currentSelection;
 	
 	/**
+	 * Stores all the collected strawberries by level id
+	 */
+	private Map<Integer, Position> collectedStrawberries;
+	
+	/**
 	 * creates a new Game ready to be played
 	 * @param theIhm the interface between the game and the player
 	 */
@@ -56,6 +63,7 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
+		this.collectedStrawberries = new HashMap<Integer, Position>();
 		
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
