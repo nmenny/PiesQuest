@@ -109,6 +109,8 @@ public class Game {
 		int x = 0;
 		int levelInitialIndex = 0;
 		int levelSelection = this.currentSelection;
+		
+		//Can can only display 8 different levels at the same time, so only the wanted levels will be displayed and not the first ones
 		while(levelSelection > 8) {
 			levelInitialIndex += 3;
 			levelSelection -= 3;
