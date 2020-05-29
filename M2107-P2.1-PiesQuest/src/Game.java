@@ -1,7 +1,9 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,7 +55,7 @@ public class Game {
 	/**
 	 * Stores all the collected strawberries by level id
 	 */
-	private Map<Integer, Position> collectedStrawberries;
+	private Map<Integer, List<Position>> collectedStrawberries;
 	
 	/**
 	 * creates a new Game ready to be played
@@ -63,13 +65,16 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
-		this.collectedStrawberries = new HashMap<Integer, Position>();
+		this.collectedStrawberries = new HashMap<Integer, List<Position>>();
 		
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
+			for(int level = 0; level < this.levels.length; level++) {
+				this.collectedStrawberries.put(level, new ArrayList<Position>());
+			}
 		} catch (LevelException e) {
 			System.err.println("Error while loading the levels, missing level information !");
 		}
@@ -112,6 +117,7 @@ public class Game {
 	 */
 	public void displayLevel(Graphics g) {
 		Level currentLevel = this.levels[this.currentLevel];
+		currentLevel.registerCollectedStrawberries(this.collectedStrawberries.get(this.currentLevel));
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
 		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
@@ -208,6 +214,8 @@ public class Game {
 		int playerX = (int)this.character.getPosition().x;
 		int playerY = (int)this.character.getPosition().y + 1;
 		
+		List<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
+		
 		//Checking the collision with the edges
 		if(playerX <= 0) {
 			collisions[1] = true;
@@ -297,28 +305,28 @@ public class Game {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if((playerX + tileWidth) == minTileWidth) {
-							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if(playerX == (minTileWidth + tileWidth)) {
-							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 						}
 					}
 				
