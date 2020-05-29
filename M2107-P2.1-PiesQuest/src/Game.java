@@ -290,14 +290,14 @@ public class Game {
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) == minTileWidth) {
+						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
 							collisions[0] = true;
 						}
 					}
 					
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX == (minTileWidth + tileWidth)) {
+						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
 							collisions[1] = true;
 						}
 					}
@@ -323,7 +323,7 @@ public class Game {
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) == minTileWidth) {
+						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
 							this.changeLevel();
 							break;
 						}
@@ -331,7 +331,7 @@ public class Game {
 					
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX == (minTileWidth + tileWidth)) {
+						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
 							this.changeLevel();
 							break;
 						}
@@ -360,7 +360,7 @@ public class Game {
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) == minTileWidth) {
+						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 							collisionDone = true;
 						}
@@ -368,7 +368,7 @@ public class Game {
 					
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX == (minTileWidth + tileWidth)) {
+						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 							collisionDone = true;
 						}
