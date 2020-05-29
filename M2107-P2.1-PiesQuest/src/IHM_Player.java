@@ -147,7 +147,33 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			break;
 		case 4: //The game over menu
-			//TODO handle events for the game over
+			//If we press the up arrow, we move up in the menu
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				this.theGame.gotoSelect(-1);
+			}
+			//If we press the down arrow, we move down in the menu
+			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				this.theGame.gotoSelect(+1);
+			}
+			//If we press on "enter", we open the current menu
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(this.theGame.getCurrentSelection()) {
+				case 0: //Start level 1 option
+					this.theGame.menuDisplayed = 0;
+					break;
+				case 1: //Level selection option
+					//TODO handle events to choose a level
+					break;
+				case 2: //Parameters Option
+					//TODO handle events to open the parameters menu
+					break;
+				case 3: //Quit option
+					System.exit(0);
+					break;
+				default: 
+					break;
+				}
+			}
 			break;
 		case 5: //The victory menu
 			//If we press on "enter", we open the current menu

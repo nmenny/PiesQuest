@@ -321,6 +321,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
+		this.character.giveHealth(3);
 		String[] menus = {"Back to main menu"};
 		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
 	
