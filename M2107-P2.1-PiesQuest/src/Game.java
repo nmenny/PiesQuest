@@ -290,40 +290,40 @@ public class Game {
 					}
 				}
 				
-				/*
+				
 				//If the player hits a strawberry, it collects it
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 				
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							
+							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							
+							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if((playerX + tileWidth) == minTileWidth) {
-							
+							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
 						}
 					}
 					
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if(playerX == (minTileWidth + tileWidth)) {
-							
+							this.collectedStrawberries.put(this.currentLevel, new Position(minTileWidth, minTileHeight));
 						}
 					}
 				
 				}
-				*/
+				
 			}
 			y -= tileHeight;
 		}
