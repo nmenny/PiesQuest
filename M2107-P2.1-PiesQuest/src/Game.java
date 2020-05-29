@@ -276,15 +276,14 @@ public class Game {
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
 							collisions[2] = true;
 						}
 					}
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
-							System.out.println("Collision Bottom");
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
 							collisions[3] = true;
 						}
 					}
@@ -308,7 +307,7 @@ public class Game {
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							this.changeLevel();
 							break;
 						}
@@ -316,7 +315,7 @@ public class Game {
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							this.changeLevel();
 							break;
 						}
@@ -345,7 +344,7 @@ public class Game {
 					boolean collisionDone = false;
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 							collisionDone = true;
 						}
@@ -353,7 +352,7 @@ public class Game {
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
 							collisionDone = true;
 						}
