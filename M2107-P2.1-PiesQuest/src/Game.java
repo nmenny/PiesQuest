@@ -303,7 +303,7 @@ public class Game {
 				
 				
 				//If the player hits a strawberry, it collects it
-				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
 				
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
