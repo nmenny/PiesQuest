@@ -197,10 +197,10 @@ public class Game {
 	public void movePlayer(int direction) {
 		boolean[] collisions = this.checkCollisions();
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves (if the end of the level is not reached)
-		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()))) {
+		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()) && !collisions[0])) {
 			this.levels[this.currentLevel].translationX(1);
 		//Else, if the player position is less than the 1/3 of the screen width and if the tiles are not back to normal (the starting offset) the tiles are moving the other way
-		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)){
+		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
 			this.levels[this.currentLevel].translationX(-1);
 		} else  {  //The player moves
 			if(direction < 0 && !collisions[1]) {
@@ -276,14 +276,14 @@ public class Game {
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX > minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
 							collisions[2] = true;
 						}
 					}
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
 							collisions[3] = true;
 						}
 					}
