@@ -38,6 +38,11 @@ public class Character {
 	 */
 	public double currentFallingSpeed, currentJumpSpeed;
 	
+	/**
+	 * The number of strawberries collected
+	 */
+	private int nbStrawberriesCollected;
+	
 	
 	/**
 	 * Creates a new Character with given attributes
@@ -50,6 +55,7 @@ public class Character {
 		this.position = new Position();
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
+		this.nbStrawberriesCollected = 0;
 	}
 	
 	/**
@@ -151,5 +157,21 @@ public class Character {
 		if(this.currentFallingSpeed < Character.FALLING_SPEED) {
 			this.currentFallingSpeed += 1;
 		}
+	}
+	
+	/**
+	 * Gets the number of strawberries collected by this character
+	 * @return the number of strawberries collected
+	 */
+	public int getNbStrawberriesCollected() {
+		return this.nbStrawberriesCollected;
+	}
+
+	/**
+	 * Sets the number of strawberries collected by this character
+	 * @param i the number of strawberries collected
+	 */
+	public void setNbStrawberriesCollected(int i) {
+		this.nbStrawberriesCollected = i;
 	}
 }
