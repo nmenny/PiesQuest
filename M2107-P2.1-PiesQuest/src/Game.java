@@ -94,7 +94,7 @@ public class Game {
 		this.ihm.initMovements();
 		this.levels[this.currentLevel].load();
 		this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
-		System.out.println("Level " +levelId+1 +" loaded");
+		System.out.println("Level " +(levelId+1) +" loaded");
 	}
 
 	/**
@@ -201,15 +201,11 @@ public class Game {
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = y + tileHeight;
 				
-				//Rectangle tile = new Rectangle(minTileWidth, minTileHeight, tileWidth, tileHeight);
-				
 				//If the tile is a wall
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						//System.out.println(playerX + ", " +minTileWidth +", " +maxTileWidth);
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							//System.out.println("True");
 							collisions[2] = true;
 						}
 					}
@@ -238,7 +234,37 @@ public class Game {
 				
 				//If the end of the level is reached, on go to the next level or we end the game
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+					//Collision on the top
+					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							this.changeLevel();
+							break;
+						}
+					}
 					
+					//Collision on the bottom
+					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							this.changeLevel();
+							break;
+						}
+					}
+					
+					//Collisions Right
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if((playerX + tileWidth) == minTileWidth) {
+							this.changeLevel();
+							break;
+						}
+					}
+					
+					//Collisions Left
+					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+						if(playerX == (minTileWidth + tileWidth)) {
+							this.changeLevel();
+							break;
+						}
+					}
 				}
 				
 				/*
@@ -251,6 +277,17 @@ public class Game {
 		
 		
 		return collisions;
+	}
+	
+	/**
+	 * Changes the current level
+	 */
+	private void changeLevel() {
+		if(this.currentLevel == this.levels.length - 1) { //If we finished the last level
+			this.menuDisplayed = 5;
+		} else {
+			this.chooseLevel(this.currentLevel+ 1);
+		}
 	}
 	
 	/**
@@ -274,7 +311,8 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		//TODO implement the method
+		System.out.println("Game Over ! You've reached the end !");
+		System.exit(0);
 	}
 	
 	/**
