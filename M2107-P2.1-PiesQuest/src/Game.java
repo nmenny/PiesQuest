@@ -287,6 +287,7 @@ public class Game {
 	private void changeLevel() {
 		if(this.currentLevel == this.levels.length - 1) { //If we finished the last level
 			this.menuDisplayed = 5;
+			this.currentSelection = 0;
 		} else {
 			this.chooseLevel(this.currentLevel+ 1);
 		}
@@ -405,16 +406,8 @@ public class Game {
 		switch(this.currentLevel) {
 		case 0:
 			return 4;
-		case 1:
-
-		case 2:
-
-		case 3:
-
-		case 4:
-
 		case 5: 
-
+			return 1;
 		default: 
 			return 0;
 		}
