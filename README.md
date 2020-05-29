@@ -1,5 +1,7 @@
 A 2D platformer game.
 
+------------------------------
+How to:
 
 --------Add a new level-------------
 
@@ -18,7 +20,7 @@ If you want to add a new level to the game, you need to follow these steps:
     6- Increment the first number and add the level name and description
     7- Your level will be in the game
     
-
+--------------------------
 Members:
 -> Tartare Antoine
 -> Teyssere Karina
