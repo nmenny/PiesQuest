@@ -288,6 +288,7 @@ public class Game {
 			this.menuDisplayed = 5;
 		} else {
 			this.chooseLevel(this.currentLevel+ 1);
+			this.levels[this.currentLevel].unlock();
 		}
 	}
 	
