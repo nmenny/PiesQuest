@@ -56,7 +56,11 @@ public class Character {
 	 */
 	public Character(String theName, int theHealth) {
 		this.name = theName;
-		this.health = theHealth;
+		if(theHealth > Character.MAX_HEALTH) {
+			this.health = 3;
+		} else {
+			this.health = theHealth;
+		}
 		this.position = new Position();
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
@@ -76,7 +80,9 @@ public class Character {
 	 * @param healthPoints the amount of health given to the player
 	 */
 	public void giveHealth(int healthPoints) {
-		this.health += healthPoints;
+		if(this.health + healthPoints <= Character.MAX_HEALTH) {
+			this.health += healthPoints;
+		}
 	}
 	
 	/**
