@@ -90,6 +90,7 @@ public class Game {
 	 */
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
+		this.levels[this.currentLevel].unlock();
 		this.levels[this.currentLevel].init();
 		this.ihm.initMovements();
 		this.levels[this.currentLevel].load();
@@ -288,7 +289,6 @@ public class Game {
 			this.menuDisplayed = 5;
 		} else {
 			this.chooseLevel(this.currentLevel+ 1);
-			this.levels[this.currentLevel].unlock();
 		}
 	}
 	
