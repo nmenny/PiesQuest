@@ -3,8 +3,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a game of Pies's Quest
@@ -55,7 +57,7 @@ public class Game {
 	/**
 	 * Stores all the collected strawberries by level id
 	 */
-	private Map<Integer, List<Position>> collectedStrawberries;
+	private Map<Integer, Set<Position>> collectedStrawberries;
 	
 	/**
 	 * creates a new Game ready to be played
@@ -65,7 +67,7 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
-		this.collectedStrawberries = new HashMap<Integer, List<Position>>();
+		this.collectedStrawberries = new HashMap<Integer, Set<Position>>();
 		
 		//At the initialization, the main menu is displayed
 		this.menuDisplayed = 0;
@@ -73,7 +75,7 @@ public class Game {
 		try {
 			this.levels = Level.loadAllLevels();
 			for(int level = 0; level < this.levels.length; level++) {
-				this.collectedStrawberries.put(level, new ArrayList<Position>());
+				this.collectedStrawberries.put(level, new HashSet<Position>());
 			}
 		} catch (LevelException e) {
 			System.err.println("Error while loading the levels, missing level information !");
@@ -214,7 +216,7 @@ public class Game {
 		int playerX = (int)this.character.getPosition().x;
 		int playerY = (int)this.character.getPosition().y + 1;
 		
-		List<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
+		Set<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
 		
 		//Checking the collision with the edges
 		if(playerX <= 0) {
