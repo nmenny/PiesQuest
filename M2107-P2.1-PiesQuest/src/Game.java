@@ -312,8 +312,7 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		System.out.println("Game Over ! You've reached the end !");
-		System.exit(0);
+		//TODO Implement game over
 	}
 	
 	/**
@@ -352,7 +351,8 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayVictoryScreen(Graphics g) {
-		//TODO implement the method
+		System.out.println("Victory ! You've reached the end !");
+		System.exit(0);
 	}
 	
 	/**
