@@ -147,6 +147,7 @@ public class Game {
 	//TODO Handle the translation of the level on the y axis
 	/**
 	 * Allows the player to jump
+	 * @return <tt>true</tt> if the ground is hit, <tt>false</tt> else
 	 */
 	public boolean jumpPlayer() {
 		if(this.character.getCurrentJumpSpeed() <= 0) {
