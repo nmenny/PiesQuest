@@ -58,7 +58,7 @@ public class Game {
 		this.parameter = new Parameter(this);
 		
 		//At the initialization, the main menu is displayed
-		this.menuDisplayed = 5;
+		this.menuDisplayed = 0;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
@@ -108,8 +108,15 @@ public class Game {
 		g.setColor(EnumTiles.Player.tileColor);
 		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
 		if(this.character.getPosition().y > this.parameter.getHeight()) {
-			System.out.println("draw death");
 			this.character.die();
+			if(this.character.getHealth() <= 0) {
+				this.menuDisplayed = 4;
+				this.currentSelection = 0;
+			} else {
+				this.levels[this.currentLevel].init();
+				this.ihm.initMovements();
+				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
+			}
 		}
 	}
 	
@@ -314,7 +321,27 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayGameOver(Graphics g) {
-		//TODO Implement game over
+		String[] menus = {"Back to main menu"};
+		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
+	
+		//Background
+		g.setColor(new Color(50, 150, 200));
+		g.fillRect(0,  0,  width, height);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 100));
+		g.drawString("GAME OVER", (width / 2) - 270, height / 3);
+		
+		for(int menu = 0; menu < menus.length; menu++) {
+			if(menu == this.currentSelection) {
+				g.setColor(Color.GREEN);
+			} else {
+				g.setColor(Color.WHITE);
+			}
+			
+			g.setFont(new Font("Arial", Font.PLAIN, 50));
+			g.drawString(menus[menu], (width / 2) - 210, 2 *height / 3);
+		}
 	}
 	
 	/**
@@ -406,6 +433,8 @@ public class Game {
 		switch(this.menuDisplayed) {
 		case 0:
 			return 4;
+		case 4:
+			return 2;
 		case 5: 
 			return 1;
 		default: 
