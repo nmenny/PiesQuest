@@ -73,6 +73,13 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread = new Thread(this);
 		this.gameThread.start();
 		
+		this.initMovements();
+	}
+	
+	/**
+	 * Initialize the movement's values
+	 */
+	public void initMovements() {
 		this.playerMovingLeft = this.playerMovingRight = this.playerJumping = false;
 	}
 	
@@ -251,13 +258,6 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		default:
 			break;
 		}
-		
-	}
-
-	/**
-	 * Initialize the movement's values
-	 */
-	public void initMovements() {
 		
 	}
 	
