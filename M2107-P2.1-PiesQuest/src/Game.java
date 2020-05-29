@@ -54,7 +54,7 @@ public class Game {
 	 */
 	public Game(IHM_Player theIhm) {
 		this.ihm = theIhm;
-		this.character = new Character("Player1", 100);
+		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
 		
 		//At the initialization, the main menu is displayed
