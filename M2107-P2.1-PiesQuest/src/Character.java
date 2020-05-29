@@ -24,6 +24,11 @@ public class Character {
 	public static final int MOVING_SPEED = 10;
 	
 	/**
+	 * The health max of the player
+	 */
+	public static final int MAX_HEALTH = 100;
+	
+	/**
 	 * The jumping speed
 	 */
 	public static final double JUMPING_SPEED = 20;
