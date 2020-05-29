@@ -283,6 +283,7 @@ public class Game {
 				}
 				
 				/*
+				//If the player hits a strawberry, it collects it
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 				}
 				*/
