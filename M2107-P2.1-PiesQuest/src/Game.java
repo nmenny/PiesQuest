@@ -403,7 +403,7 @@ public class Game {
 	 * @return the number of option of the current menu
 	 */
 	private int getNumberOption() {
-		switch(this.currentLevel) {
+		switch(this.menuDisplayed) {
 		case 0:
 			return 4;
 		case 5: 

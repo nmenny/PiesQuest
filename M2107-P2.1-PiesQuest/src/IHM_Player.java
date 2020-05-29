@@ -128,7 +128,6 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					break;
 				}
 			}
-			
 			break;
 		case 1: //The parameters menu
 			//TODO handle events for the parameters
@@ -151,7 +150,16 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			//TODO handle events for the game over
 			break;
 		case 5: //The victory menu
-			//TODO handle events for the victory
+			//If we press on "enter", we open the current menu
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				switch(this.theGame.getCurrentSelection()) {
+				case 0: //Start level 1 option
+					this.theGame.menuDisplayed = 0;
+					break;
+				default: 
+					break;
+				}
+			}
 			break;
 		default:
 			break;
