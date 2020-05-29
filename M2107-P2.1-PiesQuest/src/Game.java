@@ -68,7 +68,7 @@ public class Game {
 		this.collectedStrawberries = new HashMap<Integer, Set<Position>>();
 		
 		//At the initialization, the main menu is displayed
-		this.menuDisplayed = 0;
+		this.menuDisplayed = 2;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
@@ -94,7 +94,34 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayAllLevels(Graphics g) {
-		//TODO implement the method
+		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
+	
+		//Background
+		g.setColor(new Color(50, 150, 200));
+		g.fillRect(0,  0,  width, height);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 50));
+		g.drawString("CHOOSE THE LEVEL", (width / 2) - 220, height / 6);
+		
+		int y = 0;
+		int x = 0;
+		for(int level = 0; level < this.levels.length; level++) {
+			if(level == this.currentSelection) {
+				g.setColor(Color.GREEN);
+			} else if(this.levels[level].isLock()){
+				g.setColor(Color.RED);
+			} else {
+				g.setColor(Color.WHITE);
+			}
+			if(level % 3 == 0 && level != 0) {
+				y += 1;
+				x = 0;
+			}
+			g.setFont(new Font("Arial", Font.PLAIN, 20));
+			g.drawString(this.levels[level].getName(), 120 + this.levels[level].getName().length() * x * 10, height / 3 + 150 * y);
+			x++;
+		}
 	}
 	
 	/**
