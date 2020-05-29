@@ -55,6 +55,11 @@ public class Level {
 	private int offsetY;
 	
 	/**
+	 * Stores the position of all the collected strawberries
+	 */
+	private List<Position> strawberriesCollectedPositions;
+	
+	/**
 	 * Creates a new level with given proprieties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
@@ -313,6 +318,14 @@ public class Level {
 		String[] layers = level.split(",");
 		
 		return layers;
+	}
+
+	/**
+	 * Saves the position of all the collected strawberries
+	 * @param list the list containing the position of the strawberries
+	 */
+	public void registerCollectedStrawberries(List<Position> list) {
+		
 	}
 
 }
