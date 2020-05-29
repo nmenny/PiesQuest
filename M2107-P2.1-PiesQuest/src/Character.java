@@ -90,6 +90,8 @@ public class Character {
 	 * @param thePosition the position of the character
 	 */
 	public void setPosition(Position thePosition) {
+		this.currentFallingSpeed = 1;
+		this.currentJumpSpeed = Character.JUMPING_SPEED;
 		this.position = new Position(thePosition.x, thePosition.y);
 	}
 	
