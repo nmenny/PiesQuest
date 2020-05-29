@@ -329,7 +329,7 @@ public class Level {
 	 * @param set the list containing the position of the strawberries
 	 */
 	public void registerCollectedStrawberries(Set<Position> set) {
-		
+		this.strawberriesCollectedPositions.addAll(set);
 	}
 
 }
