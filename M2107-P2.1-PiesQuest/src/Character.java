@@ -61,6 +61,14 @@ public class Character {
 	}
 	
 	/**
+	 * Gives a certain amount of health to the player
+	 * @param healthPoints the amount of health given to the player
+	 */
+	public void giveHealth(int healthPoints) {
+		this.health += healthPoints;
+	}
+	
+	/**
 	 * gives the name of the character
 	 * @return the name of the character
 	 */
