@@ -253,5 +253,12 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		}
 		
 	}
+
+	/**
+	 * Initialize the movement's values
+	 */
+	public void initMovements() {
+		
+	}
 	
 }
