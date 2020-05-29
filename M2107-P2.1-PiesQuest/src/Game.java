@@ -525,7 +525,7 @@ public class Game {
 		switch(this.menuDisplayed) {
 		case 0:
 			return 4;
-		case 3:
+		case 2:
 			return this.levels.length;
 		case 4:
 			return 2;
