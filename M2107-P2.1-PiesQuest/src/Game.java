@@ -276,7 +276,7 @@ public class Game {
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX > minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
 							collisions[2] = true;
 						}
 					}
@@ -284,6 +284,7 @@ public class Game {
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
 						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+							System.out.println("Collision Bottom");
 							collisions[3] = true;
 						}
 					}
