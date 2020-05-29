@@ -129,14 +129,16 @@ public class Game {
 	 * @param levelId the index of the level
 	 */
 	public void chooseLevel(int levelId) {
-		this.currentLevel = levelId;
-		this.collectedStrawberries.get(this.currentLevel).clear();
-		this.levels[this.currentLevel].unlock();
-		this.levels[this.currentLevel].init();
-		this.ihm.initMovements();
-		this.levels[this.currentLevel].load();
-		this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
-		System.out.println("Level " +(levelId+1) +" loaded");
+		if(!this.levels[levelId].isLock()) {
+			this.currentLevel = levelId;
+			this.collectedStrawberries.get(this.currentLevel).clear();
+			//this.levels[this.currentLevel].unlock();
+			this.levels[this.currentLevel].init();
+			this.ihm.initMovements();
+			this.levels[this.currentLevel].load();
+			this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
+			System.out.println("Level " +(levelId+1) +" loaded");
+		}
 	}
 
 	/**
@@ -388,7 +390,9 @@ public class Game {
 			this.menuDisplayed = 5;
 			this.currentSelection = 0;
 		} else {
+			this.levels[this.currentLevel + 1].unlock();
 			this.chooseLevel(this.currentLevel+ 1);
+
 		}
 	}
 	
@@ -398,6 +402,15 @@ public class Game {
 	 */
 	public int getCurrentLevel() {
 		return this.currentLevel;
+	}
+	
+	/**
+	 * Gets the level at a given idex
+	 * @param levelId the index of the level
+	 * @return the level at the given index
+	 */
+	public Level getLevel(int levelId) {
+		return this.levels[levelId];
 	}
 	
 	/**
