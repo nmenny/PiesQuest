@@ -89,7 +89,7 @@ public class Level {
 	 */
 	public void load() {
 		this.loadedLevel = new ArrayList<String>();
-		this.strawberriesCollectedPositions = new HashSet<Position>();
+		this.strawberriesCollectedPositions.clear();
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
 		System.out.println(levelName);
 		try {
