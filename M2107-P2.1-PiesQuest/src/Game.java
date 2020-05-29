@@ -90,8 +90,11 @@ public class Game {
 	 */
 	public void chooseLevel(int levelId) {
 		this.currentLevel = levelId;
+		this.levels[this.currentLevel].init();
+		this.ihm.initMovements();
 		this.levels[this.currentLevel].load();
 		this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
+		System.out.println("Level " +levelId+1 +" loaded");
 	}
 
 	/**
@@ -232,10 +235,13 @@ public class Game {
 						}
 					}
 				}
-				/*
+				
+				//If the end of the level is reached, on go to the next level or we end the game
 				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
 					
 				}
+				
+				/*
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 				}
 				*/
