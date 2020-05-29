@@ -68,7 +68,7 @@ public class Game {
 		this.collectedStrawberries = new HashMap<Integer, Set<Position>>();
 		
 		//At the initialization, the main menu is displayed
-		this.menuDisplayed = 2;
+		this.menuDisplayed = 0;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
