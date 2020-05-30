@@ -128,6 +128,22 @@ public class Character {
 		return this.currentJumpSpeed;
 	}
 	
+	/**
+	 * Sets the value of the current jump speed
+	 * @param value the value of the speed
+	 */
+	public void setCurrentJumpSpeed(int value) {
+		this.currentJumpSpeed = value;
+	}
+	
+	/**
+	 * Sets the value of the current falling speed
+	 * @param value the value of the speed
+	 */
+	public void setCurrentFallingSpeed(int value) {
+		this.currentFallingSpeed = value;
+	}
+	
 	public void initJumpSpeed() {
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
 	}
