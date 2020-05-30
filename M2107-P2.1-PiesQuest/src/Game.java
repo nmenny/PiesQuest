@@ -140,7 +140,7 @@ public class Game {
 				x = 0;
 			}
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
-			g.drawString(this.levels[level].getName(), 120 + this.levels[level].getName().length() * x * 10, height / 3 + 150 * y);
+			g.drawString(this.levels[level].getName(), 100 + this.levels[level].getName().length() * x * 15, height / 3 + 150 * y);
 			x++;
 		}
 	}
@@ -223,16 +223,24 @@ public class Game {
 		}
 	}
 	
-	//TODO Handle the translation of the level on the y axis
 	/**
 	 * Allows the player to jump
 	 * @return <tt>true</tt> if the ground is hit, <tt>false</tt> else
 	 */
 	public boolean jumpPlayer() {
-		if(this.character.getCurrentJumpSpeed() <= 0) {
-			this.character.fall(); 
-		} else{
+		//If the player is high in the sky, the tiles will move up
+		if((this.character.getPosition().y - Character.JUMPING_SPEED < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
+			this.levels[this.currentLevel].translationY(1);
 			this.character.jump();
+		//If the player is too low, the tiles will move down
+		} else if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
+			this.levels[this.currentLevel].translationY(-1);
+		} else {
+			if(this.character.getCurrentJumpSpeed() <= 0) {
+				this.character.fall(); 
+			} else{
+				this.character.jump();
+			}
 		}
 		boolean[] collisions = this.checkCollisions();
 		if(collisions[2]) {
@@ -281,7 +289,7 @@ public class Game {
 				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX() - tileWidth;
 				int minTileHeight = y + this.levels[this.currentLevel].getOffsetY();
 				int maxTileWidth = minTileWidth + tileWidth;
-				int maxTileHeight = y + tileHeight;
+				int maxTileHeight = minTileHeight + tileHeight;
 				
 				//If the tile is a wall
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
@@ -622,7 +630,11 @@ public class Game {
 	public void makeFall() {
 		boolean[] coll = this.checkCollisions();
 		if(!coll[3]) {
-			this.character.fall();
+			if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
+				this.levels[this.currentLevel].translationY(-1);
+			} else {
+				this.character.fall();
+			}
 		}
 	}
 }
