@@ -1,4 +1,4 @@
-50 50
+30 30
   e
 xxxxxxxxxx
 
