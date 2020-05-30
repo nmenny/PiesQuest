@@ -1,8 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -400,9 +408,9 @@ public class Game {
 			this.menuDisplayed = 5;
 			this.currentSelection = 0;
 		} else {
+			this.save();
 			this.levels[this.currentLevel + 1].unlock();
 			this.chooseLevel(this.currentLevel+ 1);
-
 		}
 	}
 	
@@ -523,7 +531,32 @@ public class Game {
 	 * saves the game into a game save file
 	 */
 	public void save() {
-		//TODO implement the method
+		File f = new File("Save/saveFile");
+		try {
+			FileOutputStream fos = new FileOutputStream(f);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		    DataOutputStream dos = new DataOutputStream(bos);
+			
+			//Get the unlocked levels
+			int level = 0;
+			List<Integer> levelUnlockedIndexes = new ArrayList<Integer>();
+			while(!this.levels[level].isLock()) {
+				levelUnlockedIndexes.add(level);
+				level++;
+			}
+			dos.write(levelUnlockedIndexes.size());
+			for(int unlockLevel : levelUnlockedIndexes) {
+				dos.write(unlockLevel);
+			}
+			
+			dos.close();
+			fos.write(bos.toByteArray());
+			bos.close();
+			fos.close();
+			
+		} catch (IOException e) {
+			System.err.println("Error ! Save file error !");
+		}
 	}
 	
 	/**
