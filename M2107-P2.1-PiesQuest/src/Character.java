@@ -117,7 +117,11 @@ public class Character {
 	public void setPosition(Position thePosition) {
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
-		this.position = new Position(thePosition.x, thePosition.y);
+		try {
+			this.position = new Position(thePosition.x, thePosition.y);
+		} catch(NullPointerException e) {
+			System.err.println("Error ! Player position unknown !");
+		}
 	}
 	
 	public double getCurrentJumpSpeed() {
