@@ -231,7 +231,7 @@ public class Game {
 		//If the player is high in the sky, the tiles will move up
 		if((this.character.getPosition().y - Character.JUMPING_SPEED < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
 			this.levels[this.currentLevel].translationY(1);
-			this.character.currentJumpSpeed -= 1;
+			this.character.setCurrentJumpSpeed(this.character.getCurrentJumpSpeed() - 1);
 		//If the player is too low, the tiles will move down
 		} else if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
 			this.levels[this.currentLevel].translationY(-1);
@@ -244,11 +244,11 @@ public class Game {
 		}
 		boolean[] collisions = this.checkCollisions();
 		if(collisions[2]) {
-			this.character.currentJumpSpeed = 0;
+			this.character.setCurrentJumpSpeed(0);
 		}
 		if(collisions[3]) {
-			this.character.currentJumpSpeed = Character.JUMPING_SPEED;
-			this.character.currentFallingSpeed = 1;
+			this.character.setCurrentJumpSpeed(Character.JUMPING_SPEED);
+			this.character.setCurrentFallingSpeed(1);
 			return true;
 		}
 			
