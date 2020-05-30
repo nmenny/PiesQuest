@@ -1,6 +1,7 @@
-5
+6
 levelOne, An amazing adventure
 AnotherLevel, The incredible level
 ALevelInTheSky, Sky realm
 ALottaVoid, Cheese
 Obstacle land, A land of obstacle
+AnAmazingLevel, Incredible
