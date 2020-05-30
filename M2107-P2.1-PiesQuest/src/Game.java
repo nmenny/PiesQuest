@@ -470,7 +470,7 @@ public class Game {
 	/**
 	 * Load a game save file
 	 */
-	public void loadElements() {
+	public void load() {
 		//TODO implement the method
 	}
 	
