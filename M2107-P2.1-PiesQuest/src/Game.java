@@ -608,7 +608,7 @@ public class Game {
 		case 2:
 			return this.levels.length;
 		case 4:
-			return 2;
+			return 1;
 		case 5: 
 			return 1;
 		default: 
