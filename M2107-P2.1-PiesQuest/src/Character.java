@@ -41,7 +41,7 @@ public class Character {
 	/**
 	 * The current jump of falling speed of the player
 	 */
-	public double currentFallingSpeed, currentJumpSpeed;
+	private double currentFallingSpeed, currentJumpSpeed;
 	
 	/**
 	 * The number of strawberries collected
@@ -132,7 +132,7 @@ public class Character {
 	 * Sets the value of the current jump speed
 	 * @param value the value of the speed
 	 */
-	public void setCurrentJumpSpeed(int value) {
+	public void setCurrentJumpSpeed(double value) {
 		this.currentJumpSpeed = value;
 	}
 	
@@ -140,7 +140,7 @@ public class Character {
 	 * Sets the value of the current falling speed
 	 * @param value the value of the speed
 	 */
-	public void setCurrentFallingSpeed(int value) {
+	public void setCurrentFallingSpeed(double value) {
 		this.currentFallingSpeed = value;
 	}
 	
