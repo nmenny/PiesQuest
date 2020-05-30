@@ -177,7 +177,7 @@ public class Game {
 		//Displays the current health of the player on the top right of the screen
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
-		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 60, 15);
+		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 70, 15);
 	}
 	
 	/**
