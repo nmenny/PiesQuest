@@ -95,8 +95,14 @@ public class Level {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
 			String[] tileSize = br.readLine().split(" ");
-			this.width = Integer.parseInt(tileSize[0]); 
-			this.height = Integer.parseInt(tileSize[1]);
+			this.width = Math.abs(Integer.parseInt(tileSize[0])); 
+			this.height = Math.abs(Integer.parseInt(tileSize[1]));
+			if(this.width > 100 || this.width < 10)  {
+				this.width = 50;
+			}
+			if(this.height > 100 || this.height < 10) {
+				this.height = 50;
+			}
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -198,7 +204,7 @@ public class Level {
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
-			int nbLevels = Integer.parseInt(br.readLine());
+			int nbLevels = Math.abs(Integer.parseInt(br.readLine()));
 			levels = new Level[nbLevels];
 			String line;
 			for(int i = 0; i < nbLevels; i++) {
