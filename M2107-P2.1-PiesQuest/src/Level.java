@@ -14,6 +14,11 @@ import java.util.Set;
 public class Level {
 	
 	/**
+	 * The default tile size
+	 */
+	public static final int DEFAULT_TILE_SIZE = 30;
+	
+	/**
 	 * The name of the level
 	 */
 	private final String name;
@@ -98,10 +103,10 @@ public class Level {
 			this.width = Math.abs(Integer.parseInt(tileSize[0])); 
 			this.height = Math.abs(Integer.parseInt(tileSize[1]));
 			if(this.width > 100 || this.width < 10)  {
-				this.width = 50;
+				this.width = Level.DEFAULT_TILE_SIZE;
 			}
 			if(this.height > 100 || this.height < 10) {
-				this.height = 50;
+				this.height = Level.DEFAULT_TILE_SIZE;
 			}
 			String line;
 			while((line = br.readLine()) != null) {
