@@ -2,8 +2,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -84,6 +86,7 @@ public class Game {
 				this.collectedStrawberries.put(level, new HashSet<Position>());
 			}
 			this.levels[0].unlock();
+			this.load();
 		} catch (LevelException e) {
 			System.err.println("Error while loading the levels, missing level information !");
 		}
@@ -404,11 +407,11 @@ public class Game {
 	 * Changes the current level
 	 */
 	private void changeLevel() {
+		this.save();
 		if(this.currentLevel == this.levels.length - 1) { //If we finished the last level
 			this.menuDisplayed = 5;
 			this.currentSelection = 0;
 		} else {
-			this.save();
 			this.levels[this.currentLevel + 1].unlock();
 			this.chooseLevel(this.currentLevel+ 1);
 		}
@@ -471,7 +474,21 @@ public class Game {
 	 * Load a game save file
 	 */
 	public void load() {
-		//TODO implement the method
+		File f = new File("Save/saveFile");
+		if(f.exists()) {
+			try {
+				FileInputStream fis = new FileInputStream(f);
+				
+				while(fis.read() != -1) {
+					DataInputStream dis = new DataInputStream(fis);
+					int level = fis.read();
+					this.levels[level].unlock();
+				}
+				fis.close();
+			} catch (IOException e) {
+				System.err.println("Error ! Save file error !");
+			}
+		}
 	}
 	
 	/**
@@ -538,15 +555,14 @@ public class Game {
 		    DataOutputStream dos = new DataOutputStream(bos);
 			
 			//Get the unlocked levels
-			int level = 0;
 			List<Integer> levelUnlockedIndexes = new ArrayList<Integer>();
-			while(!this.levels[level].isLock()) {
-				levelUnlockedIndexes.add(level);
-				level++;
+			for(int level = 0; level < this.levels.length; level++) {
+				if(!this.levels[level].isLock()) {
+					levelUnlockedIndexes.add(level);
+				}
 			}
-			dos.write(levelUnlockedIndexes.size());
 			for(int unlockLevel : levelUnlockedIndexes) {
-				dos.write(unlockLevel);
+				dos.writeInt(unlockLevel);
 			}
 			
 			dos.close();
