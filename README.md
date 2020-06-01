@@ -16,9 +16,8 @@ If you want to add a new level to the game, you need to follow these steps:
             p -> player starting position
             e -> end of the level
     4- open the file labeled "LevelNames.txt"
-    5- In this file, the first line represents the number of levels and the others contains the level name and its decritption separated by a coma where each line equals a level
-    6- Increment the first number and add the level name and description
-    7- Your level will be in the game
+    5- This file contains the level name and its decritption separated by a coma where each line equals a level, so add a name and description for the new level
+    6- Your level will be in the game
     
 --------------------------
 Members:

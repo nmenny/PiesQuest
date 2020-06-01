@@ -1,4 +1,3 @@
-6
 levelOne, An amazing adventure
 AnotherLevel, The incredible level
 ALevelInTheSky, Sky realm

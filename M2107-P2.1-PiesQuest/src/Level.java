@@ -203,21 +203,27 @@ public class Level {
 	 * @throws LevelException If the level file does not contain enough information about the level
 	 */
 	public static Level[] loadAllLevels() throws LevelException {
-		Level[] levels = null;
+		List<Level> levels = new ArrayList<Level>();
+		Level[] allLevels = null;
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
-			int nbLevels = Math.abs(Integer.parseInt(br.readLine()));
-			levels = new Level[nbLevels];
 			String line;
-			for(int i = 0; i < nbLevels; i++) {
-				line = br.readLine();
+			int i = 0;
+			while((line = br.readLine()) != null) {
 				String[] levelInformations = line.split(",");
 				if(levelInformations.length == 2) {
-					levels[i] = new Level((i+1) +"_" +levelInformations[0], levelInformations[1]);
+					levels.add(new Level((i+1) +"_" +levelInformations[0], levelInformations[1]));
 				} else {
 					throw new LevelException();
 				}
+				i++;
+			}
+			i = 0;
+			allLevels = new Level[levels.size()];
+			for(Level level : levels) {
+				allLevels[i] = level;
+				i++;
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("File not found !");
@@ -226,7 +232,7 @@ public class Level {
 		} catch (IOException e) {
 			System.err.println("File error !");
 		}
-		return levels;
+		return allLevels;
 	}
 
 	/**
