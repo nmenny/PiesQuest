@@ -9,7 +9,7 @@ If you want to add a new level to the game, you need to follow these steps:
     1- First, go to the folder "Levels"
     2- Create a new file labeled "leveln.txt" where n represent the level index
     3- It's in this file that you will be writing your levels : 
-        3.1- The first line contains the width and height of the tiles
+        3.1- The first line contains this dimensions of the tiles (everything is a square)
         3.2- On the next lines, draw you level using the corresponding symbols:
             x -> an obstacle
             s -> a strawberry (collectible)

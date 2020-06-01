@@ -99,15 +99,13 @@ public class Level {
 		System.out.println(levelName);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			String[] tileSize = br.readLine().split(" ");
-			this.width = Math.abs(Integer.parseInt(tileSize[0])); 
-			this.height = Math.abs(Integer.parseInt(tileSize[1]));
-			if(this.width > 100 || this.width < 10)  {
+			this.width = Math.abs(Integer.parseInt(br.readLine()));
+			
+			if(this.width > 100 || this.width <= 10)  {
 				this.width = Level.DEFAULT_TILE_SIZE;
 			}
-			if(this.height > 100 || this.height < 10) {
-				this.height = Level.DEFAULT_TILE_SIZE;
-			}
+			
+			this.height = this.width;
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
