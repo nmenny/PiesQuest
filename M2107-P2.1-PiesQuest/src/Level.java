@@ -240,7 +240,7 @@ public class Level {
 	 * @param gameHeight the height of the game
 	 * @return The initial position of the player
 	 */
-	public Position getInitialPlayerPosition(int gameHeight) {
+	public Position getInitialPlayerPosition(int gameHeight, int gameWidth) {
 		Position pos = null;
 		int y = gameHeight - this.height;
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
@@ -252,6 +252,21 @@ public class Level {
 			}
 			y -= this.height;
 		}
+		
+		//If the player position is not visible on the screen, 
+		
+		while(((pos.x + this.offsetX) > (gameWidth / 2)) && !this.translationMaxReached(gameWidth)) {
+			this.translationX(1);
+		}
+		
+		pos.x += this.offsetX;
+		
+		while(((pos.y + this.offsetY) < (gameHeight / 2))) {
+			this.translationY(1);
+		}
+		
+		pos.y += this.offsetY;
+		
 		return pos;
 	}
 	

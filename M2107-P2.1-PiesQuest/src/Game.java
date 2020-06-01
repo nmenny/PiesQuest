@@ -157,7 +157,7 @@ public class Game {
 			this.levels[this.currentLevel].init();
 			this.ihm.initMovements();
 			this.levels[this.currentLevel].load();
-			this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
+			this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 			System.out.println("Level " +(levelId+1) +" loaded");
 		}
 	}
@@ -181,7 +181,7 @@ public class Game {
 			} else {
 				this.levels[this.currentLevel].init();
 				this.ihm.initMovements();
-				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight()));
+				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 			}
 		}
 		
