@@ -154,10 +154,10 @@ public class Character {
 	 */
 	public void move(int direction) {
 		switch(direction) {
-			case 1:
+			case 1: //Moves on the right
 				this.position = new Position(this.position.x + Character.MOVING_SPEED, this.position.y);
 			break;
-			case -1:
+			case -1: //Moves on the left
 				this.position = new Position(this.position.x - Character.MOVING_SPEED, this.position.y);
 			break;
 		}

@@ -101,6 +101,7 @@ public class Level {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
 			this.width = Math.abs(Integer.parseInt(br.readLine()));
 			
+			//If the dimensions are too high or too low, we re-adjust it
 			if(this.width > 100 || this.width <= 10)  {
 				this.width = Level.DEFAULT_TILE_SIZE;
 			}
@@ -178,16 +179,22 @@ public class Level {
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
+				
+				//If the current tile is a wall
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
 					g.fillRect((x * this.width) + this.offsetX, y + this.offsetY, this.width, this.height);
 					
 				}
+				
+				//If it's the end
 				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
 					g.setColor(EnumTiles.End.tileColor);
 					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
 					
 				}
+				
+				//If it's a strawberry
 				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.width) + this.offsetX, y + this.offsetY)))) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
@@ -219,6 +226,7 @@ public class Level {
 				}
 				i++;
 			}
+			//Puts all the levels into an array
 			i = 0;
 			allLevels = new Level[levels.size()];
 			for(Level level : levels) {
@@ -246,6 +254,8 @@ public class Level {
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
+				
+				//If the current tile is the player
 				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
 					pos = new Position(x * this.width, y);
 				}

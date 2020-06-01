@@ -146,6 +146,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				this.theGame.gotoSelect(-3);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				//If the selected level is unlock, we can select it
 				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLock()) {
 					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
 					this.theGame.menuDisplayed = 3;
@@ -238,10 +239,12 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		
 		while(this.isRunning) {
 			start = System.nanoTime();
-
+			
+			//Draws the game
 			repaint();
 			
 			elapsed = System.nanoTime() - start;
+			
 			wait = IHM_Player.targetTime - elapsed / 1000000;
 			
 			if(wait <= 0) {
@@ -286,6 +289,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				this.theGame.movePlayer(1);
 			}
 			if(this.playerJumping) {
+				//If the character hits the ground, he can jump again
 				if(this.theGame.jumpPlayer()) {
 					this.playerJumping = false;
 				}

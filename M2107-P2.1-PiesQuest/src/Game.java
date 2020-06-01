@@ -82,10 +82,13 @@ public class Game {
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
+			//We create a new set containing the collected strawberries position in a map
 			for(int level = 0; level < this.levels.length; level++) {
 				this.collectedStrawberries.put(level, new HashSet<Position>());
 			}
+			//Unlocks the first level
 			this.levels[0].unlock();
+			//Loads the previous saved game
 			this.load();
 		} catch (LevelException e) {
 			System.err.println("Error while loading the levels, missing level information !");
@@ -112,6 +115,7 @@ public class Game {
 		g.setColor(new Color(50, 150, 200));
 		g.fillRect(0,  0,  width, height);
 		
+		//Display the title of the menu
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 50));
 		g.drawString("CHOOSE THE LEVEL", (width / 2) - 220, height / 6);
@@ -150,13 +154,19 @@ public class Game {
 	 * @param levelId the index of the level
 	 */
 	public void chooseLevel(int levelId) {
+		//Saves the game
+		this.save();
 		if(!this.levels[levelId].isLock()) {
 			this.currentLevel = levelId;
+			//We clear the collected strawberries position in stored in memory
 			this.collectedStrawberries.get(this.currentLevel).clear();
-			//this.levels[this.currentLevel].unlock();
+			//Initialize the level
 			this.levels[this.currentLevel].init();
+			//Initialize the movements
 			this.ihm.initMovements();
+			//Load the level
 			this.levels[this.currentLevel].load();
+			//Set the initial position of the character
 			this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 			System.out.println("Level " +(levelId+1) +" loaded");
 		}
@@ -172,13 +182,17 @@ public class Game {
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
 		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
+		
+		//When the character position is higher than the height of the screen, the player is dead
 		if(this.character.getPosition().y > this.parameter.getHeight()) {
 			this.character.die();
+			//If the character's health if below 0, this is game over
 			if(this.character.getHealth() <= 0) {
 				this.menuDisplayed = 4;
 				this.currentSelection = 0;
-				this.character.giveHealth(3);
+				this.character.giveHealth(3); //Reinitializes the life of the character
 			} else {
+				//If he is not dead, the level restarts at the beginning
 				this.levels[this.currentLevel].init();
 				this.ihm.initMovements();
 				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
@@ -214,9 +228,9 @@ public class Game {
 		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
 			this.levels[this.currentLevel].translationX(-1);
 		} else  {  //The player moves
-			if(direction < 0 && !collisions[1]) {
+			if(direction < 0 && !collisions[1]) { //On the left
 				this.character.move(direction);
-			} else if (direction > 0 && !collisions[0]) {
+			} else if (direction > 0 && !collisions[0]) { //On the right
 				this.character.move(direction);
 			}
 			
@@ -236,17 +250,20 @@ public class Game {
 		} else if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
 			this.levels[this.currentLevel].translationY(-1);
 		} else {
-			if(this.character.getCurrentJumpSpeed() <= 0) {
+			//If the jumping speed is null, the player falls
+			if(this.character.getCurrentJumpSpeed() <= 0) { 
 				this.character.fall(); 
 			} else{
 				this.character.jump();
 			}
 		}
+		
+		//Checks the collisions with the player
 		boolean[] collisions = this.checkCollisions();
-		if(collisions[2]) {
+		if(collisions[2]) { //Collision on the top
 			this.character.setCurrentJumpSpeed(0);
 		}
-		if(collisions[3]) {
+		if(collisions[3]) { //Collision down
 			this.character.setCurrentJumpSpeed(Character.JUMPING_SPEED);
 			this.character.setCurrentFallingSpeed(1);
 			return true;
@@ -273,6 +290,7 @@ public class Game {
 		int playerX = (int)this.character.getPosition().x;
 		int playerY = (int)this.character.getPosition().y + 1;
 		
+		//The list of collected strawberries of the current level
 		Set<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
 		
 		//Checking the collision with the edges
@@ -286,6 +304,8 @@ public class Game {
 		int y = this.parameter.getHeight() - tileHeight;
 		for(int line = level.length - 1; line >= 0; line--) {
 			for(int x = 0; x < level[line].length(); x++) {
+				
+				//The dimensions of the tile
 				int minTileWidth = x * tileWidth + this.levels[this.currentLevel].getOffsetX() - tileWidth;
 				int minTileHeight = y + this.levels[this.currentLevel].getOffsetY();
 				int maxTileWidth = minTileWidth + tileWidth;
@@ -293,19 +313,6 @@ public class Game {
 				
 				//If the tile is a wall
 				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
-					//Collision on the top
-					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
-							collisions[2] = true;
-						}
-					}
-					
-					//Collision on the bottom
-					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
-							collisions[3] = true;
-						}
-					}
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
@@ -320,25 +327,24 @@ public class Game {
 							collisions[1] = true;
 						}
 					}
-				}
-				
-				//If the end of the level is reached, on go to the next level or we end the game
-				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+					
 					//Collision on the top
 					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.changeLevel();
-							break;
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+							collisions[2] = true;
 						}
 					}
 					
 					//Collision on the bottom
 					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.changeLevel();
-							break;
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+							collisions[3] = true;
 						}
 					}
+				}
+				
+				//If the end of the level is reached, on go to the next level or we end the game
+				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
@@ -351,6 +357,22 @@ public class Game {
 					//Collisions Left
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
 						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
+							this.changeLevel();
+							break;
+						}
+					}
+					
+					//Collision on the top
+					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							this.changeLevel();
+							break;
+						}
+					}
+					
+					//Collision on the bottom
+					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
 							this.changeLevel();
 							break;
 						}
@@ -361,21 +383,6 @@ public class Game {
 				//If the player hits a strawberry, it collects it
 				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
 					boolean collisionDone = false;
-					//Collision on the top
-					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
-					}
-					
-					//Collision on the bottom
-					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
-					}
 					
 					//Collisions Right
 					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
@@ -393,7 +400,23 @@ public class Game {
 						}
 					}
 					
-					//If a collision is done and we collected a 10th we gain a life
+					//Collision on the top
+					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
+					}
+					
+					//Collision on the bottom
+					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
+					}
+					
+					//If a collision is done and we collected a multiple of 10 we gain a life
 					if(collisionDone) {
 						this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
 						if((this.character.getNbStrawberriesCollected() % 10) == 0) {
@@ -415,11 +438,13 @@ public class Game {
 	 * Changes the current level
 	 */
 	private void changeLevel() {
-		this.save();
-		if(this.currentLevel == this.levels.length - 1) { //If we finished the last level
+		//If we finished the last level, it's the end
+		if(this.currentLevel == this.levels.length - 1) { 
+			//Saves the game
+			this.save();
 			this.menuDisplayed = 5;
 			this.currentSelection = 0;
-		} else {
+		} else { //Else, the next level starts
 			this.levels[this.currentLevel + 1].unlock();
 			this.chooseLevel(this.currentLevel+ 1);
 		}
@@ -462,11 +487,14 @@ public class Game {
 		g.setColor(new Color(50, 150, 200));
 		g.fillRect(0,  0,  width, height);
 		
+		//The title of the menu
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 100));
 		g.drawString("GAME OVER", (width / 2) - 270, height / 3);
 		
+		//For every menu option, we draw it on the screen
 		for(int menu = 0; menu < menus.length; menu++) {
+			//If the current menu is selected, its color changes
 			if(menu == this.currentSelection) {
 				g.setColor(Color.GREEN);
 			} else {
@@ -483,6 +511,7 @@ public class Game {
 	 */
 	public void load() {
 		File f = new File("Save/saveFile");
+		//If the file exits, we can load it
 		if(f.exists()) {
 			try {
 				FileInputStream fis = new FileInputStream(f);
@@ -511,7 +540,9 @@ public class Game {
 		g.setColor(new Color(50, 150, 200));
 		g.fillRect(0,  0,  width, height);
 		
+		//For every menu option, we draw it on the screen
 		for(int menu = 0; menu < menus.length; menu++) {
+			//If the current menu is selected, its color changes
 			if(menu == this.currentSelection) {
 				g.setColor(Color.GREEN);
 			} else {
@@ -536,11 +567,14 @@ public class Game {
 		g.setColor(new Color(50, 150, 200));
 		g.fillRect(0,  0,  width, height);
 		
+		//Displays the title of the menu
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 100));
 		g.drawString("VICTORY", (width / 2) - 210, height / 3);
 		
+		//For every menu option, we draw it on the screen
 		for(int menu = 0; menu < menus.length; menu++) {
+			//If the current menu is selected, its color changes
 			if(menu == this.currentSelection) {
 				g.setColor(Color.GREEN);
 			} else {
@@ -559,8 +593,7 @@ public class Game {
 		File f = new File("Save/saveFile");
 		try {
 			FileOutputStream fos = new FileOutputStream(f);
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		    DataOutputStream dos = new DataOutputStream(bos);
+		    DataOutputStream dos = new DataOutputStream(fos);
 			
 			//Get the unlocked levels
 			List<Integer> levelUnlockedIndexes = new ArrayList<Integer>();
@@ -569,13 +602,12 @@ public class Game {
 					levelUnlockedIndexes.add(level);
 				}
 			}
+			//Each unlocked level indexes are stored in a file
 			for(int unlockLevel : levelUnlockedIndexes) {
 				dos.writeInt(unlockLevel);
 			}
 			
 			dos.close();
-			fos.write(bos.toByteArray());
-			bos.close();
 			fos.close();
 			
 		} catch (IOException e) {
@@ -589,9 +621,11 @@ public class Game {
 	 */
 	public void gotoSelect(int go) {
 		this.currentSelection += go;
+		//If the selection is less than 0, we go to the last option
 		if(this.currentSelection < 0) {
 			this.currentSelection = this.getNumberOption() - 1;
 		}
+		//If the selection is more or equals to the number of menus, we go to the first option
 		if(this.currentSelection >= this.getNumberOption()) {
 			this.currentSelection = 0;
 		}
@@ -602,6 +636,7 @@ public class Game {
 	 * @return the number of option of the current menu
 	 */
 	private int getNumberOption() {
+		//For each menu, there's a defined number of menus
 		switch(this.menuDisplayed) {
 		case 0:
 			return 4;
@@ -629,6 +664,7 @@ public class Game {
 	 */
 	public void makeFall() {
 		boolean[] coll = this.checkCollisions();
+		//If there's no collision on the bottom, the character falls
 		if(!coll[3]) {
 			if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
 				this.levels[this.currentLevel].translationY(-1);
