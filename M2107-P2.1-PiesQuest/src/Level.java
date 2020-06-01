@@ -253,7 +253,7 @@ public class Level {
 			y -= this.height;
 		}
 		
-		//If the player position is not visible on the screen, the tiles are reajusting
+		//If the player position is not visible on the screen, the tiles are re-adjusting
 		
 		while(((pos.x + this.offsetX) > (gameWidth / 2)) && !this.translationMaxReached(gameWidth)) {
 			this.translationX(1);
