@@ -47,17 +47,6 @@ public class Game {
 	private final IHM_Player ihm;
 	
 	/**
-	 * Allows us to know which screen has to be displayed by looking at the value
-	 * 0 - main menu displayed
-	 * 1 - parameters displayed
-	 * 2 - level selection displayed
-	 * 3 - level displayed
-	 * 4 - game over screen displayed
-	 * 5 - victory screen displayed
-	 */
-	public int menuDisplayed;
-	
-	/**
 	 * The selection of the options in the menus
 	 */
 	private int currentSelection;
@@ -78,7 +67,6 @@ public class Game {
 		this.collectedStrawberries = new HashMap<Integer, Set<Position>>();
 		
 		//At the initialization, the main menu is displayed
-		this.menuDisplayed = 0;
 		this.currentSelection = 0;
 		try {
 			this.levels = Level.loadAllLevels();
@@ -188,7 +176,7 @@ public class Game {
 			this.character.die();
 			//If the character's health if below 0, this is game over
 			if(this.character.getHealth() <= 0) {
-				this.menuDisplayed = 4;
+				this.ihm.displayMenu(4);
 				this.currentSelection = 0;
 				this.character.giveHealth(3); //Reinitializes the life of the character
 			} else {
@@ -442,7 +430,7 @@ public class Game {
 		if(this.currentLevel == this.levels.length - 1) { 
 			//Saves the game
 			this.save();
-			this.menuDisplayed = 5;
+			this.ihm.displayMenu(5);
 			this.currentSelection = 0;
 		} else { //Else, the next level starts
 			this.levels[this.currentLevel + 1].unlock();
@@ -636,7 +624,7 @@ public class Game {
 	 */
 	private int getNumberOption() {
 		//For each menu, there's a defined number of menus
-		switch(this.menuDisplayed) {
+		switch(this.ihm.getDisplayedMenu()) {
 		case 0:
 			return 4;
 		case 2:

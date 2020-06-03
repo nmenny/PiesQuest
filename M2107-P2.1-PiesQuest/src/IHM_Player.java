@@ -21,6 +21,17 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private Game theGame;
 	
 	/**
+	 * Allows us to know which screen has to be displayed by looking at the value
+	 * 0 - main menu displayed
+	 * 1 - parameters displayed
+	 * 2 - level selection displayed
+	 * 3 - level displayed
+	 * 4 - game over screen displayed
+	 * 5 - victory screen displayed
+	 */
+	private int menuDisplayed;
+	
+	/**
 	 * Is the game running
 	 */
 	private boolean isRunning;
@@ -73,7 +84,35 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread = new Thread(this);
 		this.gameThread.start();
 		
+		this.menuDisplayed = 0;
+		
 		this.initMovements();
+	}
+	
+	/**
+	 * Gets the menu being currently displayed
+	 * @return the value of the menu
+	 * 		0 - main menu displayed
+	 *  	1 - parameters displayed
+	 *  	2 - level selection displayed
+     *  	3 - level displayed
+	 *  	4 - game over screen displayed
+	 *  	5 - victory screen displayed
+	 */
+	public int getDisplayedMenu() {
+		return this.menuDisplayed;
+	}
+	
+	/**
+	 * Changes the currently displayed menu with the given value
+	 * @param menuValue the value corresponding of the menu
+	 */
+	public void displayMenu(int menuValue) {
+		if(menuValue < 0 || menuValue > 5) {
+			this.menuDisplayed = 0;
+		} else {
+			this.menuDisplayed = menuValue;
+		}
 	}
 	
 	/**
@@ -98,7 +137,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 */
 	public void keyPressed(KeyEvent e) {
 		//Depending on the menu, the action possible are different
-		switch(this.theGame.menuDisplayed) {
+		switch(this.menuDisplayed) {
 		case 0: //The main menu
 			//If we press the up arrow, we move up in the menu
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
@@ -113,10 +152,10 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
 					this.theGame.chooseLevel(0);
-					this.theGame.menuDisplayed = 3;
+					this.menuDisplayed = 3;
 					break;
 				case 1: //Level selection option
-					this.theGame.menuDisplayed = 2;
+					this.menuDisplayed = 2;
 					//Puts the level selection cursor on the first level
 					this.theGame.gotoSelect(-1);
 					break;
@@ -151,11 +190,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 				//If the selected level is unlock, we can select it
 				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLock()) {
 					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
-					this.theGame.menuDisplayed = 3;
+					this.menuDisplayed = 3;
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				this.theGame.menuDisplayed = 0;
+				this.menuDisplayed = 0;
 			}
 			break;
 		case 3: //The level
@@ -182,7 +221,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
-					this.theGame.menuDisplayed = 0;
+					this.menuDisplayed = 0;
 					break;
 				default: 
 					break;
@@ -194,7 +233,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
-					this.theGame.menuDisplayed = 0;
+					this.menuDisplayed = 0;
 					break;
 				default: 
 					break;
@@ -213,7 +252,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 */
 	public void keyReleased(KeyEvent e) {
 		//Depending on the menu, the action possible are different
-		switch(this.theGame.menuDisplayed) {
+		switch(this.menuDisplayed) {
 			case 3: //The level
 				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 					this.playerMovingLeft = false;
@@ -273,7 +312,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
 		
 		//The element displayed varies depending on the menu displayed
-		switch(this.theGame.menuDisplayed) {
+		switch(this.menuDisplayed) {
 		case 0: //The main menu
 			this.theGame.displayMainScreen(g);
 			break;
