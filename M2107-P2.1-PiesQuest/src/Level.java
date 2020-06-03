@@ -44,12 +44,12 @@ public class Level {
 	/**
 	 * The width of the tiles
 	 */
-	private int width;
+	private int tileWidth;
 	
 	/**
 	 * The height of the tiles
 	 */
-	private int height;
+	private int tileHeight;
 	
 	/**
 	 * The offset on the x axis of the tiles
@@ -99,14 +99,14 @@ public class Level {
 		System.out.println(levelName);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			this.width = Math.abs(Integer.parseInt(br.readLine()));
+			this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
 			
 			//If the dimensions are too high or too low, we re-adjust it
-			if(this.width > 100 || this.width <= 10)  {
-				this.width = Level.DEFAULT_TILE_SIZE;
+			if(this.tileWidth > 100 || this.tileWidth <= 10)  {
+				this.tileWidth = Level.DEFAULT_TILE_SIZE;
 			}
 			
-			this.height = this.width;
+			this.tileHeight = this.tileWidth;
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -157,7 +157,7 @@ public class Level {
 	 * @return the width of the tiles
 	 */
 	public int getTileWidth() {
-		return this.width;
+		return this.tileWidth;
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class Level {
 	 * @return the height of the tiles
 	 */
 	public int getTileHeight() {
-		return this.height;
+		return this.tileHeight;
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class Level {
 	 * @param gameHeight the height of the game
 	 */
 	public void display(Graphics g, int gameWidth, int gameHeight) {
-		int y = gameHeight - this.height;
+		int y = gameHeight - this.tileHeight;
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
@@ -183,24 +183,24 @@ public class Level {
 				//If the current tile is a wall
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation) {
 					g.setColor(EnumTiles.Wall.tileColor);
-					g.fillRect((x * this.width) + this.offsetX, y + this.offsetY, this.width, this.height);
+					g.fillRect((x * this.tileWidth) + this.offsetX, y + this.offsetY, this.tileWidth, this.tileHeight);
 					
 				}
 				
 				//If it's the end
 				if(line.charAt(x) == EnumTiles.End.charRepresentation) {
 					g.setColor(EnumTiles.End.tileColor);
-					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
+					g.fillRect((x * this.tileWidth) + this.offsetX,  y + this.offsetY, this.tileWidth, this.tileHeight);
 					
 				}
 				
 				//If it's a strawberry
-				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.width) + this.offsetX, y + this.offsetY)))) {
+				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.tileWidth) + this.offsetX, y + this.offsetY)))) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
-					g.fillRect((x * this.width) + this.offsetX,  y + this.offsetY, this.width, this.height);
+					g.fillRect((x * this.tileWidth) + this.offsetX,  y + this.offsetY, this.tileWidth, this.tileHeight);
 				}
 			}
-			y -= this.height;
+			y -= this.tileHeight;
 		}
 	}
 	
@@ -250,17 +250,17 @@ public class Level {
 	 */
 	public Position getInitialPlayerPosition(int gameHeight, int gameWidth) {
 		Position pos = null;
-		int y = gameHeight - this.height;
+		int y = gameHeight - this.tileHeight;
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
 				
 				//If the current tile is the player
 				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
-					pos = new Position(x * this.width, y);
+					pos = new Position(x * this.tileWidth, y);
 				}
 			}
-			y -= this.height;
+			y -= this.tileHeight;
 		}
 		
 		//If the player position is not visible on the screen, the tiles are re-adjusting
@@ -330,8 +330,8 @@ public class Level {
 		for(int line = 0; line < this.loadedLevel.size(); line++) {
 			for(int x = 0; x < this.loadedLevel.get(line).length(); x++) {
 				if(this.loadedLevel.get(line).charAt(x) == 'x') {
-					if(((x * this.width) + this.offsetX) > xMax)
-						xMax = (x * this.width) + this.offsetX;
+					if(((x * this.tileWidth) + this.offsetX) > xMax)
+						xMax = (x * this.tileWidth) + this.offsetX;
 				}
 			}
 		}
