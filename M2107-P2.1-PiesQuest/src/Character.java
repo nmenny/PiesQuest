@@ -118,7 +118,7 @@ public class Character {
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
 		try {
-			this.position = new Position(thePosition.x, thePosition.y);
+			this.position = new Position(thePosition.getX(), thePosition.getY());
 		} catch(NullPointerException e) {
 			System.err.println("Error ! Player position unknown !");
 		}
@@ -155,10 +155,10 @@ public class Character {
 	public void move(int direction) {
 		switch(direction) {
 			case 1: //Moves on the right
-				this.position = new Position(this.position.x + Character.MOVING_SPEED, this.position.y);
+				this.position = new Position(this.position.getX() + Character.MOVING_SPEED, this.position.getY());
 			break;
 			case -1: //Moves on the left
-				this.position = new Position(this.position.x - Character.MOVING_SPEED, this.position.y);
+				this.position = new Position(this.position.getX() - Character.MOVING_SPEED, this.position.getY());
 			break;
 		}
 	}
@@ -167,7 +167,7 @@ public class Character {
 	 * makes the player jump
 	 */
 	public void jump() {
-		this.position.y -= (int) this.currentJumpSpeed;
+		this.position.addToY(- (int) this.currentJumpSpeed);
 		
 		this.currentJumpSpeed -= 1;
 	}
@@ -183,7 +183,7 @@ public class Character {
 	 * Makes the player fall
 	 */
 	public void fall() {
-		this.position.y += (int) this.currentFallingSpeed;
+		this.position.addToY((int) this.currentFallingSpeed);
 		
 		if(this.currentFallingSpeed < Character.FALLING_SPEED) {
 			this.currentFallingSpeed += 1;

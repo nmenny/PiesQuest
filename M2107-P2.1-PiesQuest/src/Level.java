@@ -265,17 +265,17 @@ public class Level {
 		
 		//If the player position is not visible on the screen, the tiles are re-adjusting
 		
-		while(((pos.x + this.offsetX) > (gameWidth / 2)) && !this.translationMaxReached(gameWidth)) {
+		while(((pos.getX() + this.offsetX) > (gameWidth / 2)) && !this.translationMaxReached(gameWidth)) {
 			this.translationX(1);
 		}
 		
-		pos.x += this.offsetX;
+		pos.addToX(this.offsetX);
 		
-		while(((pos.y + this.offsetY) < (gameHeight / 2))) {
+		while(((pos.getY() + this.offsetY) < (gameHeight / 2))) {
 			this.translationY(1);
 		}
 		
-		pos.y += this.offsetY;
+		pos.addToY(this.offsetY);
 		
 		return pos;
 	}

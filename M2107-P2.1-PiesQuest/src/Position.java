@@ -6,18 +6,50 @@ public class Position {
 	/**
 	 * The coordinate in the X axis
 	 */
-	public double x;
+	private double x;
 	
 	/**
 	 * The coordinate in the Y axis
 	 */
-	public double y;
+	private double y;
 	
 	/**
 	 * Set the position to the origin (0, 0)
 	 */
 	public Position() {
 		this.x = this.y = 0;
+	}
+	
+	/**
+	 * Gets the coordinate on the x axis
+	 * @return the x value
+	 */
+	public double getX() {
+		return this.x;
+	}
+	
+	/**
+	 * Gets the coordinate on the y axis
+	 * @return the y value
+	 */
+	public double getY() {
+		return this.y;
+	}
+	
+	/**
+	 * Adds a given value to the x value
+	 * @param val the value to add
+	 */
+	public void addToX(double val) {
+		this.x = this.x + val;
+	}
+	
+	/**
+	 * Adds a given value to the y value
+	 * @param val the value to add
+	 */
+	public void addToY(double val) {
+		this.y = this.y + val;
 	}
 	
 	/**

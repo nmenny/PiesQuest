@@ -181,10 +181,10 @@ public class Game {
 		currentLevel.registerCollectedStrawberries(this.collectedStrawberries.get(this.currentLevel));
 		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
 		g.setColor(EnumTiles.Player.tileColor);
-		g.fillRect((int)this.character.getPosition().x, (int)this.character.getPosition().y, currentLevel.getTileWidth(), currentLevel.getTileHeight());
+		g.fillRect((int)this.character.getPosition().getX(), (int)this.character.getPosition().getY(), currentLevel.getTileWidth(), currentLevel.getTileHeight());
 		
 		//When the character position is higher than the height of the screen, the player is dead
-		if(this.character.getPosition().y > this.parameter.getHeight()) {
+		if(this.character.getPosition().getY() > this.parameter.getHeight()) {
 			this.character.die();
 			//If the character's health if below 0, this is game over
 			if(this.character.getHealth() <= 0) {
@@ -222,10 +222,10 @@ public class Game {
 	public void movePlayer(int direction) {
 		boolean[] collisions = this.checkCollisions();
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves (if the end of the level is not reached)
-		if((this.character.getPosition().x + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()) && !collisions[0])) {
+		if((this.character.getPosition().getX() + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()) && !collisions[0])) {
 			this.levels[this.currentLevel].translationX(1);
 		//Else, if the player position is less than the 1/3 of the screen width and if the tiles are not back to normal (the starting offset) the tiles are moving the other way
-		} else if((this.character.getPosition().x - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
+		} else if((this.character.getPosition().getX() - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
 			this.levels[this.currentLevel].translationX(-1);
 		} else  {  //The player moves
 			if(direction < 0 && !collisions[1]) { //On the left
@@ -243,11 +243,11 @@ public class Game {
 	 */
 	public boolean jumpPlayer() {
 		//If the player is high in the sky, the tiles will move up
-		if((this.character.getPosition().y - Character.JUMPING_SPEED < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
+		if((this.character.getPosition().getY() - Character.JUMPING_SPEED < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
 			this.levels[this.currentLevel].translationY(1);
 			this.character.setCurrentJumpSpeed(this.character.getCurrentJumpSpeed() - 1);
 		//If the player is too low, the tiles will move down
-		} else if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
+		} else if((this.character.getPosition().getY() + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
 			this.levels[this.currentLevel].translationY(-1);
 		} else {
 			//If the jumping speed is null, the player falls
@@ -287,8 +287,8 @@ public class Game {
 		int tileHeight = this.levels[this.currentLevel].getTileHeight();
 		int tileWidth = this.levels[this.currentLevel].getTileWidth();
 		
-		int playerX = (int)this.character.getPosition().x;
-		int playerY = (int)this.character.getPosition().y + 1;
+		int playerX = (int)this.character.getPosition().getX();
+		int playerY = (int)this.character.getPosition().getY() + 1;
 		
 		//The list of collected strawberries of the current level
 		Set<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
@@ -517,7 +517,6 @@ public class Game {
 				FileInputStream fis = new FileInputStream(f);
 				
 				while(fis.read() != -1) {
-					DataInputStream dis = new DataInputStream(fis);
 					int level = fis.read();
 					this.levels[level].unlock();
 				}
@@ -666,7 +665,7 @@ public class Game {
 		boolean[] coll = this.checkCollisions();
 		//If there's no collision on the bottom, the character falls
 		if(!coll[3]) {
-			if((this.character.getPosition().y + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
+			if((this.character.getPosition().getY() + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
 				this.levels[this.currentLevel].translationY(-1);
 			} else {
 				this.character.fall();
