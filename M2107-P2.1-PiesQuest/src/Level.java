@@ -16,7 +16,7 @@ public class Level {
 	/**
 	 * The default tile size
 	 */
-	public static final int DEFAULT_TILE_SIZE = 30;
+	public static final int DEFAULT_TILE_SIZE = 40;
 	
 	/**
 	 * The name of the level
@@ -78,6 +78,7 @@ public class Level {
 		this.loadedLevel = new ArrayList<String>();
 		this.strawberriesCollectedPositions = new HashSet<Position>();
 		this.init();
+		this.tileWidth = this.tileHeight = Level.DEFAULT_TILE_SIZE;
 	}
 	
 
@@ -99,14 +100,14 @@ public class Level {
 		System.out.println(levelName);
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
+			/*this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
 			
 			//If the dimensions are too high or too low, we re-adjust it
 			if(this.tileWidth > 100 || this.tileWidth <= 10)  {
 				this.tileWidth = Level.DEFAULT_TILE_SIZE;
 			}
 			
-			this.tileHeight = this.tileWidth;
+			this.tileHeight = this.tileWidth;*/
 			String line;
 			while((line = br.readLine()) != null) {
 				System.out.println(line);
