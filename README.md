@@ -7,7 +7,7 @@ How to:
 
 If you want to add a new level to the game, you need to follow these steps:
     1- First, go to the folder "Levels"
-    2- Create a new file labeled "leveln.txt" where n represent the level index
+    2- Create a new file labeled "leveln.txt" where n represent the level index (starting at 1)
     3- It's in this file that you will be writing your levels : 
         3.1- On the next lines, draw you level using the corresponding symbols:
             x -> an obstacle
