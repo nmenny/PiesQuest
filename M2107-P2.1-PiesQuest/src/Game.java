@@ -389,7 +389,7 @@ public class Game {
 					}
 				}
 				
-				//If a collision is done and we collected a multiple of 10 we gain a life
+				//If a collision is done with a strawberry and we have collected a dozen of them; we gain a life
 				if(collisionDone) {
 					this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
 					if((this.character.getNbStrawberriesCollected() % 10) == 0) {
