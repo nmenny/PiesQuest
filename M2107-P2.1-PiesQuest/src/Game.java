@@ -191,8 +191,24 @@ public class Game {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 15));
 		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 70, 15);
+		
+		//Displays the number of strawberries collected
+		g.drawString("Strawberries : " +this.getTotalCollectedStrawberries(), this.parameter.getWidth() - 150, 35);
 	}
 	
+	/**
+	 * Gets the total number of collected strawberries
+	 * @return
+	 */
+	private int getTotalCollectedStrawberries() {
+		int tot = 0;
+		for(Set<Position> collected : this.collectedStrawberries.values()) {
+			tot += collected.size();
+		}
+		
+		return tot;
+	}
+
 	/**
 	 * displays the selected level at the screen
 	 * @param levelId the index of the level
