@@ -299,121 +299,103 @@ public class Game {
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = minTileHeight + tileHeight;
 				
-				//If the tile is a wall
-				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
-					
-					//Collisions Right
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
+				boolean collisionDone = false;
+				
+				//Collisions Right
+				if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+					if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
+						//Collision with a wall
+						if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 							collisions[0] = true;
 						}
+						
+						//Collision with the end of the level
+						if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+							this.changeLevel();
+							break;
+						}
+						
+						//Collision with a strawberry which hasn't been collected
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
 					}
-					
-					//Collisions Left
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
+				}
+				
+				//Collisions Left
+				if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
+					if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
+						//Collision with a wall
+						if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 							collisions[1] = true;
 						}
-					}
-					
-					//Collision on the top
-					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+						
+						//Collision with the end of the level
+						if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+							this.changeLevel();
+							break;
+						}
+						
+						//Collision with a strawberry which hasn't been collected
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
+					}	
+				}
+				
+				//Collision on the top
+				if(playerY >= minTileHeight && playerY <= maxTileHeight) {
+					if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+						//Collision with a wall
+						if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 							collisions[2] = true;
 						}
+						
+						//Collision with the end of the level
+						if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
+							this.changeLevel();
+							break;
+						}
+						
+						//Collision with a strawberry which hasn't been collected
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
+						}
 					}
-					
-					//Collision on the bottom
-					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+				}
+				
+				//Collision on the bottom
+				if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
+					if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) < maxTileWidth)) {
+						//Collision with a wall
+						if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation) {
 							collisions[3] = true;
 						}
-					}
-				}
-				
-				//If the end of the level is reached, on go to the next level or we end the game
-				if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
-					
-					//Collisions Right
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
+						
+						//Collision with the end of the level
+						if(level[line].charAt(x) == EnumTiles.End.charRepresentation) {
 							this.changeLevel();
 							break;
 						}
-					}
-					
-					//Collisions Left
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
-							this.changeLevel();
-							break;
-						}
-					}
-					
-					//Collision on the top
-					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.changeLevel();
-							break;
-						}
-					}
-					
-					//Collision on the bottom
-					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							this.changeLevel();
-							break;
+						
+						//Collision with a strawberry which hasn't been collected
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
+							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+							collisionDone = true;
 						}
 					}
 				}
 				
-				
-				//If the player hits a strawberry, it collects it
-				if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-					boolean collisionDone = false;
-					
-					//Collisions Right
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if((playerX + tileWidth) >= minTileWidth && (playerX + tileWidth) <= maxTileWidth) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
+				//If a collision is done and we collected a multiple of 10 we gain a life
+				if(collisionDone) {
+					this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
+					if((this.character.getNbStrawberriesCollected() % 10) == 0) {
+						this.character.giveHealth(1);
 					}
-					
-					//Collisions Left
-					if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
-						if(playerX <= (minTileWidth + tileWidth) && playerX >= (minTileWidth + tileWidth)) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
-					}
-					
-					//Collision on the top
-					if(playerY >= minTileHeight && playerY <= maxTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
-					}
-					
-					//Collision on the bottom
-					if((playerY + tileHeight) >= minTileHeight && playerY < minTileHeight) {
-						if((playerX >= minTileWidth && playerX < maxTileWidth) || ((playerX + tileWidth) > minTileWidth && (playerX + tileWidth) <= maxTileWidth)) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
-							collisionDone = true;
-						}
-					}
-					
-					//If a collision is done and we collected a multiple of 10 we gain a life
-					if(collisionDone) {
-						this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
-						if((this.character.getNbStrawberriesCollected() % 10) == 0) {
-							this.character.giveHealth(1);
-						}
-					}
-				
 				}
-				
 			}
 			y -= tileHeight;
 		}
