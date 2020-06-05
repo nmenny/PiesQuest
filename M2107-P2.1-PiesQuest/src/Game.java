@@ -332,8 +332,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
+							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
 							collisionDone = true;
 						}
 					}
@@ -354,8 +354,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
+							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
 							collisionDone = true;
 						}
 					}	
@@ -376,8 +376,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
+							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
 							collisionDone = true;
 						}
 					}
@@ -398,8 +398,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(minTileWidth, minTileHeight)))) {
-							currentListOfStrawberries.add(new Position(minTileWidth, minTileHeight));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
+							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
 							collisionDone = true;
 						}
 					}

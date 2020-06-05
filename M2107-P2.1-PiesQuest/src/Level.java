@@ -196,7 +196,7 @@ public class Level {
 				}
 				
 				//If it's a strawberry
-				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.tileWidth) + this.offsetX, y + this.offsetY)))) {
+				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.tileWidth), y)))) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect((x * this.tileWidth) + this.offsetX,  y + this.offsetY, this.tileWidth, this.tileHeight);
 				}
