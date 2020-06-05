@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,6 +16,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * Serial version
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The maximum time with the message displayed on the screen (in fps (Frame Per Second))
+	 */
+	private static final int MAX_MESSAGE_DISPLAYED_TIME = 240;
 
 	/**
 	 * The game being played
@@ -67,6 +74,21 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private boolean playerJumping;
 	
 	/**
+	 * <tt>true</tt> When a message is displayed with the method inform
+	 */
+	private boolean messageDisplayed;
+	
+	/**
+	 * The message to display on the screen
+	 */
+	private String messageToDisplay;
+	
+	/**
+	 * The time passed since the message is displayed
+	 */
+	private int intervalMessageDisplayed;
+	
+	/**
 	 * Creates a new player for the game and starts the game
 	 */
 	public IHM_Player() {
@@ -85,6 +107,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread.start();
 		
 		this.menuDisplayed = 0;
+		this.messageDisplayed = false;
+		this.messageToDisplay = "";
+		this.intervalMessageDisplayed = 0;
 		
 		this.initMovements();
 	}
@@ -127,7 +152,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param message the message to transmit
 	 */
 	public void inform(String message) {
-		//TODO implement the method
+		this.messageToDisplay = message;
+		this.messageDisplayed = true;
 	}
 
 	@Override
@@ -347,6 +373,21 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			break;
 		default:
 			break;
+		}
+		
+		if(this.messageDisplayed) {
+			if(this.intervalMessageDisplayed < IHM_Player.MAX_MESSAGE_DISPLAYED_TIME) {
+				g.setColor(Color.gray);
+				g.fillRoundRect(this.theParameters.getWidth() / 6, 8*this.theParameters.getHeight() / 9, 2*this.theParameters.getWidth() / 3, this.theParameters.getHeight(), 15, 15);
+				
+				g.setColor(Color.black);
+				g.setFont(new Font("Arial", Font.PLAIN, 20));
+				g.drawString(this.messageToDisplay, (this.theParameters.getWidth() / 6) + this.messageToDisplay.length() * 2, (this.theParameters.getHeight() + 8*this.theParameters.getHeight() / 9) / 2);
+				this.intervalMessageDisplayed++;
+			} else {
+				this.messageDisplayed = false;
+				this.intervalMessageDisplayed = 0;
+			}
 		}
 		
 	}
