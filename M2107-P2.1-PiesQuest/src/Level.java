@@ -64,7 +64,7 @@ public class Level {
 	/**
 	 * Stores the position of all the collected strawberries
 	 */
-	private Set<Position> strawberriesCollectedPositions;
+	private Set<Integer> strawberriesCollectedPositions;
 	
 	/**
 	 * Creates a new level with given proprieties
@@ -76,7 +76,7 @@ public class Level {
 		this.description = theDescription;
 		this.isLock = true;
 		this.loadedLevel = new ArrayList<String>();
-		this.strawberriesCollectedPositions = new HashSet<Position>();
+		this.strawberriesCollectedPositions = new HashSet<Integer>();
 		this.init();
 		this.tileWidth = this.tileHeight = Level.DEFAULT_TILE_SIZE;
 	}
@@ -177,6 +177,7 @@ public class Level {
 	 */
 	public void display(Graphics g, int gameWidth, int gameHeight) {
 		int y = gameHeight - this.tileHeight;
+		int tileIndex = 0;
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
@@ -196,9 +197,13 @@ public class Level {
 				}
 				
 				//If it's a strawberry
-				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(new Position((x * this.tileWidth), y)))) {
+				if(line.charAt(x) == EnumTiles.Strawberries.charRepresentation && (!this.strawberriesCollectedPositions.contains(tileIndex))) {
 					g.setColor(EnumTiles.Strawberries.tileColor);
 					g.fillRect((x * this.tileWidth) + this.offsetX,  y + this.offsetY, this.tileWidth, this.tileHeight);
+				}
+				
+				if(line.charAt(x) == EnumTiles.Wall.charRepresentation || line.charAt(x) == EnumTiles.End.charRepresentation || line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+					tileIndex++;
 				}
 			}
 			y -= this.tileHeight;
@@ -369,7 +374,7 @@ public class Level {
 	 * Saves the position of all the collected strawberries
 	 * @param set the list containing the position of the strawberries
 	 */
-	public void registerCollectedStrawberries(Set<Position> set) {
+	public void registerCollectedStrawberries(Set<Integer> set) {
 		this.strawberriesCollectedPositions.addAll(set);
 	}
 

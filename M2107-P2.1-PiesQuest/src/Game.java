@@ -54,7 +54,7 @@ public class Game {
 	/**
 	 * Stores all the collected strawberries by level id
 	 */
-	private Map<Integer, Set<Position>> collectedStrawberries;
+	private Map<Integer, Set<Integer>> collectedStrawberries;
 	
 	/**
 	 * creates a new Game ready to be played
@@ -64,7 +64,7 @@ public class Game {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
-		this.collectedStrawberries = new HashMap<Integer, Set<Position>>();
+		this.collectedStrawberries = new HashMap<Integer, Set<Integer>>();
 		
 		//At the initialization, the main menu is displayed
 		this.currentSelection = 0;
@@ -72,7 +72,7 @@ public class Game {
 			this.levels = Level.loadAllLevels();
 			//We create a new set containing the collected strawberries position in a map
 			for(int level = 0; level < this.levels.length; level++) {
-				this.collectedStrawberries.put(level, new HashSet<Position>());
+				this.collectedStrawberries.put(level, new HashSet<Integer>());
 			}
 			//Unlocks the first level
 			this.levels[0].unlock();
@@ -193,20 +193,7 @@ public class Game {
 		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 70, 15);
 		
 		//Displays the number of strawberries collected
-		g.drawString("Strawberries : " +this.getTotalCollectedStrawberries(), this.parameter.getWidth() - 150, 35);
-	}
-	
-	/**
-	 * Gets the total number of collected strawberries
-	 * @return
-	 */
-	private int getTotalCollectedStrawberries() {
-		int tot = 0;
-		for(Set<Position> collected : this.collectedStrawberries.values()) {
-			tot += collected.size();
-		}
-		
-		return tot;
+		g.drawString("Strawberries : " +this.character.getNbStrawberriesCollected(), this.parameter.getWidth() - 150, 35);
 	}
 
 	/**
@@ -295,7 +282,7 @@ public class Game {
 		int playerY = (int)this.character.getPosition().getY() + 1;
 		
 		//The list of collected strawberries of the current level
-		Set<Position> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
+		Set<Integer> currentListOfStrawberries = this.collectedStrawberries.get(this.currentLevel);
 		
 		//Checking the collision with the edges
 		if(playerX <= 0) {
@@ -306,6 +293,7 @@ public class Game {
 		}
 		
 		int y = this.parameter.getHeight() - tileHeight;
+		int tileIndex = 0;
 		for(int line = level.length - 1; line >= 0; line--) {
 			for(int x = 0; x < level[line].length(); x++) {
 				
@@ -332,8 +320,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
-							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
+							currentListOfStrawberries.add(tileIndex);
 							collisionDone = true;
 						}
 					}
@@ -354,8 +342,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
-							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
+							currentListOfStrawberries.add(tileIndex);
 							collisionDone = true;
 						}
 					}	
@@ -376,8 +364,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
-							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
+							currentListOfStrawberries.add(tileIndex);
 							collisionDone = true;
 						}
 					}
@@ -398,8 +386,8 @@ public class Game {
 						}
 						
 						//Collision with a strawberry which hasn't been collected
-						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(new Position(x * tileWidth - tileWidth, y)))) {
-							currentListOfStrawberries.add(new Position(x * tileWidth - tileWidth, y));
+						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
+							currentListOfStrawberries.add(tileIndex);
 							collisionDone = true;
 						}
 					}
@@ -412,6 +400,11 @@ public class Game {
 						this.character.giveHealth(1);
 					}
 				}
+				
+				if(level[line].charAt(x) == EnumTiles.Wall.charRepresentation || level[line].charAt(x) == EnumTiles.End.charRepresentation || level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation) {
+					tileIndex++;
+				}
+				
 			}
 			y -= tileHeight;
 		}
