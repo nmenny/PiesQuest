@@ -114,14 +114,12 @@ public class Character {
 	 * Place the character somewhere on the screen
 	 * @param thePosition the position of the character
 	 */
-	public void setPosition(Position thePosition) {
+	public void setPosition(Position thePosition) throws NullPointerException {
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
-		try {
-			this.position = new Position(thePosition.getX(), thePosition.getY());
-		} catch(NullPointerException e) {
-			System.err.println("Error ! Player position unknown !");
-		}
+
+		this.position = new Position(thePosition.getX(), thePosition.getY());
+		
 	}
 	
 	public double getCurrentJumpSpeed() {

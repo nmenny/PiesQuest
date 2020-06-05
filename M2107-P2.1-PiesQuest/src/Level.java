@@ -93,31 +93,25 @@ public class Level {
 	/**
 	 * Load the level in memory
 	 */
-	public void load() {
+	public void load() throws FileNotFoundException, IOException{
 		this.loadedLevel = new ArrayList<String>();
 		this.strawberriesCollectedPositions.clear();
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
 		System.out.println(levelName);
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(levelName));
-			/*this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
+		
+		BufferedReader br = new BufferedReader(new FileReader(levelName));
+		/*this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
+		
+		//If the dimensions are too high or too low, we re-adjust it
+		if(this.tileWidth > 100 || this.tileWidth <= 10)  {
+			this.tileWidth = Level.DEFAULT_TILE_SIZE;
+		}
 			
-			//If the dimensions are too high or too low, we re-adjust it
-			if(this.tileWidth > 100 || this.tileWidth <= 10)  {
-				this.tileWidth = Level.DEFAULT_TILE_SIZE;
-			}
-			
-			this.tileHeight = this.tileWidth;*/
-			String line;
-			while((line = br.readLine()) != null) {
-				System.out.println(line);
-				this.loadedLevel.add(line);
-			}
-			
-		} catch (FileNotFoundException e) {
-			System.err.println("Error, level not found !");
-		} catch (IOException e) {
-			System.err.println("File error !");
+		this.tileHeight = this.tileWidth;*/
+		String line;
+		while((line = br.readLine()) != null) {
+			System.out.println(line);
+			this.loadedLevel.add(line);
 		}
 		
 	}
@@ -215,36 +209,28 @@ public class Level {
 	 * @return an array containing all the levels
 	 * @throws LevelException If the level file does not contain enough information about the level
 	 */
-	public static Level[] loadAllLevels() throws LevelException {
+	public static Level[] loadAllLevels() throws LevelException, FileNotFoundException, IOException {
 		List<Level> levels = new ArrayList<Level>();
 		Level[] allLevels = null;
-		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
-			String line;
-			int i = 0;
-			while((line = br.readLine()) != null) {
-				String[] levelInformations = line.split(",");
-				if(levelInformations.length == 2) {
-					levels.add(new Level((i+1) +"_" +levelInformations[0], levelInformations[1]));
-				} else {
-					throw new LevelException();
-				}
-				i++;
+
+		BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
+		String line;
+		int i = 0;
+		while((line = br.readLine()) != null) {
+			String[] levelInformations = line.split(",");
+			if(levelInformations.length == 2) {
+				levels.add(new Level((i+1) +"_" +levelInformations[0], levelInformations[1]));
+			} else {
+				throw new LevelException();
 			}
-			//Puts all the levels into an array
-			i = 0;
-			allLevels = new Level[levels.size()];
-			for(Level level : levels) {
-				allLevels[i] = level;
-				i++;
-			}
-		} catch (FileNotFoundException e) {
-			System.err.println("File not found !");
-		} catch (NumberFormatException e) {
-			System.err.println("The first line of the level file is not a number !");
-		} catch (IOException e) {
-			System.err.println("File error !");
+			i++;
+		}
+		//Puts all the levels into an array
+		i = 0;
+		allLevels = new Level[levels.size()];
+		for(Level level : levels) {
+			allLevels[i] = level;
+			i++;
 		}
 		return allLevels;
 	}

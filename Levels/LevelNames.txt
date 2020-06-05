@@ -3,4 +3,4 @@ AnotherLevel, The incredible level
 ALevelInTheSky, Sky realm
 ALottaVoid, Cheese
 Obstacle land, A land of obstacle
-AnAmazingLevel, Incredible
+AnAmazingLevel, A level with a lot oh high

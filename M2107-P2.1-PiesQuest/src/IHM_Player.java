@@ -92,6 +92,11 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * Creates a new player for the game and starts the game
 	 */
 	public IHM_Player() {
+		
+		this.messageDisplayed = false;
+		this.messageToDisplay = "";
+		this.intervalMessageDisplayed = 0;
+		
 		this.theGame = new Game(this);
 		this.theParameters = this.theGame.getParameter();
 		
@@ -107,9 +112,6 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		this.gameThread.start();
 		
 		this.menuDisplayed = 0;
-		this.messageDisplayed = false;
-		this.messageToDisplay = "";
-		this.intervalMessageDisplayed = 0;
 		
 		this.initMovements();
 	}
@@ -152,6 +154,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param message the message to transmit
 	 */
 	public void inform(String message) {
+		this.intervalMessageDisplayed = 0;
 		this.messageToDisplay = message;
 		this.messageDisplayed = true;
 	}
@@ -177,13 +180,19 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				switch(this.theGame.getCurrentSelection()) {
 				case 0: //Start level 1 option
-					this.theGame.chooseLevel(0);
-					this.menuDisplayed = 3;
+					try {
+						this.menuDisplayed = 3;
+						this.theGame.chooseLevel(0);
+						
+					} catch(NullPointerException e1) {
+						this.inform("Error while loading the first level ! Look at the level's files !");
+					}
 					break;
 				case 1: //Level selection option
 					this.menuDisplayed = 2;
+
 					//Puts the level selection cursor on the first level
-					this.theGame.gotoSelect(-1);
+					this.theGame.setCurrentSelection(0);
 					break;
 				case 2: //Parameters Option
 					//TODO handle events to open the parameters menu
@@ -215,8 +224,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				//If the selected level is unlock, we can select it
 				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLock()) {
-					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
 					this.menuDisplayed = 3;
+					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -346,7 +355,12 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theParameters.displayMenu(this);
 			break;
 		case 2: //The level selection menu
-			this.theGame.displayAllLevels(g);
+			try {
+				this.theGame.displayAllLevels(g);
+			} catch(NullPointerException e) {
+				this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
+				this.menuDisplayed = 0;
+			}
 			break;
 		case 3: //The level
 			if(this.playerMovingLeft) {
@@ -375,14 +389,15 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			break;
 		}
 		
+		
 		if(this.messageDisplayed) {
 			if(this.intervalMessageDisplayed < IHM_Player.MAX_MESSAGE_DISPLAYED_TIME) {
 				g.setColor(Color.gray);
-				g.fillRoundRect(this.theParameters.getWidth() / 6, 8*this.theParameters.getHeight() / 9, 2*this.theParameters.getWidth() / 3, this.theParameters.getHeight(), 15, 15);
+				g.fillRoundRect(0, 8*this.theParameters.getHeight() / 9, this.theParameters.getWidth(), this.theParameters.getHeight(), 15, 15);
 				
 				g.setColor(Color.black);
 				g.setFont(new Font("Arial", Font.PLAIN, 20));
-				g.drawString(this.messageToDisplay, (this.theParameters.getWidth() / 6) + this.messageToDisplay.length() * 2, (this.theParameters.getHeight() + 8*this.theParameters.getHeight() / 9) / 2);
+				g.drawString(this.messageToDisplay, this.messageToDisplay.length(), (this.theParameters.getHeight() + 8*this.theParameters.getHeight() / 9) / 2);
 				this.intervalMessageDisplayed++;
 			} else {
 				this.messageDisplayed = false;

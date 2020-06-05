@@ -79,7 +79,11 @@ public class Game {
 			//Loads the previous saved game
 			this.load();
 		} catch (LevelException e) {
-			System.err.println("Error while loading the levels, missing level information !");
+			this.ihm.inform("Error ! Missing level's information ! Please add a name or a description !");
+		} catch(FileNotFoundException e) {
+			this.ihm.inform("Error ! Missing \"Levels/LevelNames.txt\" file ! Please add it !");
+		} catch(IOException e) {
+			this.ihm.inform("Error ! Error in file \"Levels/LevelNames.txt\" !");
 		}
 	}
 	
@@ -153,10 +157,20 @@ public class Game {
 			//Initialize the movements
 			this.ihm.initMovements();
 			//Load the level
-			this.levels[this.currentLevel].load();
-			//Set the initial position of the character
-			this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
-			System.out.println("Level " +(levelId+1) +" loaded");
+			try {
+				this.levels[this.currentLevel].load();
+				//Set the initial position of the character
+				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
+				System.out.println("Level " +(levelId+1) +" loaded");
+			} catch(FileNotFoundException e) {
+				this.ihm.inform("Error ! level " +(this.currentLevel + 1) +"'s file not found !");
+				this.ihm.displayMenu(0);
+			} catch(IOException e) {
+				this.ihm.inform("Error while loading the file \"level" +(this.currentLevel + 1) +".txt\" !");
+			} catch(NullPointerException e) {
+				this.ihm.inform("Error ! Player starting position was not given for level " +(this.currentLevel + 1));
+				this.ihm.displayMenu(0);
+			}
 		}
 	}
 
@@ -635,6 +649,14 @@ public class Game {
 	 */
 	public int getCurrentSelection() {
 		return this.currentSelection;
+	}
+	
+	/**
+	 * Sets the selection cursor
+	 * @param theSelection the menu selection index
+	 */
+	public void setCurrentSelection(int theSelection) {
+		this.currentSelection = theSelection;
 	}
 
 	/**
