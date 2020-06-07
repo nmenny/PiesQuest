@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="M2107-P2.1-PiesQuest/src"/>
+	<classpathentry kind="lib" path="lib/junit-4.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
