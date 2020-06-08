@@ -30,7 +30,7 @@ public class Parameter {
 	 */
 	public Parameter(Game theGame) {
 		this.volume = 50;
-		this.displayFormat = "800x600";
+		this.displayFormat = "1920x1080";
 		this.game = theGame;
 	}
 	

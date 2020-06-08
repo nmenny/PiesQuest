@@ -116,9 +116,10 @@ public class Game {
 		int x = 0;
 		int levelInitialIndex = 0;
 		int levelSelection = this.currentSelection;
+		int nbLevelDisplayedAtOnce = 8;
 		
-		//Can can only display 8 different levels at the same time, so only the wanted levels will be displayed and not the first ones
-		while(levelSelection > 8) {
+		//Can can only display "nbLevelDisplayedAtOnce" different levels at the same time, so only the wanted levels will be displayed and not the first ones
+		while(levelSelection > nbLevelDisplayedAtOnce) {
 			levelInitialIndex += 3;
 			levelSelection -= 3;
 		}
@@ -136,7 +137,7 @@ public class Game {
 				x = 0;
 			}
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
-			g.drawString(this.levels[level].getName(), ((width / 2) - 110) * x + (int) this.levels[level].getName().length() * 5 / 2, height / 3 + 150 * y);
+			g.drawString(this.levels[level].getName(), ((width / 2) - 110) * x + ((int) this.levels[level].getName().length() / 2), height / 3 + 150 * y);
 			x++;
 		}
 	}
