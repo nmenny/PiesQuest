@@ -136,7 +136,7 @@ public class Game {
 				x = 0;
 			}
 			g.setFont(new Font("Arial", Font.PLAIN, 20));
-			g.drawString(this.levels[level].getName(), 100 + this.levels[level].getName().length() * x * 15, height / 3 + 150 * y);
+			g.drawString(this.levels[level].getName(), ((width / 2) - 110) * x + (int) this.levels[level].getName().length() * 5 / 2, height / 3 + 150 * y);
 			x++;
 		}
 	}
@@ -532,6 +532,10 @@ public class Game {
 		g.setColor(new Color(50, 150, 200));
 		g.fillRect(0,  0,  width, height);
 		
+		g.setFont(new Font("Arial", Font.PLAIN, 75));
+		g.setColor(new Color(0, 0, 0));
+		g.drawString("Pie's Quest", (this.parameter.getWidth() / 2) - 5 * 35, 2*this.parameter.getHeight()/9);
+		
 		//For every menu option, we draw it on the screen
 		for(int menu = 0; menu < menus.length; menu++) {
 			//If the current menu is selected, its color changes
@@ -541,8 +545,8 @@ public class Game {
 				g.setColor(Color.WHITE);
 			}
 			
-			g.setFont(new Font("Arial", Font.PLAIN, 50));
-			g.drawString(menus[menu], (width / 2) - 120, 120 + menu * 120);
+			g.setFont(new Font("Arial", Font.PLAIN, 40));
+			g.drawString(menus[menu], (this.parameter.getWidth() / 2) - menus[menu].length() * 10, 4*this.parameter.getHeight()/9 + menu * this.parameter.getHeight()/9);
 		}
 	}
 	
