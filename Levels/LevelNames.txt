@@ -4,3 +4,4 @@ ALevelInTheSky, Sky realm
 ALottaVoid, Cheese
 Obstacle land, A land of obstacle
 AnAmazingLevel, A level with a lot oh high
+A_Strange_World, Everything seems strange
