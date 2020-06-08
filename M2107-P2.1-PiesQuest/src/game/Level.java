@@ -218,8 +218,10 @@ public class Level {
 	public static Level[] loadAllLevels() throws LevelException, FileNotFoundException, IOException {
 		List<Level> levels = new ArrayList<Level>();
 		Level[] allLevels = null;
+		String fileName = "Levels/LevelNames.txt";
 
-		BufferedReader br = new BufferedReader(new FileReader("Levels/LevelNames.txt"));
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		
 		String line;
 		int i = 0;
 		while((line = br.readLine()) != null) {
@@ -227,10 +229,12 @@ public class Level {
 			if(levelInformations.length == 2) {
 				levels.add(new Level((i+1) +"_" +levelInformations[0], levelInformations[1]));
 			} else {
+				br.close();
 				throw new LevelException();
 			}
 			i++;
 		}
+		
 		br.close();
 		//Puts all the levels into an array
 		i = 0;
@@ -239,7 +243,6 @@ public class Level {
 			allLevels[i] = level;
 			i++;
 		}
-		
 		return allLevels;
 	}
 
