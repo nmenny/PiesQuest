@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -67,7 +69,7 @@ public class Level {
 	private Set<Integer> strawberriesCollectedPositions;
 	
 	/**
-	 * Creates a new level with given proprieties
+	 * Creates a new level with given properties
 	 * @param theName the name of the level
 	 * @param theDescription the description of the level
 	 */
@@ -92,6 +94,8 @@ public class Level {
 	
 	/**
 	 * Load the level in memory
+	 * @throws FileNotFoundException If the corresponding file does not exist 
+	 * @throws IOException If an error occurs during the reading of the file
 	 */
 	public void load() throws FileNotFoundException, IOException{
 		this.loadedLevel = new ArrayList<String>();
@@ -113,7 +117,7 @@ public class Level {
 			System.out.println(line);
 			this.loadedLevel.add(line);
 		}
-		
+		br.close();
 	}
 	
 	/**
@@ -207,7 +211,9 @@ public class Level {
 	/**
 	 * Loads all the levels of the game
 	 * @return an array containing all the levels
-	 * @throws LevelException If the level file does not contain enough information about the level
+	 * @throws LevelException If the LevelNames.txt file does not contain enough information about the level
+	 * @throws FileNotFoundException If the LevelNames.txt file does not exists
+	 * @throws IOException If an error is thrown during the reading
 	 */
 	public static Level[] loadAllLevels() throws LevelException, FileNotFoundException, IOException {
 		List<Level> levels = new ArrayList<Level>();
@@ -225,6 +231,7 @@ public class Level {
 			}
 			i++;
 		}
+		br.close();
 		//Puts all the levels into an array
 		i = 0;
 		allLevels = new Level[levels.size()];
@@ -232,6 +239,7 @@ public class Level {
 			allLevels[i] = level;
 			i++;
 		}
+		
 		return allLevels;
 	}
 

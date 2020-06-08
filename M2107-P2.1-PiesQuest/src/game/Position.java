@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Represents a position in a 2d environment
  */

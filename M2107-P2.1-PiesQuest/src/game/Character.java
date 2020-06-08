@@ -1,3 +1,5 @@
+package game;
+
 /**
  * Represents a character on the game
  */
@@ -114,7 +116,7 @@ public class Character {
 	 * Place the character somewhere on the screen
 	 * @param thePosition the position of the character
 	 */
-	public void setPosition(Position thePosition) throws NullPointerException {
+	public void setPosition(Position thePosition) {
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
 

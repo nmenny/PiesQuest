@@ -1,3 +1,5 @@
+package game;
+
 /**
  * An error when the level has a problem
  */

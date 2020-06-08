@@ -1,8 +1,8 @@
+package game;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
