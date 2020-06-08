@@ -245,6 +245,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 				this.playerJumping = true;
 			}
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				this.menuDisplayed = 0;
+			}
 			break;
 		case 4: //The game over menu
 			//If we press the up arrow, we move up in the menu
