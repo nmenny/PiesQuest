@@ -198,6 +198,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					break;
 				case 2: //Parameters Option
 					//TODO handle events to open the parameters menu
+					this.inform("Functionality unimplemented !");
 					break;
 				case 3: //Quit option
 					System.exit(0);
