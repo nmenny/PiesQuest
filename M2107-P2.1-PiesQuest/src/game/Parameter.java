@@ -47,13 +47,18 @@ public class Parameter {
 	
 	/**
 	 * Displays the menu at the screen
-	 * @param ihm the container to put elements in
+	 * @param frame the container to put elements in
+	 * @param ihm the interface
 	 */
-	public void displayMenu(JFrame frame) {
+	public void displayMenu(JFrame frame, IHM_Player ihm) {
 		this.setDisplay(true);
-		frame.setBackground(Color.BLACK);
-		JButton b = new JButton("Hi !");
-		frame.add(b);
+		
+		/*
+		frame.setSize(1920, 1080);
+		ihm.setSize(1920,  1080);
+		this.displayFormat = "1920x1080";
+		*/
+		
 		frame.setVisible(true);
 	}
 	
