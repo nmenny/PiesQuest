@@ -248,7 +248,8 @@ public class Level {
 
 	/**
 	 * Returns the initial position of the character
-	 * @param gameHeight the height of the game
+	 * @param gameHeight the height of the game screen
+	 * @param gameWidth the width of the game screen
 	 * @return The initial position of the player
 	 */
 	public Position getInitialPlayerPosition(int gameHeight, int gameWidth) {
