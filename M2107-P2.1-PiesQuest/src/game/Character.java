@@ -63,6 +63,13 @@ public class Character {
 		} else {
 			this.health = theHealth;
 		}
+		this.init();
+	}
+	
+	/**
+	 * Initialize the character's attributes
+	 */
+	public void init() {
 		this.position = new Position();
 		this.currentFallingSpeed = 1;
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
