@@ -254,16 +254,22 @@ public class Level {
 	public Position getInitialPlayerPosition(int gameHeight, int gameWidth) {
 		Position pos = null;
 		int y = gameHeight - this.tileHeight;
-		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
+		boolean initialPositionFound = false;
+		int level = this.loadedLevel.size() - 1;
+		while(level >= 0 && !initialPositionFound) {
 			String line = this.loadedLevel.get(level);
-			for(int x = 0; x < line.length(); x++) {
+			int x = 0;
+			while(x < line.length() && !initialPositionFound) {
 				
 				//If the current tile is the player
 				if(line.charAt(x) == EnumTiles.Player.charRepresentation) {
 					pos = new Position(x * this.tileWidth, y);
+					initialPositionFound = true;
 				}
+				x++;
 			}
 			y -= this.tileHeight;
+			level--;
 		}
 		
 		//If the player position is not visible on the screen, the tiles are re-adjusting
