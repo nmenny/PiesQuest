@@ -27,7 +27,7 @@ public class Parameter {
 	private int volume;
 	
 	/**
-	 * The format in which the game will be displayed
+	 * The format in which the game will be displayed (format: width_x_height)
 	 */
 	private String displayFormat;
 	
@@ -47,7 +47,7 @@ public class Parameter {
 	 */
 	public Parameter(Game theGame) {
 		this.volume = 50;
-		this.displayFormat = "800x600";
+		this.displayFormat = "1080x720";
 		this.game = theGame;
 		this.isDisplayed = false;
 	}
