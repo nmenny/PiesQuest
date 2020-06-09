@@ -1,17 +1,26 @@
+package test;
 import javax.swing.JFrame;
 
 import game.Game;
 import game.IHM_Player;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import junit.framework.*;
 
+/**
+ * A test for the class Game
+ */
 public class GameTest extends TestCase {
 	
+	/**
+	 * creates a new test with a given name
+	 * @param testName the name of the test
+	 */
 	public GameTest(String testName) {
 		super(testName);
 	}
 	
+	/**
+	 * Tests the chooseLevel method
+	 */
 	public void testChooseLevel() {
 		IHM_Player ihm = new IHM_Player(new JFrame());
 		Game game = ihm.getTheGame();
@@ -29,10 +38,17 @@ public class GameTest extends TestCase {
 		
 	}
 	
+	/**
+	 * Tests the displayLevel method
+	 */
 	public void testDisplayLevel() {
 		
 	}
 	
+	/**
+	 * The test suite of this test
+	 * @return
+	 */
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 		suite.addTest(new GameTest("testChooseLevel"));
