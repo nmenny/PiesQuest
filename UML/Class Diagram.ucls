@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="game.Character" project="M2107-P2.1-PiesQuest" 
     file="/M2107-P2.1-PiesQuest/M2107-P2.1-PiesQuest/src/game/Character.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1012" y="836"/>    
+    <position height="-1" width="-1" x="1393" y="297"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="game.Parameter" project="M2107-P2.1-PiesQuest" 
     file="/M2107-P2.1-PiesQuest/M2107-P2.1-PiesQuest/src/game/Parameter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="541" y="285"/>    
+    <position height="-1" width="-1" x="498" y="279"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="game.Game" project="M2107-P2.1-PiesQuest" 
     file="/M2107-P2.1-PiesQuest/M2107-P2.1-PiesQuest/src/game/Game.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="983" y="273"/>    
+    <position height="-1" width="-1" x="863" y="275"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="game.Position" project="M2107-P2.1-PiesQuest" 
     file="/M2107-P2.1-PiesQuest/M2107-P2.1-PiesQuest/src/game/Position.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="765" y="722"/>    
+    <position height="-1" width="-1" x="1090" y="439"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -72,10 +72,10 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="13">    
-    <bendpoint x="744" y="231"/>    
+    <bendpoint x="688" y="260"/>    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="14" name="parameter">        
-        <position height="18" width="57" x="649" y="225"/>      
+        <position height="18" width="57" x="604" y="235"/>      
       </attribute>      
       <multiplicity id="15" minimum="0" maximum="1"/>    
     </end>    
@@ -99,7 +99,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
-    <bendpoint x="754" y="336"/>    
+    <bendpoint x="693" y="331"/>    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="23" name="game"/>      
       <multiplicity id="24" minimum="0" maximum="1"/>    
@@ -108,8 +108,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
-    <bendpoint x="843" y="52"/>    
-    <bendpoint x="825" y="52"/>    
+    <bendpoint x="724" y="60"/>    
     <bendpoint x="259" y="54"/>    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="26" name="ihm"/>      
@@ -122,12 +121,11 @@
     <bendpoint x="260" y="117"/>    
     <bendpoint x="294" y="114"/>    
     <bendpoint x="627" y="109"/>    
-    <bendpoint x="764" y="107"/>    
-    <bendpoint x="823" y="105"/>    
-    <bendpoint x="844" y="106"/>    
+    <bendpoint x="702" y="109"/>    
+    <bendpoint x="725" y="110"/>    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="29" name="theGame">        
-        <position height="18" width="51" x="788" y="85"/>      
+        <position height="18" width="51" x="668" y="87"/>      
       </attribute>      
       <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
