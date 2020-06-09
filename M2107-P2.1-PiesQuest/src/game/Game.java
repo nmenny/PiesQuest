@@ -259,11 +259,11 @@ public class Game {
 	 */
 	public boolean jumpPlayer() {
 		//If the player is high in the sky, the tiles will move up
-		if((this.character.getPosition().getY() - Character.JUMPING_SPEED < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
+		if((this.character.getPosition().getY() < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
 			this.levels[this.currentLevel].translationY(1);
 			this.character.setCurrentJumpSpeed(this.character.getCurrentJumpSpeed() - 1);
 		//If the player is too low, the tiles will move down
-		} else if((this.character.getPosition().getY() + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
+		} else if((this.character.getPosition().getY() > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
 			this.levels[this.currentLevel].translationY(-1);
 		} else {
 			//If the jumping speed is null, the player falls
