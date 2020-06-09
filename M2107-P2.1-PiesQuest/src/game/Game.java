@@ -149,6 +149,10 @@ public class Game {
 	public void chooseLevel(int levelId) {
 		//Saves the game
 		this.save();
+		if(levelId >= this.levels.length || levelId < 0) {
+			this.ihm.inform("The level at index " +levelId +" does not exist !");
+			return;
+		}
 		if(!this.levels[levelId].isLock()) {
 			this.currentLevel = levelId;
 			//We clear the collected strawberries position in stored in memory
@@ -218,7 +222,12 @@ public class Game {
 	 * @param g the drawing object
 	 */
 	public void displayLevel(int levelId, Graphics g) {
-		this.currentLevel = levelId;
+		if(levelId >= this.levels.length || levelId < 0) {
+			this.currentLevel = 0;
+		} else {
+			this.currentLevel = levelId;
+		}
+		
 		this.displayLevel(g);
 	}
 	
@@ -454,11 +463,14 @@ public class Game {
 	}
 	
 	/**
-	 * Gets the level at a given idex
+	 * Gets the level at a given index
 	 * @param levelId the index of the level
 	 * @return the level at the given index
 	 */
 	public Level getLevel(int levelId) {
+		if(levelId >= this.levels.length || levelId < 0) {
+			return this.levels[0];
+		}
 		return this.levels[levelId];
 	}
 	
@@ -662,7 +674,12 @@ public class Game {
 	 * @param theSelection the menu selection index
 	 */
 	public void setCurrentSelection(int theSelection) {
-		this.currentSelection = theSelection;
+		if(theSelection < 0 || theSelection >= this.getNumberOption()) {
+			this.currentSelection = 0;
+		} else {
+			this.currentSelection = theSelection;
+		}
+		
 	}
 
 	/**

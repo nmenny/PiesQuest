@@ -89,7 +89,7 @@ public class Character {
 	 * @param healthPoints the amount of health given to the player
 	 */
 	public void giveHealth(int healthPoints) {
-		if(this.health + healthPoints <= Character.MAX_HEALTH) {
+		if(((this.health + healthPoints) <= Character.MAX_HEALTH) && ((this.health + healthPoints) > 0)) {
 			this.health += healthPoints;
 		}
 	}

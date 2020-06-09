@@ -219,7 +219,6 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			break;
 		case 1: //The parameters menu
-			//TODO handle events for the parameters
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.theParameters.setDisplay(false);
 				this.menuDisplayed = 0;
@@ -247,6 +246,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.menuDisplayed = 0;
+				this.theGame.setCurrentSelection(0);
 			}
 			break;
 		case 3: //The level
