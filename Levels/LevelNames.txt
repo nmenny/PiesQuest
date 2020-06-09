@@ -1,7 +1,12 @@
-levelOne, An amazing adventure
+The journey begins, An amazing adventure
 AnotherLevel, The incredible level
 ALevelInTheSky, Sky realm
 ALottaVoid, Cheese
 Obstacle land, A land of obstacle
 AnAmazingLevel, A level with a lot oh high
 A_Strange_World, Everything seems strange
+Let's jump, A lot of jump is awaiting
+Try not to fall, Be careful of the fall
+Approaching, Entering a new world
+Cheesy world, Jump carefully
+The end, The last level
