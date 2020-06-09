@@ -12,7 +12,7 @@ public class GameTest extends TestCase {
 		super(testName);
 	}
 	
-	public void testDisplayLevel() {
+	public void testChooseLevel() {
 		IHM_Player ihm = new IHM_Player(new JFrame());
 		Game game = ihm.getTheGame();
 		game.chooseLevel(-5);
@@ -29,8 +29,13 @@ public class GameTest extends TestCase {
 		
 	}
 	
+	public void testDisplayLevel() {
+		
+	}
+	
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
+		suite.addTest(new GameTest("testChooseLevel"));
 		suite.addTest(new GameTest("testDisplayLevel"));
 		return suite;
 	}
