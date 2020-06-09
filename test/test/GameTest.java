@@ -76,4 +76,11 @@ public class GameTest extends TestCase {
 		
 	}
 	
+	/**
+	 * Tests the setCurrentSelection method
+	 */
+	public void testSetCurrentSelection() {
+		
+	}
+	
 }
