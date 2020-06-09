@@ -194,6 +194,7 @@ public class Game {
 				this.ihm.displayMenu(4);
 				this.currentSelection = 0;
 				this.character.giveHealth(3); //Reinitializes the life of the character
+				this.character.init(); //Reinitialize player attributes
 			} else {
 				//If he is not dead, the level restarts at the beginning
 				this.levels[this.currentLevel].init();
