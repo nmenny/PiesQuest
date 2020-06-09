@@ -1,4 +1,5 @@
 package test;
+
 import javax.swing.JFrame;
 
 import game.Game;
@@ -42,6 +43,36 @@ public class GameTest extends TestCase {
 	 * Tests the displayLevel method
 	 */
 	public void testDisplayLevel() {
+		IHM_Player ihm = new IHM_Player(new JFrame());
+		Game game = ihm.getTheGame();
+		
+		try {
+			game.displayLevel(0, null);
+			TestCase.assertEquals(game.getCurrentLevel(), 0);
+		} catch(Exception e) {
+			//Nothing to do
+		}
+		
+		try {
+			game.displayLevel(-5, null);
+			TestCase.assertEquals(game.getCurrentLevel(), 0); //If the levelId is too low, it sets to 0
+		} catch(Exception e) {
+			//Nothing to do
+		}
+		
+		try {
+			game.displayLevel(6, null);
+			TestCase.assertEquals(game.getCurrentLevel(), 6); //There are at least 7 levels, so it must work
+		} catch(Exception e) {
+			//Nothing to do
+		}
+		
+		try {
+			game.displayLevel(12, null);
+			TestCase.assertEquals(game.getCurrentLevel(), 0); //There are less than 13 levels, so it sets to 0
+		} catch(Exception e) {
+			//Nothing to do
+		}
 		
 	}
 	
