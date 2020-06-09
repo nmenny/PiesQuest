@@ -434,7 +434,7 @@ public class Game {
 	 */
 	private void changeLevel() {
 		//If we finished the last level, it's the end
-		if(this.currentLevel == this.levels.length - 1) { 
+		if(this.currentLevel >= this.levels.length - 1) { 
 			//Saves the game
 			this.save();
 			this.ihm.displayMenu(5);
