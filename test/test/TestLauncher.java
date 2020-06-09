@@ -13,6 +13,7 @@ public class TestLauncher extends TestCase {
 		
 		suite.addTest(new GameTest("testChooseLevel"));
 		suite.addTest(new GameTest("testDisplayLevel"));
+		suite.addTest(new GameTest("testSetCurrentSelection"));
 		
 		suite.addTest(new IHM_PlayerTest("testDisplayMenu"));
 		return suite;
