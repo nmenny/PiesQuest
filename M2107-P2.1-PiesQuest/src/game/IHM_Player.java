@@ -142,6 +142,14 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	}
 	
 	/**
+	 * Gets the game which is being played
+	 * @return the game being played
+	 */
+	public Game getTheGame() {
+		return this.theGame;
+	}
+	
+	/**
 	 * Changes the currently displayed menu with the given value
 	 * @param menuValue the value corresponding of the menu
 	 */
