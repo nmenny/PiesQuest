@@ -80,7 +80,18 @@ public class GameTest extends TestCase {
 	 * Tests the setCurrentSelection method
 	 */
 	public void testSetCurrentSelection() {
+		IHM_Player ihm = new IHM_Player(new JFrame());
+		Game game = ihm.getTheGame();
 		
+		game.setCurrentSelection(2);
+		TestCase.assertEquals(game.getCurrentSelection(), 2); //The main menu has 4 options, so it should work
+		
+		ihm.displayMenu(2); //We open the level selection menu
+		game.setCurrentSelection(12); 
+		TestCase.assertEquals(game.getCurrentSelection(), 0);//We only have 12 levels, so it sets to 0
+		
+		game.setCurrentSelection(-1);
+		TestCase.assertEquals(game.getCurrentSelection(), 0); //The given number is too low, it should be equals to 0
 	}
 	
 }
