@@ -50,7 +50,7 @@ public class Parameter {
 	 * @param ihm the container to put elements in
 	 */
 	public void displayMenu(JFrame frame) {
-		
+		this.setDisplay(true);
 		frame.setBackground(Color.BLACK);
 		JButton b = new JButton("Hi !");
 		frame.add(b);
@@ -111,6 +111,14 @@ public class Parameter {
 	 */
 	public boolean isDisplayed() {
 		return this.isDisplayed;
+	}
+	
+	/**
+	 * Allows us to close and open the menu
+	 * @param isDisplayed <tt>true</tt> if you want to display it, <tt>false</tt> if you want to close it
+	 */
+	public void setDisplay(boolean isDisplayed) {
+		this.isDisplayed = isDisplayed;
 	}
 	
 }
