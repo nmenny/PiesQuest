@@ -1,13 +1,20 @@
 package game;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
+
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Represents the parameters of the game to configure it
@@ -52,6 +59,22 @@ public class Parameter {
 	 */
 	public void displayMenu(JFrame frame, IHM_Player ihm) {
 		this.setDisplay(true);
+		System.out.println("hi !");
+		
+		JPanel panelFormat = new JPanel();
+		
+		String[] formatValues = {"800x600", "1920x1080"};
+		JLabel formatLabel = new JLabel("Format : ");
+		JComboBox cmb = new JComboBox(formatValues);
+		cmb.setSelectedIndex(1);
+		cmb.setVisible(true);
+		
+		panelFormat.add(formatLabel);
+		panelFormat.add(cmb);
+		
+		frame.add(panelFormat);
+		
+		frame.setTitle("Parameters:");
 		
 		/*
 		frame.setSize(1920, 1080);

@@ -207,8 +207,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					break;
 				case 2: //Parameters Option
 					//TODO handle events to open the parameters menu
-					//this.inform("Functionality unimplemented !");
-					this.menuDisplayed = 1;
+					this.inform("Functionality unimplemented !");
+					//this.menuDisplayed = 1;
 					break;
 				case 3: //Quit option
 					System.exit(0);
@@ -337,9 +337,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			start = System.nanoTime();
 			
 			//Draws the game
-			if(!this.theParameters.isDisplayed()) {
-				repaint();
-			}
+			
+			repaint();
+			
 			
 			elapsed = System.nanoTime() - start;
 			
@@ -363,54 +363,55 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * @param g the graphical component
 	 */
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		//Clears the screen
-		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
+		if(!this.theParameters.isDisplayed()) {
+			super.paintComponent(g);
 		
-		//The element displayed varies depending on the menu displayed
-		switch(this.menuDisplayed) {
-		case 0: //The main menu
-			this.theGame.displayMainScreen(g);
-			break;
-		case 1: //The parameters menu
-			this.theParameters.displayMenu(this.frame, this);
-			break;
-		case 2: //The level selection menu
-			try {
-				this.theGame.displayAllLevels(g);
-			} catch(NullPointerException e) {
-				this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
-				this.menuDisplayed = 0;
-			}
-			break;
-		case 3: //The level
-			if(this.playerMovingLeft) {
-				this.theGame.movePlayer(-1);
-			}
-			if(this.playerMovingRight) {
-				this.theGame.movePlayer(1);
-			}
-			if(this.playerJumping) {
-				//If the character hits the ground, he can jump again
-				if(this.theGame.jumpPlayer()) {
-					this.playerJumping = false;
+			//Clears the screen
+			g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
+		
+			//The element displayed varies depending on the menu displayed
+			switch(this.menuDisplayed) {
+			case 0: //The main menu
+				this.theGame.displayMainScreen(g);
+				break;
+			case 1: //The parameters menu
+				this.theParameters.displayMenu(this.frame, this);
+				break;
+			case 2: //The level selection menu
+				try {
+					this.theGame.displayAllLevels(g);
+				} catch(NullPointerException e) {
+					this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
+					this.menuDisplayed = 0;
 				}
-			} else {
-				this.theGame.makeFall();
+				break;
+			case 3: //The level
+				if(this.playerMovingLeft) {
+					this.theGame.movePlayer(-1);
+				}
+				if(this.playerMovingRight) {
+					this.theGame.movePlayer(1);
+				}
+				if(this.playerJumping) {
+					//If the character hits the ground, he can jump again
+					if(this.theGame.jumpPlayer()) {
+						this.playerJumping = false;
+					}
+				} else {
+					this.theGame.makeFall();
+				}
+				this.theGame.displayLevel(g);
+				break;
+			case 4: //The game over Screen
+				this.theGame.displayGameOver(g);
+				break;
+			case 5: //The victory Screen
+				this.theGame.displayVictoryScreen(g);
+				break;
+			default:
+				break;
 			}
-			this.theGame.displayLevel(g);
-			break;
-		case 4: //The game over Screen
-			this.theGame.displayGameOver(g);
-			break;
-		case 5: //The victory Screen
-			this.theGame.displayVictoryScreen(g);
-			break;
-		default:
-			break;
 		}
-		
 		
 		if(this.messageDisplayed) {
 			if(this.intervalMessageDisplayed < IHM_Player.MAX_MESSAGE_DISPLAYED_TIME) {
