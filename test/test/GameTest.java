@@ -45,15 +45,4 @@ public class GameTest extends TestCase {
 		
 	}
 	
-	/**
-	 * The test suite of this test
-	 * @return
-	 */
-	public static Test suite() {
-		TestSuite suite = new TestSuite();
-		suite.addTest(new GameTest("testChooseLevel"));
-		suite.addTest(new GameTest("testDisplayLevel"));
-		return suite;
-	}
-	
 }
