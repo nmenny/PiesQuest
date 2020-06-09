@@ -2,6 +2,7 @@ package game;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -18,7 +19,7 @@ public class GameLauncher {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
-		frame.add(new IHM_Player(), BorderLayout.CENTER);
+		frame.add(new IHM_Player(frame), BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -91,13 +92,21 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	private int intervalMessageDisplayed;
 	
 	/**
-	 * Creates a new player for the game and starts the game
+	 * The frame in which the ihm is displayed
 	 */
-	public IHM_Player() {
+	private JFrame frame;
+	
+	/**
+	 * Creates a new player for the game and starts the game
+	 * @param theFrame the frame in which the game is being displayed
+	 */
+	public IHM_Player(JFrame theFrame) {
 		
 		this.messageDisplayed = false;
 		this.messageToDisplay = "";
 		this.intervalMessageDisplayed = 0;
+		
+		this.frame = theFrame;
 		
 		this.theGame = new Game(this);
 		this.theParameters = this.theGame.getParameter();
@@ -198,7 +207,8 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 					break;
 				case 2: //Parameters Option
 					//TODO handle events to open the parameters menu
-					this.inform("Functionality unimplemented !");
+					//this.inform("Functionality unimplemented !");
+					this.menuDisplayed = 1;
 					break;
 				case 3: //Quit option
 					System.exit(0);
@@ -210,6 +220,9 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			break;
 		case 1: //The parameters menu
 			//TODO handle events for the parameters
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				this.menuDisplayed = 0;
+			}
 			break;
 		case 2: //The level selection menu
 			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -358,7 +371,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			this.theGame.displayMainScreen(g);
 			break;
 		case 1: //The parameters menu
-			this.theParameters.displayMenu(this);
+			this.theParameters.displayMenu(this.frame);
 			break;
 		case 2: //The level selection menu
 			try {
