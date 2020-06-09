@@ -319,7 +319,7 @@ public class Game {
 				int maxTileWidth = minTileWidth + tileWidth;
 				int maxTileHeight = minTileHeight + tileHeight;
 				
-				boolean collisionDone = false;
+				boolean collisionDoneWithAStrawberry = false;
 				
 				//Collisions Right
 				if((playerY >= minTileHeight && playerY <= maxTileHeight)) {
@@ -338,7 +338,7 @@ public class Game {
 						//Collision with a strawberry which hasn't been collected
 						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
 							currentListOfStrawberries.add(tileIndex);
-							collisionDone = true;
+							collisionDoneWithAStrawberry = true;
 						}
 					}
 				}
@@ -360,7 +360,7 @@ public class Game {
 						//Collision with a strawberry which hasn't been collected
 						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
 							currentListOfStrawberries.add(tileIndex);
-							collisionDone = true;
+							collisionDoneWithAStrawberry = true;
 						}
 					}	
 				}
@@ -382,7 +382,7 @@ public class Game {
 						//Collision with a strawberry which hasn't been collected
 						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
 							currentListOfStrawberries.add(tileIndex);
-							collisionDone = true;
+							collisionDoneWithAStrawberry = true;
 						}
 					}
 				}
@@ -404,13 +404,13 @@ public class Game {
 						//Collision with a strawberry which hasn't been collected
 						if(level[line].charAt(x) == EnumTiles.Strawberries.charRepresentation && (!currentListOfStrawberries.contains(tileIndex))) {
 							currentListOfStrawberries.add(tileIndex);
-							collisionDone = true;
+							collisionDoneWithAStrawberry = true;
 						}
 					}
 				}
 				
 				//If a collision is done with a strawberry and we have collected a dozen of them; we gain a life
-				if(collisionDone) {
+				if(collisionDoneWithAStrawberry) {
 					this.character.setNbStrawberriesCollected(this.character.getNbStrawberriesCollected() + 1);
 					if((this.character.getNbStrawberriesCollected() % 10) == 0) {
 						this.character.giveHealth(1);
