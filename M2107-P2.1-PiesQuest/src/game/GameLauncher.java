@@ -19,6 +19,7 @@ public class GameLauncher {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
+		frame.setTitle("Pie's Quest");
 		frame.add(new IHM_Player(frame), BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
