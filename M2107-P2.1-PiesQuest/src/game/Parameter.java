@@ -1,8 +1,13 @@
 package game;
 
+import java.awt.Color;
+
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
+import javax.swing.UIManager;
 
 /**
  * Represents the parameters of the game to configure it
@@ -23,6 +28,11 @@ public class Parameter {
 	 * The game in which the parameters will apply
 	 */
 	private Game game;
+
+	/**
+	 * Is the parameter menu displayed
+	 */
+	private boolean isDisplayed;
 	
 	/**
 	 * Give standard parameters
@@ -32,25 +42,19 @@ public class Parameter {
 		this.volume = 50;
 		this.displayFormat = "800x600";
 		this.game = theGame;
+		this.isDisplayed = false;
 	}
 	
 	/**
 	 * Displays the menu at the screen
 	 * @param ihm the container to put elements in
 	 */
-	public void displayMenu(IHM_Player ihm) {
+	public void displayMenu(JFrame frame) {
 		
-		JLabel labelVolume = new JLabel("Volume:");
-		JTextPane volume = new JTextPane();
-		JLabel labelFormat = new JLabel("Screen format:");
-		JTextPane screenFormat = new JTextPane();
-		JButton btn = new JButton("Valider");
-		
-		ihm.add(labelVolume);
-		ihm.add(volume);
-		ihm.add(labelFormat);
-		ihm.add(screenFormat);
-		ihm.add(btn);
+		frame.setBackground(Color.BLACK);
+		JButton b = new JButton("Hi !");
+		frame.add(b);
+		frame.setVisible(true);
 	}
 	
 	/**
@@ -99,6 +103,14 @@ public class Parameter {
 	 */
 	public int getHeight() {
 		return Integer.parseInt(this.displayFormat.split("x")[1]);
+	}
+
+	/**
+	 * Allows us to know if the parameters are displayed
+	 * @return <tt>true</tt> if the parameters are displayed, <tt>false</tt> else
+	 */
+	public boolean isDisplayed() {
+		return this.isDisplayed;
 	}
 	
 }
