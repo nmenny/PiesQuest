@@ -7,9 +7,24 @@ import java.awt.Color;
  */
 public enum EnumTiles {
 	
+	/**
+	 * Representation of a wall
+	 */
 	Wall('x', Color.BLACK),
+	
+	/**
+	 * Representation of the player's initial position
+	 */
 	Player('p', Color.GREEN),
+	
+	/**
+	 * Representation of a strawberry
+	 */
 	Strawberries('s', Color.RED),
+	
+	/**
+	 * Representation of the end of the game
+	 */
 	End('e', Color.BLUE);
 	
 	public char charRepresentation;
