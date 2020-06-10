@@ -23,6 +23,16 @@ public class Position {
 	}
 	
 	/**
+	 * Set the position at given coordinates
+	 * @param theX the position in the x axis
+	 * @param theY the position in the y axis
+	 */
+	public Position(int theX, int theY) {
+		this.x = theX;
+		this.y = theY;
+	}
+	
+	/**
 	 * Gets the coordinate on the x axis
 	 * @return the x value
 	 */
@@ -54,16 +64,6 @@ public class Position {
 		this.y = this.y + val;
 	}
 	
-	/**
-	 * Set the position at given coordinates
-	 * @param theX the position in the x axis
-	 * @param theY the position in the y axis
-	 */
-	public Position(int theX, int theY) {
-		this.x = theX;
-		this.y = theY;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
