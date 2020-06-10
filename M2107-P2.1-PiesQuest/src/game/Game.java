@@ -44,7 +44,7 @@ public class Game {
 	/**
 	 * The interface between the game and the player
 	 */
-	private final PlayerInterface ihm;
+	private final PlayerInterface playerInterface;
 	
 	/**
 	 * The selection of the options in the menus
@@ -58,10 +58,10 @@ public class Game {
 	
 	/**
 	 * creates a new Game ready to be played
-	 * @param theIhm the interface between the game and the player
+	 * @param theInterface the interface between the game and the player
 	 */
-	public Game(PlayerInterface theIhm) {
-		this.ihm = theIhm;
+	public Game(PlayerInterface theInterface) {
+		this.playerInterface = theInterface;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);
 		this.collectedStrawberries = new HashMap<Integer, Set<Integer>>();
@@ -79,11 +79,11 @@ public class Game {
 			//Loads the previous saved game
 			this.load();
 		} catch (LevelException e) {
-			this.ihm.inform("Error ! Missing level's information ! Please add a name or a description !");
+			this.playerInterface.inform("Error ! Missing level's information ! Please add a name or a description !");
 		} catch(FileNotFoundException e) {
-			this.ihm.inform("Error ! Missing \"Levels/LevelNames.txt\" file ! Please add it !");
+			this.playerInterface.inform("Error ! Missing \"Levels/LevelNames.txt\" file ! Please add it !");
 		} catch(IOException e) {
-			this.ihm.inform("Error ! Error in file \"Levels/LevelNames.txt\" !");
+			this.playerInterface.inform("Error ! Error in file \"Levels/LevelNames.txt\" !");
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class Game {
 		//Saves the game
 		this.save();
 		if(levelId >= this.levels.length || levelId < 0) {
-			this.ihm.inform("The level at index " +levelId +" does not exist !");
+			this.playerInterface.inform("The level at index " +levelId +" does not exist !");
 			return;
 		}
 		if(!this.levels[levelId].isLocked()) {
@@ -160,7 +160,7 @@ public class Game {
 			//Initialize the level
 			this.levels[this.currentLevel].init();
 			//Initialize the movements
-			this.ihm.initMovements();
+			this.playerInterface.initMovements();
 			//Load the level
 			try {
 				this.levels[this.currentLevel].load();
@@ -168,13 +168,13 @@ public class Game {
 				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 				System.out.println("Level " +(levelId+1) +" loaded");
 			} catch(FileNotFoundException e) {
-				this.ihm.inform("Error ! level " +(this.currentLevel + 1) +"'s file not found !");
-				this.ihm.displayMenu(0);
+				this.playerInterface.inform("Error ! level " +(this.currentLevel + 1) +"'s file not found !");
+				this.playerInterface.displayMenu(0);
 			} catch(IOException e) {
-				this.ihm.inform("Error while loading the file \"level" +(this.currentLevel + 1) +".txt\" !");
+				this.playerInterface.inform("Error while loading the file \"level" +(this.currentLevel + 1) +".txt\" !");
 			} catch(NullPointerException e) {
-				this.ihm.inform("Error ! Player starting position was not given for level " +(this.currentLevel + 1));
-				this.ihm.displayMenu(0);
+				this.playerInterface.inform("Error ! Player starting position was not given for level " +(this.currentLevel + 1));
+				this.playerInterface.displayMenu(0);
 			}
 		}
 	}
@@ -195,14 +195,14 @@ public class Game {
 			this.character.die();
 			//If the character's health if below 0, this is game over
 			if(this.character.getHealth() <= 0) {
-				this.ihm.displayMenu(4);
+				this.playerInterface.displayMenu(4);
 				this.currentSelection = 0;
 				this.character.giveHealth(3); //Reinitializes the life of the character
 				this.character.init(); //Reinitialize player attributes
 			} else {
 				//If he is not dead, the level restarts at the beginning
 				this.levels[this.currentLevel].init();
-				this.ihm.initMovements();
+				this.playerInterface.initMovements();
 				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 			}
 		}
@@ -446,7 +446,7 @@ public class Game {
 		if(this.currentLevel >= this.levels.length - 1) { 
 			//Saves the game
 			this.save();
-			this.ihm.displayMenu(5);
+			this.playerInterface.displayMenu(5);
 			this.currentSelection = 0;
 		} else { //Else, the next level starts
 			this.levels[this.currentLevel + 1].unlock();
@@ -647,7 +647,7 @@ public class Game {
 	 */
 	private int getNumberOption() {
 		//For each menu, there's a defined number of menus
-		switch(this.ihm.getDisplayedMenu()) {
+		switch(this.playerInterface.getDisplayedMenu()) {
 		case 0:
 			return 4;
 		case 2:

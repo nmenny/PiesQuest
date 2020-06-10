@@ -44,9 +44,9 @@ public class Parameter {
 	/**
 	 * Displays the menu at the screen
 	 * @param frame the container to put elements in
-	 * @param ihm the interface
+	 * @param theInterface the interface
 	 */
-	public void displayMenu(JFrame frame, PlayerInterface ihm) {
+	public void displayMenu(JFrame frame, PlayerInterface theInterface) {
 		this.setDisplay(true);
 		
 		//Creating a panel to contain the format selector

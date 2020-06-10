@@ -114,7 +114,7 @@
     <bendpoint x="724" y="60"/>    
     <bendpoint x="259" y="54"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="20" name="ihm">        
+      <attribute id="20" name="playerInterface">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="21" minimum="0" maximum="1">        
