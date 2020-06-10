@@ -1,7 +1,7 @@
 package game;
 
 /**
- * Represents a character on the game
+ * Represents a character in the game
  */
 public class Character {
 	
@@ -16,7 +16,7 @@ public class Character {
 	private final String name;
 	
 	/**
-	 * The position of the Character at the screen
+	 * The position of the Character on the screen
 	 */
 	private Position position;
 	
@@ -41,7 +41,7 @@ public class Character {
 	public static final double FALLING_SPEED = 15;
 	
 	/**
-	 * The current jump of falling speed of the player
+	 * The current jump and falling speed of the player
 	 */
 	private double currentFallingSpeed, currentJumpSpeed;
 	
@@ -54,11 +54,11 @@ public class Character {
 	/**
 	 * Creates a new Character with given attributes
 	 * @param theName The name of the character
-	 * @param theHealth the health of the character
+	 * @param theHealth The health of the character
 	 */
 	public Character(String theName, int theHealth) {
 		this.name = theName;
-		if(theHealth > Character.MAX_HEALTH) {
+		if(theHealth > Character.MAX_HEALTH || theHealth <= 0) {
 			this.health = 3;
 		} else {
 			this.health = theHealth;
@@ -67,7 +67,7 @@ public class Character {
 	}
 	
 	/**
-	 * Initialize the character's attributes
+	 * Initialize some of the character's attributes
 	 */
 	public void init() {
 		this.position = new Position();
@@ -77,8 +77,8 @@ public class Character {
 	}
 	
 	/**
-	 * gives the current health of the character
-	 * @return the health of the character
+	 * Gives the current health of the character
+	 * @return The health of the character
 	 */
 	public int getHealth() {
 		return this.health;
@@ -86,7 +86,7 @@ public class Character {
 	
 	/**
 	 * Gives a certain amount of health to the player
-	 * @param healthPoints the amount of health given to the player
+	 * @param healthPoints The amount of health given to the player
 	 */
 	public void giveHealth(int healthPoints) {
 		if(((this.health + healthPoints) <= Character.MAX_HEALTH) && ((this.health + healthPoints) > 0)) {
@@ -95,8 +95,8 @@ public class Character {
 	}
 	
 	/**
-	 * gives the name of the character
-	 * @return the name of the character
+	 * Gives the name of the character
+	 * @return The name of the character
 	 */
 	public String getName() {
 		return this.name;
@@ -104,7 +104,7 @@ public class Character {
 	
 	/**
 	 * Gives the current position of the Character
-	 * @return the position of the player
+	 * @return The position of the player
 	 */
 	public Position getPosition() {
 		return this.position;
@@ -112,32 +112,34 @@ public class Character {
 	
 	/**
 	 * Place the character somewhere on the screen
-	 * @param x the coordinate on the x axis
-	 * @param y the coordinate on the y axis
+	 * @param x The coordinate on the x axis
+	 * @param y The coordinate on the y axis
 	 */
 	public void setPosition(int x, int y) {
+		this.currentFallingSpeed = 1;
+		this.currentJumpSpeed = Character.JUMPING_SPEED;
 		this.position = new Position(x, y);
 	}
 	
 	/**
 	 * Place the character somewhere on the screen
-	 * @param thePosition the position of the character
+	 * @param thePosition The position of the character
 	 */
 	public void setPosition(Position thePosition) {
-		this.currentFallingSpeed = 1;
-		this.currentJumpSpeed = Character.JUMPING_SPEED;
-
-		this.position = new Position(thePosition.getX(), thePosition.getY());
-		
+		this.setPosition(thePosition.getX(), thePosition.getY());
 	}
 	
+	/**
+	 * Gets the current jumping speed of the character
+	 * @return The current jumping speed
+	 */
 	public double getCurrentJumpSpeed() {
 		return this.currentJumpSpeed;
 	}
 	
 	/**
 	 * Sets the value of the current jump speed
-	 * @param value the value of the speed
+	 * @param value The value of the jumping speed
 	 */
 	public void setCurrentJumpSpeed(double value) {
 		this.currentJumpSpeed = value;
@@ -145,45 +147,52 @@ public class Character {
 	
 	/**
 	 * Sets the value of the current falling speed
-	 * @param value the value of the speed
+	 * @param value The value of the falling speed
 	 */
 	public void setCurrentFallingSpeed(double value) {
 		this.currentFallingSpeed = value;
 	}
 	
+	/**
+	 * Initializes the jump speed to the default value
+	 */
 	public void initJumpSpeed() {
 		this.currentJumpSpeed = Character.JUMPING_SPEED;
 	}
 	
 	/**
 	 * Moves the player in a give direction
-	 * @param direction the direction in which the player will move
+	 * @param direction The direction in which the player will move
+	 * 		If < 0 : The player moves on the left
+	 * 		If > 0 : The player moves on the right
+	 * 		Else : Nothing happens
 	 */
 	public void move(int direction) {
-		switch(direction) {
-			case 1: //Moves on the right
-				this.position = new Position(this.position.getX() + Character.MOVING_SPEED, this.position.getY());
-			break;
-			case -1: //Moves on the left
-				this.position = new Position(this.position.getX() - Character.MOVING_SPEED, this.position.getY());
-			break;
+		if(direction > 0) { //Moves to the right
+			this.position = new Position(this.position.getX() + Character.MOVING_SPEED, this.position.getY());
+		}
+		else if(direction < 0) { //Moves to the left 
+			this.position = new Position(this.position.getX() - Character.MOVING_SPEED, this.position.getY());
 		}
 	}
 	
 	/**
-	 * makes the player jump
+	 * Makes the player jump
 	 */
 	public void jump() {
 		this.position.addToY(- (int) this.currentJumpSpeed);
 		
+		//The speed reduces the higher he gets
 		this.currentJumpSpeed -= 1;
 	}
 	
 	/**
-	 * the player dies
+	 * The player looses one life
 	 */
 	public void die() {
-		this.health--;
+		if(this.health > 0) {
+			this.health--;
+		}
 	}
 	
 	/**
@@ -199,7 +208,7 @@ public class Character {
 	
 	/**
 	 * Gets the number of strawberries collected by this character
-	 * @return the number of strawberries collected
+	 * @return The number of strawberries collected
 	 */
 	public int getNbStrawberriesCollected() {
 		return this.nbStrawberriesCollected;
@@ -207,9 +216,12 @@ public class Character {
 
 	/**
 	 * Sets the number of strawberries collected by this character
-	 * @param i the number of strawberries collected
+	 * @param i The number of strawberries collected
 	 */
 	public void setNbStrawberriesCollected(int i) {
+		if(i < 0) {
+			this.nbStrawberriesCollected = 0;
+		}
 		this.nbStrawberriesCollected = i;
 	}
 }
