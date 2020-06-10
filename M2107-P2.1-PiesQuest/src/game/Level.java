@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Represents a level of our game
+ * Represents a level of the game
  */
 public class Level {
 	
@@ -64,7 +64,7 @@ public class Level {
 	private int offsetY;
 	
 	/**
-	 * Stores the position of all the collected strawberries
+	 * Stores the position (the tile indexes in the file) of all the collected strawberries
 	 */
 	private Set<Integer> strawberriesCollectedPositions;
 	
@@ -100,31 +100,29 @@ public class Level {
 	public void load() throws FileNotFoundException, IOException{
 		this.loadedLevel = new ArrayList<String>();
 		this.strawberriesCollectedPositions.clear();
+		
+		//Loads the level file
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
 		System.out.println(levelName);
 		
 		BufferedReader br = new BufferedReader(new FileReader(levelName));
-		/*this.tileWidth = Math.abs(Integer.parseInt(br.readLine()));
 		
-		//If the dimensions are too high or too low, we re-adjust it
-		if(this.tileWidth > 100 || this.tileWidth <= 10)  {
-			this.tileWidth = Level.DEFAULT_TILE_SIZE;
-		}
-			
-		this.tileHeight = this.tileWidth;*/
 		String line;
+		
+		//For each line of the file
 		while((line = br.readLine()) != null) {
 			System.out.println(line);
 			this.loadedLevel.add(line);
 		}
+		
 		br.close();
 	}
 	
 	/**
 	 * is the level locked ?
-	 * @return <tt>true</tt> the level has been finished or <tt>false</tt> the level has not been finished yet
+	 * @return <tt>true</tt> the level has not been finished yet or <tt>false</tt> the level has been finished
 	 */
-	public boolean isLock() {
+	public boolean isLocked() {
 		return this.isLock;
 	}
 	
@@ -176,6 +174,8 @@ public class Level {
 	public void display(Graphics g, int gameWidth, int gameHeight) {
 		int y = gameHeight - this.tileHeight;
 		int tileIndex = 0;
+		
+		//Each tile of each line is represented by a character in memory
 		for(int level = this.loadedLevel.size() - 1; level >= 0; level--) {
 			String line = this.loadedLevel.get(level);
 			for(int x = 0; x < line.length(); x++) {
@@ -200,6 +200,7 @@ public class Level {
 					g.fillRect((x * this.tileWidth) + this.offsetX,  y + this.offsetY, this.tileWidth, this.tileHeight);
 				}
 				
+				
 				if(line.charAt(x) == EnumTiles.Wall.charRepresentation || line.charAt(x) == EnumTiles.End.charRepresentation || line.charAt(x) == EnumTiles.Strawberries.charRepresentation) {
 					tileIndex++;
 				}
@@ -217,7 +218,6 @@ public class Level {
 	 */
 	public static Level[] loadAllLevels() throws LevelException, FileNotFoundException, IOException {
 		List<Level> levels = new ArrayList<Level>();
-		Level[] allLevels = null;
 		String fileName = "Levels/LevelNames.txt";
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -236,14 +236,8 @@ public class Level {
 		}
 		
 		br.close();
-		//Puts all the levels into an array
-		i = 0;
-		allLevels = new Level[levels.size()];
-		for(Level level : levels) {
-			allLevels[i] = level;
-			i++;
-		}
-		return allLevels;
+
+		return levels.toArray(new Level[levels.size()]);
 	}
 
 	/**
@@ -273,16 +267,16 @@ public class Level {
 			level--;
 		}
 		
-		//If the player position is not visible on the screen, the tiles are re-adjusting
+		//If the player position is not visible on the screen, the tiles are scrolling
 		
-		while(((pos.getX() + this.offsetX) > (gameWidth / 2)) && !this.translationMaxReached(gameWidth)) {
-			this.translationX(1);
+		while(((pos.getX() + this.offsetX) > (gameWidth / 2)) && !this.maximumScrollReached(gameWidth)) {
+			this.scrollX(1);
 		}
 		
 		pos.addToX(this.offsetX);
 		
-		while(((pos.getY() + this.offsetY) < (gameHeight / 2))) {
-			this.translationY(1);
+		while(((pos.getY() + this.offsetY) < (gameHeight / 3))) {
+			this.scrollY(1);
 		}
 		
 		pos.addToY(this.offsetY);
@@ -291,10 +285,10 @@ public class Level {
 	}
 	
 	/**
-	 * Translates the level on the x axis tiles
-	 * @param direction the direction of the translation
+	 * Scrolls the level tiles on the x axis
+	 * @param direction the direction of the scroll
 	 */
-	public void translationX(int direction) {
+	public void scrollX(int direction) {
 		if(direction > 0) { //Moves to the right
 			this.offsetX -= Character.MOVING_SPEED;
 		} else if(direction < 0) { //Moves to the left
@@ -303,10 +297,10 @@ public class Level {
 	}
 	
 	/**
-	 * Translates the level on the y axis
-	 * @param direction the direction of the translation
+	 * Scrolls the level tiles on the y axis
+	 * @param direction the direction of the scroll
 	 */
-	public void translationY(int direction) {
+	public void scrollY(int direction) {
 		if(direction > 0) { //Moves Up
 			this.offsetY += Character.JUMPING_SPEED;
 		} else if(direction < 0) { //Moves Down
@@ -335,7 +329,7 @@ public class Level {
 	 * @param gameWidth the width of the screen
 	 * @return <tt>true</tt> if the end is reached, <tt>false</tt> else
 	 */
-	public boolean translationMaxReached(int gameWidth) {
+	public boolean maximumScrollReached(int gameWidth) {
 		int xMax = 0;
 		for(int line = 0; line < this.loadedLevel.size(); line++) {
 			for(int x = 0; x < this.loadedLevel.get(line).length(); x++) {
