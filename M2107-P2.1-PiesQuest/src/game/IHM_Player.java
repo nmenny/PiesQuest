@@ -247,7 +247,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				//If the selected level is unlock, we can select it
-				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLock()) {
+				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLocked()) {
 					this.menuDisplayed = 3;
 					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
 				}

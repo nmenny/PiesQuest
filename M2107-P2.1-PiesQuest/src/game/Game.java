@@ -127,7 +127,7 @@ public class Game {
 			
 			if(level == this.currentSelection) {
 				g.setColor(Color.GREEN);
-			} else if(this.levels[level].isLock()){
+			} else if(this.levels[level].isLocked()){
 				g.setColor(Color.RED);
 			} else {
 				g.setColor(Color.WHITE);
@@ -153,7 +153,7 @@ public class Game {
 			this.ihm.inform("The level at index " +levelId +" does not exist !");
 			return;
 		}
-		if(!this.levels[levelId].isLock()) {
+		if(!this.levels[levelId].isLocked()) {
 			this.currentLevel = levelId;
 			//We clear the collected strawberries position in stored in memory
 			this.collectedStrawberries.get(this.currentLevel).clear();
@@ -238,11 +238,11 @@ public class Game {
 	public void movePlayer(int direction) {
 		boolean[] collisions = this.checkCollisions();
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves (if the end of the level is not reached)
-		if((this.character.getPosition().getX() + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].translationMaxReached(this.parameter.getWidth()) && !collisions[0])) {
-			this.levels[this.currentLevel].translationX(1);
+		if((this.character.getPosition().getX() + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].maximumScrollReached(this.parameter.getWidth()) && !collisions[0])) {
+			this.levels[this.currentLevel].scrollX(1);
 		//Else, if the player position is less than the 1/3 of the screen width and if the tiles are not back to normal (the starting offset) the tiles are moving the other way
 		} else if((this.character.getPosition().getX() - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
-			this.levels[this.currentLevel].translationX(-1);
+			this.levels[this.currentLevel].scrollX(-1);
 		} else  {  //The player moves
 			if(direction < 0 && !collisions[1]) { //On the left
 				this.character.move(direction);
@@ -260,11 +260,11 @@ public class Game {
 	public boolean jumpPlayer() {
 		//If the player is high in the sky, the tiles will move up
 		if((this.character.getPosition().getY() < (this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() > 0) {
-			this.levels[this.currentLevel].translationY(1);
+			this.levels[this.currentLevel].scrollY(1);
 			this.character.setCurrentJumpSpeed(this.character.getCurrentJumpSpeed() - 1);
 		//If the player is too low, the tiles will move down
 		} else if((this.character.getPosition().getY() > (4*this.parameter.getHeight() / 5)) && this.character.getCurrentJumpSpeed() <= 0 && this.levels[this.currentLevel].getOffsetY() != 0) {
-			this.levels[this.currentLevel].translationY(-1);
+			this.levels[this.currentLevel].scrollY(-1);
 		} else {
 			//If the jumping speed is null, the player falls
 			if(this.character.getCurrentJumpSpeed() <= 0) { 
@@ -608,7 +608,7 @@ public class Game {
 			//Get the unlocked levels
 			List<Integer> levelUnlockedIndexes = new ArrayList<Integer>();
 			for(int level = 0; level < this.levels.length; level++) {
-				if(!this.levels[level].isLock()) {
+				if(!this.levels[level].isLocked()) {
 					levelUnlockedIndexes.add(level);
 				}
 			}
@@ -690,7 +690,7 @@ public class Game {
 		//If there's no collision on the bottom, the character falls
 		if(!coll[3]) {
 			if((this.character.getPosition().getY() + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
-				this.levels[this.currentLevel].translationY(-1);
+				this.levels[this.currentLevel].scrollY(-1);
 			} else {
 				this.character.fall();
 			}
