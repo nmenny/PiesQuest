@@ -221,7 +221,6 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					this.theGame.setCurrentSelection(0);
 					break;
 				case 2: //Parameters Option
-					//TODO handle events to open the parameters menu
 					this.inform("Functionality unimplemented !");
 					//this.menuDisplayed = 1;
 					break;
