@@ -2,7 +2,7 @@ package game;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -20,6 +20,7 @@ public class GameLauncher {
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 		frame.setTitle("Pie's Quest");
+		frame.setIconImage(new ImageIcon("images/icon.png").getImage());
 		frame.add(new PlayerInterface(frame), BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
