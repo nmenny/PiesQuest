@@ -209,14 +209,16 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					try {
 						this.menuDisplayed = 3;
 						this.theGame.chooseLevel(0);
-						
+						//If a message is displayed, it's now hidden
+						this.messageDisplayed = false;
 					} catch(NullPointerException e1) {
 						this.inform("Error while loading the first level ! Look at the level's files !");
 					}
 					break;
 				case 1: //Level selection option
 					this.menuDisplayed = 2;
-
+					//If a message is displayed, it's now hidden
+					this.messageDisplayed = false;
 					//Puts the level selection cursor on the first level
 					this.theGame.setCurrentSelection(0);
 					break;
