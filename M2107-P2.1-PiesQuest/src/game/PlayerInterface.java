@@ -21,7 +21,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * The maximum time with the message displayed on the screen (in fps (Frame Per Second))
+	 * The maximum time with the message displayed on the screen (in frames)
 	 */
 	private static final int MAX_MESSAGE_DISPLAYED_TIME = 240;
 
@@ -31,7 +31,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	private Game theGame;
 	
 	/**
-	 * Allows us to know which screen has to be displayed by looking at the value
+	 * Allows us to know which screen (menu) must be displayed by looking at the value
 	 * 0 - main menu displayed
 	 * 1 - parameters displayed
 	 * 2 - level selection displayed
@@ -52,12 +52,12 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	private Thread gameThread;
 	
 	/**
-	 * Frame Per Seconds to render the game
+	 * The number of graphical updates in a second (Frame Per Second)
 	 */
 	private static final int FPS = 60;
 	
 	/**
-	 * The time to wait between each frame
+	 * The time to wait between each frame (in milliseconds)
 	 */
 	private static final long targetTime = 1000 / PlayerInterface.FPS;
 	
@@ -67,17 +67,24 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	private Parameter theParameters;
 	
 	/**
-	 * Allows us to know where is the player moving to
+	 * Is the player moving on the left ?
+	 * <tt>true</tt> if he is moving on the left; <tt>false</tt> else
 	 */
-	private boolean playerMovingLeft, playerMovingRight;
+	private boolean playerMovingLeft;
 	
 	/**
-	 * The states of the jump
+	 * Is the player moving on the right ?
+	 * <tt>true</tt> if he is moving on the right; <tt>false</tt> else
+	 */
+	private boolean playerMovingRight;
+	
+	/**
+	 * Is the player jumping ?
 	 */
 	private boolean playerJumping;
 	
 	/**
-	 * <tt>true</tt> When a message is displayed with the method inform
+	 * <tt>true</tt> When a message is displayed with the "inform" method; <tt>false</tt> else
 	 */
 	private boolean messageDisplayed;
 	
@@ -92,7 +99,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	private int intervalMessageDisplayed;
 	
 	/**
-	 * The frame in which the ihm is displayed
+	 * The frame in which the interface is displayed
 	 */
 	private JFrame frame;
 	
@@ -129,7 +136,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	
 	/**
 	 * Gets the menu being currently displayed
-	 * @return the value of the menu
+	 * @return the value corresponding of the menu
 	 * 		0 - main menu displayed
 	 *  	1 - parameters displayed
 	 *  	2 - level selection displayed
@@ -345,12 +352,12 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			start = System.nanoTime();
 			
 			//Draws the game
-			
 			repaint();
 			
-			
+			//Processing the time passed to display the game
 			elapsed = System.nanoTime() - start;
 			
+			//Determine the time to wait
 			wait = PlayerInterface.targetTime - elapsed / 1000000;
 			
 			if(wait <= 0) {
@@ -371,6 +378,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	 * @param g the graphical component
 	 */
 	public void paintComponent(Graphics g) {
+		//If the parameters are not displayed; we can refresh the all screen
 		if(!this.theParameters.isDisplayed()) {
 			super.paintComponent(g);
 		
@@ -406,6 +414,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 						this.playerJumping = false;
 					}
 				} else {
+					//Tries to make the player fall
 					this.theGame.makeFall();
 				}
 				this.theGame.displayLevel(g);
@@ -421,7 +430,9 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		//If a message have to be displayed
 		if(this.messageDisplayed) {
+			//If the time the message is displayed is not too long
 			if(this.intervalMessageDisplayed < PlayerInterface.MAX_MESSAGE_DISPLAYED_TIME) {
 				g.setColor(Color.gray);
 				g.fillRoundRect(0, 8*this.theParameters.getHeight() / 9, this.theParameters.getWidth(), this.theParameters.getHeight(), 15, 15);
