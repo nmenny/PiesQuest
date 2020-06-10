@@ -15,7 +15,7 @@ public class TestLauncher extends TestCase {
 		suite.addTest(new GameTest("testDisplayLevel"));
 		suite.addTest(new GameTest("testSetCurrentSelection"));
 		
-		suite.addTest(new IHM_PlayerTest("testDisplayMenu"));
+		suite.addTest(new PlayerInterfaceTest("testDisplayMenu"));
 		return suite;
 	}
 }

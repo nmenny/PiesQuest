@@ -44,7 +44,7 @@ public class Game {
 	/**
 	 * The interface between the game and the player
 	 */
-	private final IHM_Player ihm;
+	private final PlayerInterface ihm;
 	
 	/**
 	 * The selection of the options in the menus
@@ -60,7 +60,7 @@ public class Game {
 	 * creates a new Game ready to be played
 	 * @param theIhm the interface between the game and the player
 	 */
-	public Game(IHM_Player theIhm) {
+	public Game(PlayerInterface theIhm) {
 		this.ihm = theIhm;
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter(this);

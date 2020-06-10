@@ -2,19 +2,19 @@ package test;
 
 import javax.swing.JFrame;
 
-import game.IHM_Player;
+import game.PlayerInterface;
 import junit.framework.*;
 
 /**
  * Tests the class IHM_Player
  */
-public class IHM_PlayerTest extends TestCase {
+public class PlayerInterfaceTest extends TestCase {
 	
 	/**
 	 * creates a new test with a given name
 	 * @param testName the name of the test
 	 */
-	public IHM_PlayerTest(String testName) {
+	public PlayerInterfaceTest(String testName) {
 		super(testName);
 	}
 	
@@ -22,7 +22,7 @@ public class IHM_PlayerTest extends TestCase {
 	 * Tests the method displayMenu
 	 */
 	public void testDisplayMenu() {
-		IHM_Player ihm = new IHM_Player(new JFrame());
+		PlayerInterface ihm = new PlayerInterface(new JFrame());
 		
 		ihm.displayMenu(0);
 		TestCase.assertEquals(ihm.getDisplayedMenu(), 0);

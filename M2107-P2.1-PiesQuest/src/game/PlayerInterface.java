@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 /**
  * The interface between the player and the game
  */
-public class IHM_Player extends JPanel implements Runnable, KeyListener {
+public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	
 	/**
 	 * Serial version
@@ -59,7 +59,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	/**
 	 * The time to wait between each frame
 	 */
-	private static final long targetTime = 1000 / IHM_Player.FPS;
+	private static final long targetTime = 1000 / PlayerInterface.FPS;
 	
 	/**
 	 * The parameters of the current game
@@ -100,7 +100,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 	 * Creates a new player for the game and starts the game
 	 * @param theFrame the frame in which the game is being displayed
 	 */
-	public IHM_Player(JFrame theFrame) {
+	public PlayerInterface(JFrame theFrame) {
 		
 		this.messageDisplayed = false;
 		this.messageToDisplay = "";
@@ -351,7 +351,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 			
 			elapsed = System.nanoTime() - start;
 			
-			wait = IHM_Player.targetTime - elapsed / 1000000;
+			wait = PlayerInterface.targetTime - elapsed / 1000000;
 			
 			if(wait <= 0) {
 				wait = 5;
@@ -422,7 +422,7 @@ public class IHM_Player extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if(this.messageDisplayed) {
-			if(this.intervalMessageDisplayed < IHM_Player.MAX_MESSAGE_DISPLAYED_TIME) {
+			if(this.intervalMessageDisplayed < PlayerInterface.MAX_MESSAGE_DISPLAYED_TIME) {
 				g.setColor(Color.gray);
 				g.fillRoundRect(0, 8*this.theParameters.getHeight() / 9, this.theParameters.getWidth(), this.theParameters.getHeight(), 15, 15);
 				

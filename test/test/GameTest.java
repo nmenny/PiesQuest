@@ -3,7 +3,7 @@ package test;
 import javax.swing.JFrame;
 
 import game.Game;
-import game.IHM_Player;
+import game.PlayerInterface;
 import junit.framework.*;
 
 /**
@@ -23,7 +23,7 @@ public class GameTest extends TestCase {
 	 * Tests the chooseLevel method
 	 */
 	public void testChooseLevel() {
-		IHM_Player ihm = new IHM_Player(new JFrame());
+		PlayerInterface ihm = new PlayerInterface(new JFrame());
 		Game game = ihm.getTheGame();
 		game.chooseLevel(-5);
 		TestCase.assertEquals(game.getCurrentLevel(), 0); //It's equal to 0 since the value -5 is not applied
@@ -43,7 +43,7 @@ public class GameTest extends TestCase {
 	 * Tests the displayLevel method
 	 */
 	public void testDisplayLevel() {
-		IHM_Player ihm = new IHM_Player(new JFrame());
+		PlayerInterface ihm = new PlayerInterface(new JFrame());
 		Game game = ihm.getTheGame();
 		
 		try {
@@ -80,7 +80,7 @@ public class GameTest extends TestCase {
 	 * Tests the setCurrentSelection method
 	 */
 	public void testSetCurrentSelection() {
-		IHM_Player ihm = new IHM_Player(new JFrame());
+		PlayerInterface ihm = new PlayerInterface(new JFrame());
 		Game game = ihm.getTheGame();
 		
 		game.setCurrentSelection(2);

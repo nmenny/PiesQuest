@@ -20,7 +20,7 @@ public class GameLauncher {
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 		frame.setTitle("Pie's Quest");
-		frame.add(new IHM_Player(frame), BorderLayout.CENTER);
+		frame.add(new PlayerInterface(frame), BorderLayout.CENTER);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
