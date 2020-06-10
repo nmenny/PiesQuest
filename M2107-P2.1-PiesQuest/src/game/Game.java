@@ -236,8 +236,8 @@ public class Game {
 	/**
 	 * makes the player move in a give direction
 	 * @param direction the given direction
-	 * 		If < 0 : the player moves to the left
-	 * 		If > 0 : the player moves to the right
+	 * 		If less than 0 : the player moves to the left
+	 * 		If more than 0 : the player moves to the right
 	 * 		Else : Nothing happens
 	 */
 	public void movePlayer(int direction) {

@@ -163,8 +163,8 @@ public class Character {
 	/**
 	 * Moves the player in a give direction
 	 * @param direction The direction in which the player will move
-	 * 		If < 0 : The player moves on the left
-	 * 		If > 0 : The player moves on the right
+	 * 		If less than 0 : The player moves on the left
+	 * 		If more than 0 : The player moves on the right
 	 * 		Else : Nothing happens
 	 */
 	public void move(int direction) {
