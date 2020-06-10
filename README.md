@@ -1,9 +1,24 @@
 A 2D platformer game.
 
-------------------------------
-How to:
+How to start the application ?
 
---------Add a new level-------------
+	Execute the main method situated into the gameLauncher class (no parameters required)
+
+--------The controls------------
+
+		In the menus:
+		
+			-> directional arrows : moving in the menu
+			-> enter key : select the menu
+			-> escape key : go back to the main menu
+			
+		In the game:
+		
+			-> directional arrows : move the player on the screen
+			-> space key : makes the player jump
+			-> escape key : go back to the main menu
+
+--------Adding a new level-------------
 
 If you want to add a new level to the game, you need to follow these steps:
     1- First, go to the folder "Levels"
@@ -19,6 +34,7 @@ If you want to add a new level to the game, you need to follow these steps:
     6- Your level will be in the game
     
 --------------------------
+
 Members:
 -> Tartare Antoine
 -> Teyssere Karina
