@@ -1,20 +1,9 @@
 package game;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.UIManager;
-
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 
 /**
  * Represents the parameters of the game to configure it
@@ -47,7 +36,7 @@ public class Parameter {
 	 */
 	public Parameter(Game theGame) {
 		this.volume = 50;
-		this.displayFormat = "1080x720";
+		this.displayFormat = "1080x720"; //The default display format
 		this.game = theGame;
 		this.isDisplayed = false;
 	}
@@ -59,11 +48,11 @@ public class Parameter {
 	 */
 	public void displayMenu(JFrame frame, IHM_Player ihm) {
 		this.setDisplay(true);
-		System.out.println("hi !");
 		
+		//Creating a panel to contain the format selector
 		JPanel panelFormat = new JPanel();
 		
-		String[] formatValues = {"800x600", "1920x1080"};
+		String[] formatValues = {"800x600", "1920x1080"}; //The values held in the Combo box
 		JLabel formatLabel = new JLabel("Format : ");
 		JComboBox cmb = new JComboBox(formatValues);
 		cmb.setSelectedIndex(1);
@@ -73,14 +62,6 @@ public class Parameter {
 		panelFormat.add(cmb);
 		
 		frame.add(panelFormat);
-		
-		frame.setTitle("Parameters:");
-		
-		/*
-		frame.setSize(1920, 1080);
-		ihm.setSize(1920,  1080);
-		this.displayFormat = "1920x1080";
-		*/
 		
 		frame.setVisible(true);
 	}
