@@ -8,12 +8,12 @@ public class Position {
 	/**
 	 * The coordinate in the X axis
 	 */
-	private double x;
+	private int x;
 	
 	/**
 	 * The coordinate in the Y axis
 	 */
-	private double y;
+	private int y;
 	
 	/**
 	 * Set the position to the origin (0, 0)
@@ -26,7 +26,7 @@ public class Position {
 	 * Gets the coordinate on the x axis
 	 * @return the x value
 	 */
-	public double getX() {
+	public int getX() {
 		return this.x;
 	}
 	
@@ -34,7 +34,7 @@ public class Position {
 	 * Gets the coordinate on the y axis
 	 * @return the y value
 	 */
-	public double getY() {
+	public int getY() {
 		return this.y;
 	}
 	
@@ -42,7 +42,7 @@ public class Position {
 	 * Adds a given value to the x value
 	 * @param val the value to add
 	 */
-	public void addToX(double val) {
+	public void addToX(int val) {
 		this.x = this.x + val;
 	}
 	
@@ -50,7 +50,7 @@ public class Position {
 	 * Adds a given value to the y value
 	 * @param val the value to add
 	 */
-	public void addToY(double val) {
+	public void addToY(int val) {
 		this.y = this.y + val;
 	}
 	
@@ -59,7 +59,7 @@ public class Position {
 	 * @param theX the position in the x axis
 	 * @param theY the position in the y axis
 	 */
-	public Position(double theX, double theY) {
+	public Position(int theX, int theY) {
 		this.x = theX;
 		this.y = theY;
 	}
