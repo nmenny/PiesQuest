@@ -1,5 +1,8 @@
 A 2D platformer game.
 
+You play as a green square and you must reach the blue square in each level which allows you to go to the next level. On your way, you will find 
+    red squares representing strawberries; if you collect 10 of them you have one more life !
+
 How to start the application ?
 
 	Execute the main method situated into the gameLauncher class (no parameters required)
@@ -36,7 +39,7 @@ If you want to add a new level to the game, you need to follow these steps:
 --------------------------
 
 Members:
--> Tartare Antoine
--> Teyssere Karina
--> Scheidt Sophie
--> Menny Nathan
+    -> Tartare Antoine
+    -> Teyssere Karina
+    -> Scheidt Sophie
+    -> Menny Nathan
