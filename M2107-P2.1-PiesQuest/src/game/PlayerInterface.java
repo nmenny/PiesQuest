@@ -237,6 +237,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.theParameters.setDisplay(false);
 				this.menuDisplayed = 0;
+				this.theGame.setCurrentSelection(0);
 			}
 			break;
 		case 2: //The level selection menu
@@ -276,6 +277,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.menuDisplayed = 0;
+				this.theGame.setCurrentSelection(0);
 			}
 			break;
 		case 4: //The game over menu
