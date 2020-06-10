@@ -132,6 +132,8 @@ public class Game {
 			} else {
 				g.setColor(Color.WHITE);
 			}
+			
+			//Each line has 3 levels
 			if(level % 3 == 0 && level != levelInitialIndex) {
 				y += 1;
 				x = 0;
@@ -234,6 +236,9 @@ public class Game {
 	/**
 	 * makes the player move in a give direction
 	 * @param direction the given direction
+	 * 		If < 0 : the player moves to the left
+	 * 		If > 0 : the player moves to the right
+	 * 		Else : Nothing happens
 	 */
 	public void movePlayer(int direction) {
 		boolean[] collisions = this.checkCollisions();
@@ -465,7 +470,7 @@ public class Game {
 	/**
 	 * Gets the level at a given index
 	 * @param levelId the index of the level
-	 * @return the level at the given index
+	 * @return the level at the given index or the first level if the levelId is not correct
 	 */
 	public Level getLevel(int levelId) {
 		if(levelId >= this.levels.length || levelId < 0) {
@@ -686,9 +691,8 @@ public class Game {
 	 * Makes the player fall if it's not jumping and there's nothing under it
 	 */
 	public void makeFall() {
-		boolean[] coll = this.checkCollisions();
 		//If there's no collision on the bottom, the character falls
-		if(!coll[3]) {
+		if(!this.checkCollisions()[3]) {
 			if((this.character.getPosition().getY() + Character.JUMPING_SPEED > (4*this.parameter.getHeight() / 5)) && this.levels[this.currentLevel].getOffsetY() != 0) {
 				this.levels[this.currentLevel].scrollY(-1);
 			} else {
