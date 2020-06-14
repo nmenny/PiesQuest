@@ -520,7 +520,7 @@ public class Game {
 	/**
 	 * Load a game save file
 	 */
-	public void load() {
+	private void load() {
 		File f = new File("Save/saveFile");
 		//If the file exits, we can load it
 		if(f.exists()) {
@@ -603,7 +603,7 @@ public class Game {
 	/**
 	 * saves the game into a game save file
 	 */
-	public void save() {
+	private void save() {
 		File f = new File("Save/saveFile");
 		try {
 			FileOutputStream fos = new FileOutputStream(f);
