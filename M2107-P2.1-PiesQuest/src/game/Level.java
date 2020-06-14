@@ -287,9 +287,9 @@ public class Level {
 	 * @param direction the direction of the scroll
 	 */
 	public void scrollX(int direction) {
-		if(direction > 0) { //Moves to the right
+		if(direction == EnumMovements.RIGHT.value) { //Moves to the right
 			this.offsetX -= Character.MOVING_SPEED;
-		} else if(direction < 0) { //Moves to the left
+		} else if(direction == EnumMovements.LEFT.value) { //Moves to the left
 			this.offsetX += Character.MOVING_SPEED;
 		}
 	}

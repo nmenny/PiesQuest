@@ -406,10 +406,10 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 				break;
 			case 3: //The level
 				if(this.playerMovingLeft) {
-					this.theGame.movePlayer(-1);
+					this.theGame.movePlayer(EnumMovements.LEFT.value);
 				}
 				if(this.playerMovingRight) {
-					this.theGame.movePlayer(1);
+					this.theGame.movePlayer(EnumMovements.RIGHT.value);
 				}
 				if(this.playerJumping) {
 					//If the character hits the ground, he can jump again

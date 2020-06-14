@@ -242,15 +242,15 @@ public class Game {
 	public void movePlayer(int direction) {
 		boolean[] collisions = this.checkCollisions();
 		//If the player will be at a position beyond the 2/3 of the screen width, the tiles moves (if the end of the level is not reached)
-		if((this.character.getPosition().getX() + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction > 0) && (!this.levels[this.currentLevel].maximumScrollReached(this.parameter.getWidth()) && !collisions[0])) {
-			this.levels[this.currentLevel].scrollX(1);
+		if((this.character.getPosition().getX() + Character.MOVING_SPEED > ((2 * this.parameter.getWidth()) / 3)) && (direction == EnumMovements.RIGHT.value) && (!this.levels[this.currentLevel].maximumScrollReached(this.parameter.getWidth()) && !collisions[0])) {
+			this.levels[this.currentLevel].scrollX(EnumMovements.RIGHT.value);
 		//Else, if the player position is less than the 1/3 of the screen width and if the tiles are not back to normal (the starting offset) the tiles are moving the other way
-		} else if((this.character.getPosition().getX() - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction < 0) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
-			this.levels[this.currentLevel].scrollX(-1);
+		} else if((this.character.getPosition().getX() - Character.MOVING_SPEED < (this.parameter.getWidth() / 3)) && (direction == EnumMovements.LEFT.value) && (this.levels[this.currentLevel].getOffsetX() != 0)  && !collisions[1]){
+			this.levels[this.currentLevel].scrollX(EnumMovements.LEFT.value);
 		} else  {  //The player moves
-			if(direction < 0 && !collisions[1]) { //On the left
+			if(direction == EnumMovements.LEFT.value && !collisions[1]) { //On the left
 				this.character.move(direction);
-			} else if (direction > 0 && !collisions[0]) { //On the right
+			} else if (direction == EnumMovements.RIGHT.value && !collisions[0]) { //On the right
 				this.character.move(direction);
 			}
 			
