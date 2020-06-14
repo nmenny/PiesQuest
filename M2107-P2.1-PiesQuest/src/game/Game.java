@@ -168,7 +168,6 @@ public class Game {
 				this.levels[this.currentLevel].load();
 				//Set the initial position of the character
 				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
-				System.out.println("Level " +(levelId+1) +" loaded");
 			} catch(FileNotFoundException e) {
 				this.playerInterface.inform("Error ! level " +(this.currentLevel + 1) +"'s file not found !");
 				this.playerInterface.displayMenu(0);

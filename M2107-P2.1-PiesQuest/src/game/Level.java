@@ -103,7 +103,6 @@ public class Level {
 		
 		//Loads the level file
 		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
-		System.out.println(levelName);
 		
 		BufferedReader br = new BufferedReader(new FileReader(levelName));
 		
@@ -111,7 +110,6 @@ public class Level {
 		
 		//For each line of the file
 		while((line = br.readLine()) != null) {
-			System.out.println(line);
 			this.loadedLevel.add(line);
 		}
 		
