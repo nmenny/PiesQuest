@@ -67,6 +67,17 @@ public class Parameter {
 		JComboBox<String> cmb = new JComboBox<String>(Parameter.DISPLAY_FORMATS);
 		cmb.setSelectedIndex(Parameter.findFormatIndex(this.displayFormat));
 		
+		cmb.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setFormat((String) cmb.getSelectedItem());
+				frame.setSize(getWidth(), getHeight());
+				theInterface.setSize(getWidth(), getHeight());
+				displayMenu(frame, theInterface);
+			}
+		});
+		
 		cmb.setVisible(true);
 		formatLabel.setVisible(true);
 		
