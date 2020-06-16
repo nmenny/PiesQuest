@@ -93,6 +93,10 @@ public class Parameter {
 	 * @param theFormat the new format of the screen
 	 */
 	public void setFormat(String theFormat) {
+		//If the given format is in the format array, we can set it
+		if(Parameter.findFormatIndex(theFormat) != -1) {
+			this.displayFormat = theFormat;
+		}
 	}
 	
 	/**
