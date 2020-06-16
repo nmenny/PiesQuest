@@ -1,5 +1,10 @@
 package game;
 
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +14,11 @@ import javax.swing.JPanel;
  * Represents the parameters of the game to configure it
  */
 public class Parameter {
+	
+	/**
+	 * Stores all the different format of the screen
+	 */
+	public static final String[] displayFormats = {"800x600", "1080x720", "1920x1080"};
 	
 	/**
 	 * The sound volume of the game (in percent)
@@ -47,19 +57,24 @@ public class Parameter {
 	 * @param theInterface the interface
 	 */
 	public void displayMenu(JFrame frame, PlayerInterface theInterface) {
-		this.setDisplay(true);
+		this.isDisplayed = true;
 		
 		//Creating a panel to contain the format selector
 		JPanel panelFormat = new JPanel();
+		panelFormat.setLayout(new GridBagLayout());
 		
-		String[] formatValues = {"800x600", "1920x1080"}; //The values held in the Combo box
+		String[] formatValues = {"800x600", "1080x720", "1920x1080"}; //The values held in the Combo box
 		JLabel formatLabel = new JLabel("Format : ");
-		JComboBox cmb = new JComboBox(formatValues);
+		JComboBox<String> cmb = new JComboBox<String>(formatValues);
 		cmb.setSelectedIndex(1);
+		
 		cmb.setVisible(true);
+		formatLabel.setVisible(true);
 		
 		panelFormat.add(formatLabel);
 		panelFormat.add(cmb);
+		
+		panelFormat.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
 		frame.add(panelFormat);
 		
