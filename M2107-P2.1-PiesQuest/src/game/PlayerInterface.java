@@ -234,6 +234,10 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					break;
 				}
 			}
+			//If we press on the escape key, we close the application
+			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				System.exit(0);
+			}
 			break;
 		case 1: //The parameters menu
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
