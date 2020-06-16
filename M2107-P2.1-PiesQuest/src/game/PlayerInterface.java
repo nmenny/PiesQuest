@@ -196,15 +196,15 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 		case 0: //The main menu
 			//If we press the up arrow, we move up in the menu
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				this.theGame.gotoSelect(-1);
+				this.theGame.getMenuHandler().gotoSelect(-1);
 			}
 			//If we press the down arrow, we move down in the menu
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				this.theGame.gotoSelect(+1);
+				this.theGame.getMenuHandler().gotoSelect(+1);
 			}
 			//If we press on "enter", we open the current menu
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				switch(this.theGame.getCurrentSelection()) {
+				switch(this.theGame.getMenuHandler().getCurrentSelection()) {
 				case 0: //Start level 1 option
 					try {
 						this.menuDisplayed = 3;
@@ -220,7 +220,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					//If a message is displayed, it's now hidden
 					this.messageDisplayed = false;
 					//Puts the level selection cursor on the first level
-					this.theGame.setCurrentSelection(0);
+					this.theGame.getMenuHandler().setCurrentSelection(0);
 					break;
 				case 2: //Parameters Option
 					this.inform("Functionality unimplemented !");
@@ -239,35 +239,35 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.theParameters.setDisplay(false);
 				this.menuDisplayed = 0;
-				this.theGame.setCurrentSelection(0);
+				this.theGame.getMenuHandler().setCurrentSelection(0);
 			}
 			break;
 		case 2: //The level selection menu
 			if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-				this.theGame.gotoSelect(-1);
+				this.theGame.getMenuHandler().gotoSelect(-1);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				this.theGame.gotoSelect(+1);
+				this.theGame.getMenuHandler().gotoSelect(+1);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				this.theGame.gotoSelect(+3);
+				this.theGame.getMenuHandler().gotoSelect(+3);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				this.theGame.gotoSelect(-3);
+				this.theGame.getMenuHandler().gotoSelect(-3);
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				//If the selected level is unlock, we can select it
-				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLocked()) {
+				if(!this.theGame.getLevel(this.theGame.getMenuHandler().getCurrentSelection()).isLocked()) {
 					this.messageDisplayed = false;
 					this.menuDisplayed = 3;
-					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
+					this.theGame.chooseLevel(this.theGame.getMenuHandler().getCurrentSelection());
 				} else {
-					this.inform("Level " +(this.theGame.getCurrentSelection() + 1) + " locked !");
+					this.inform("Level " +(this.theGame.getMenuHandler().getCurrentSelection() + 1) + " locked !");
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.menuDisplayed = 0;
-				this.theGame.setCurrentSelection(0);
+				this.theGame.getMenuHandler().setCurrentSelection(0);
 			}
 			break;
 		case 3: //The level
@@ -282,21 +282,21 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				this.menuDisplayed = 0;
-				this.theGame.setCurrentSelection(0);
+				this.theGame.getMenuHandler().setCurrentSelection(0);
 			}
 			break;
 		case 4: //The game over menu
 			//If we press the up arrow, we move up in the menu
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				this.theGame.gotoSelect(-1);
+				this.theGame.getMenuHandler().gotoSelect(-1);
 			}
 			//If we press the down arrow, we move down in the menu
 			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				this.theGame.gotoSelect(+1);
+				this.theGame.getMenuHandler().gotoSelect(+1);
 			}
 			//If we press on "enter", we open the current menu
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				switch(this.theGame.getCurrentSelection()) {
+				switch(this.theGame.getMenuHandler().getCurrentSelection()) {
 				case 0: //Start level 1 option
 					this.menuDisplayed = 0;
 					break;
@@ -308,7 +308,7 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 		case 5: //The victory menu
 			//If we press on "enter", we open the current menu
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-				switch(this.theGame.getCurrentSelection()) {
+				switch(this.theGame.getMenuHandler().getCurrentSelection()) {
 				case 0: //Start level 1 option
 					this.menuDisplayed = 0;
 					break;
@@ -390,22 +390,11 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 		
 		//Clears the screen
 		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
-	
+
 		//The element displayed varies depending on the menu displayed
 		switch(this.menuDisplayed) {
-		case 0: //The main menu
-			this.theGame.displayMainScreen(g);
-			break;
 		case 1: //The parameters menu
 			this.theParameters.displayMenu(this.frame, this);
-			break;
-		case 2: //The level selection menu
-			try {
-				this.theGame.displayAllLevels(g);
-			} catch(NullPointerException e) {
-				this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
-				this.menuDisplayed = 0;
-			}
 			break;
 		case 3: //The level
 			if(this.playerMovingLeft) {
@@ -425,13 +414,13 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			}
 			this.theGame.displayLevel(g);
 			break;
-		case 4: //The game over Screen
-			this.theGame.displayGameOver(g);
-			break;
-		case 5: //The victory Screen
-			this.theGame.displayVictoryScreen(g);
-			break;
 		default:
+			try {
+				this.theGame.getMenuHandler().displayCorrespondingMenu(this.menuDisplayed, g);
+			} catch(NullPointerException e) { //Error while loading the level selection menu
+				this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
+				this.menuDisplayed = 0;
+			}
 			break;
 		}
 		

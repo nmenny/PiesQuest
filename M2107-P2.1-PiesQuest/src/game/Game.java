@@ -39,6 +39,11 @@ public class Game {
 	private final Parameter parameter;
 	
 	/**
+	 * The menu handler allowing us to move in the menus
+	 */
+	private final MenuHandler menuHandler;
+	
+	/**
 	 * The levels of the game
 	 */
 	private Level[] levels;
@@ -47,11 +52,6 @@ public class Game {
 	 * The interface between the game and the player
 	 */
 	private final PlayerInterface playerInterface;
-	
-	/**
-	 * The selection of the options in the menus
-	 */
-	private int currentSelection;
 	
 	/**
 	 * Stores all the collected strawberries by level id
@@ -64,12 +64,11 @@ public class Game {
 	 */
 	public Game(PlayerInterface theInterface) {
 		this.playerInterface = theInterface;
+		this.menuHandler = new MenuHandler(this);
 		this.character = new Character("Player1", 3);
 		this.parameter = new Parameter();
 		this.collectedStrawberries = new HashMap<Integer, Set<Integer>>();
-		
-		//At the initialization, the main menu is displayed
-		this.currentSelection = 0;
+
 		try {
 			this.levels = Level.loadAllLevels();
 			//We create a new set containing the collected strawberries position in a map
@@ -96,54 +95,6 @@ public class Game {
 	 */
 	public void applyModification(int theNewVolume, String theNewFormat) {
 		//TODO implement the method
-	}
-	
-	/**
-	 * Displays all the levels at the screen
-	 * @param g the drawing object
-	 */
-	public void displayAllLevels(Graphics g) {
-		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
-	
-		//Background
-		g.setColor(new Color(50, 150, 200));
-		g.fillRect(0,  0,  width, height);
-		
-		//Display the title of the menu
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Arial", Font.PLAIN, 50));
-		g.drawString("CHOOSE THE LEVEL", (width / 2) - 220, height / 6);
-		
-		int y = 0;
-		int x = 0;
-		int levelInitialIndex = 0;
-		int levelSelection = this.currentSelection;
-		int nbLevelDisplayedAtOnce = 8;
-		
-		//Can can only display "nbLevelDisplayedAtOnce" different levels at the same time, so only the wanted levels will be displayed and not the first ones
-		while(levelSelection > nbLevelDisplayedAtOnce) {
-			levelInitialIndex += 3;
-			levelSelection -= 3;
-		}
-		for(int level = levelInitialIndex; level < this.levels.length; level++) {
-			
-			if(level == this.currentSelection) {
-				g.setColor(Color.GREEN);
-			} else if(this.levels[level].isLocked()){
-				g.setColor(Color.RED);
-			} else {
-				g.setColor(Color.WHITE);
-			}
-			
-			//Each line has 3 levels
-			if(level % 3 == 0 && level != levelInitialIndex) {
-				y += 1;
-				x = 0;
-			}
-			g.setFont(new Font("Arial", Font.PLAIN, 20));
-			g.drawString(this.levels[level].getName(), ((width / 2) - 110) * x + ((int) this.levels[level].getName().length() / 2), height / 3 + 150 * y);
-			x++;
-		}
 	}
 	
 	/**
@@ -181,58 +132,6 @@ public class Game {
 				this.playerInterface.displayMenu(0);
 			}
 		}
-	}
-
-	/**
-	 * display the current level at the screen
-	 * @param g the drawing object
-	 */
-	public void displayLevel(Graphics g) {
-		Level currentLevel = this.levels[this.currentLevel];
-		currentLevel.registerCollectedStrawberries(this.collectedStrawberries.get(this.currentLevel));
-		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
-		g.setColor(EnumTiles.Player.tileColor);
-		g.fillRect((int)this.character.getPosition().getX(), (int)this.character.getPosition().getY(), currentLevel.getTileWidth(), currentLevel.getTileHeight());
-		
-		//When the character position is higher than the height of the screen, the player is dead
-		if(this.character.getPosition().getY() > this.parameter.getHeight()) {
-			this.character.die();
-			//If the character's health if below 0, this is game over
-			if(this.character.getHealth() <= 0) {
-				this.playerInterface.displayMenu(4);
-				this.currentSelection = 0;
-				this.character.giveHealth(3); //Reinitializes the life of the character
-				this.character.init(); //Reinitialize player attributes
-			} else {
-				//If he is not dead, the level restarts at the beginning
-				this.levels[this.currentLevel].init();
-				this.playerInterface.initMovements();
-				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
-			}
-		}
-		
-		//Displays the current health of the player on the top right of the screen
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Arial", Font.PLAIN, 15));
-		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 70, 15);
-		
-		//Displays the number of strawberries collected
-		g.drawString("Strawberries : " +this.character.getNbStrawberriesCollected(), this.parameter.getWidth() - 150, 35);
-	}
-
-	/**
-	 * displays the selected level at the screen
-	 * @param levelId the index of the level
-	 * @param g the drawing object
-	 */
-	public void displayLevel(int levelId, Graphics g) {
-		if(levelId >= this.levels.length || levelId < 0) {
-			this.currentLevel = 0;
-		} else {
-			this.currentLevel = levelId;
-		}
-		
-		this.displayLevel(g);
 	}
 	
 	/**
@@ -454,11 +353,63 @@ public class Game {
 			//Saves the game
 			this.save();
 			this.playerInterface.displayMenu(5);
-			this.currentSelection = 0;
+			this.menuHandler.setCurrentSelection(0);
 		} else { //Else, the next level starts
 			this.levels[this.currentLevel + 1].unlock();
 			this.chooseLevel(this.currentLevel+ 1);
 		}
+	}
+	
+	/**
+	 * display the current level at the screen
+	 * @param g the drawing object
+	 */
+	public void displayLevel(Graphics g) {
+		Level currentLevel = this.levels[this.currentLevel];
+		currentLevel.registerCollectedStrawberries(this.collectedStrawberries.get(this.currentLevel));
+		currentLevel.display(g, this.parameter.getWidth(), this.parameter.getHeight());
+		g.setColor(EnumTiles.Player.tileColor);
+		g.fillRect((int)this.character.getPosition().getX(), (int)this.character.getPosition().getY(), currentLevel.getTileWidth(), currentLevel.getTileHeight());
+		
+		//When the character position is higher than the height of the screen, the player is dead
+		if(this.character.getPosition().getY() > this.parameter.getHeight()) {
+			this.character.die();
+			//If the character's health if below 0, this is game over
+			if(this.character.getHealth() <= 0) {
+				this.playerInterface.displayMenu(4);
+				this.menuHandler.setCurrentSelection(0);
+				this.character.giveHealth(3); //Reinitializes the life of the character
+				this.character.init(); //Reinitialize player attributes
+			} else {
+				//If he is not dead, the level restarts at the beginning
+				this.levels[this.currentLevel].init();
+				this.playerInterface.initMovements();
+				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
+			}
+		}
+		
+		//Displays the current health of the player on the top right of the screen
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Arial", Font.PLAIN, 15));
+		g.drawString("Lifes : " +this.character.getHealth(), this.parameter.getWidth() - 70, 15);
+		
+		//Displays the number of strawberries collected
+		g.drawString("Strawberries : " +this.character.getNbStrawberriesCollected(), this.parameter.getWidth() - 150, 35);
+	}
+
+	/**
+	 * displays the selected level at the screen
+	 * @param levelId the index of the level
+	 * @param g the drawing object
+	 */
+	public void displayLevel(int levelId, Graphics g) {
+		if(levelId >= this.levels.length || levelId < 0) {
+			this.currentLevel = 0;
+		} else {
+			this.currentLevel = levelId;
+		}
+		
+		this.displayLevel(g);
 	}
 	
 	/**
@@ -490,35 +441,21 @@ public class Game {
 	}
 	
 	/**
-	 * displays the game over screen to the player
-	 * @param g the drawing object
+	 * Gets the interface in which the game is being played
+	 * @return the player interface which contains the game
 	 */
-	public void displayGameOver(Graphics g) {
-		String[] menus = {"Back to main menu"};
-		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
-	
-		//Background
-		g.setColor(new Color(50, 150, 200));
-		g.fillRect(0,  0,  width, height);
-		
-		//The title of the menu
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Arial", Font.PLAIN, 100));
-		g.drawString("GAME OVER", (width / 2) - 270, height / 3);
-		
-		//For every menu option, we draw it on the screen
-		for(int menu = 0; menu < menus.length; menu++) {
-			//If the current menu is selected, its color changes
-			if(menu == this.currentSelection) {
-				g.setColor(Color.GREEN);
-			} else {
-				g.setColor(Color.WHITE);
-			}
-			
-			g.setFont(new Font("Arial", Font.PLAIN, 50));
-			g.drawString(menus[menu], (width / 2) - 210, 2 *height / 3);
-		}
+	public PlayerInterface getPlayerInterface() {
+		return this.playerInterface;
 	}
+	
+	/**
+	 * Gets the menu handler of the game
+	 * @return the menu handler on the game
+	 */
+	public MenuHandler getMenuHandler() {
+		return this.menuHandler;
+	}
+	
 	
 	/**
 	 * Load a game save file
@@ -538,68 +475,6 @@ public class Game {
 			} catch (IOException e) {
 				System.err.println("Error ! Save file error !");
 			}
-		}
-	}
-	
-	/**
-	 * displays the main screen to the player
-	 * @param g the drawing object
-	 */
-	public void displayMainScreen(Graphics g) {
-		String[] menus = {"Start", "Choose level", "Parameters", "Quit"};
-		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
-		
-		//Background
-		g.setColor(new Color(50, 150, 200));
-		g.fillRect(0,  0,  width, height);
-		
-		g.setFont(new Font("Arial", Font.PLAIN, 75));
-		g.setColor(new Color(0, 0, 0));
-		g.drawString("Pie's Quest", (this.parameter.getWidth() / 2) - 5 * 35, 2*this.parameter.getHeight()/9);
-		
-		//For every menu option, we draw it on the screen
-		for(int menu = 0; menu < menus.length; menu++) {
-			//If the current menu is selected, its color changes
-			if(menu == this.currentSelection) {
-				g.setColor(Color.GREEN);
-			} else {
-				g.setColor(Color.WHITE);
-			}
-			
-			g.setFont(new Font("Arial", Font.PLAIN, 40));
-			g.drawString(menus[menu], (this.parameter.getWidth() / 2) - menus[menu].length() * 10, 4*this.parameter.getHeight()/9 + menu * this.parameter.getHeight()/9);
-		}
-	}
-	
-	/**
-	 * displays the victory screen to the player
-	 * @param g the drawing object
-	 */
-	public void displayVictoryScreen(Graphics g) {
-		String[] menus = {"Back to main menu"};
-		int width = this.parameter.getWidth(), height = this.parameter.getHeight();
-	
-		
-		//Background
-		g.setColor(new Color(50, 150, 200));
-		g.fillRect(0,  0,  width, height);
-		
-		//Displays the title of the menu
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Arial", Font.PLAIN, 100));
-		g.drawString("VICTORY", (width / 2) - 210, height / 3);
-		
-		//For every menu option, we draw it on the screen
-		for(int menu = 0; menu < menus.length; menu++) {
-			//If the current menu is selected, its color changes
-			if(menu == this.currentSelection) {
-				g.setColor(Color.GREEN);
-			} else {
-				g.setColor(Color.WHITE);
-			}
-			
-			g.setFont(new Font("Arial", Font.PLAIN, 50));
-			g.drawString(menus[menu], (width / 2) - 210, 2 *height / 3);
 		}
 	}
 	
@@ -631,63 +506,7 @@ public class Game {
 			System.err.println("Error ! Save file error !");
 		}
 	}
-	
-	/**
-	 * Moves the selection attribute in a given direction
-	 * @param go the direction of the move
-	 */
-	public void gotoSelect(int go) {
-		this.currentSelection += go;
-		//If the selection is less than 0, we go to the last option
-		if(this.currentSelection < 0) {
-			this.currentSelection = this.getNumberOption() - 1;
-		}
-		//If the selection is more or equals to the number of menus, we go to the first option
-		if(this.currentSelection >= this.getNumberOption()) {
-			this.currentSelection = 0;
-		}
-	}
-	
-	/**
-	 * Gets the number of options possible for the current menu
-	 * @return the number of option of the current menu
-	 */
-	private int getNumberOption() {
-		//For each menu, there's a defined number of menus
-		switch(this.playerInterface.getDisplayedMenu()) {
-		case 0:
-			return 4;
-		case 2:
-			return this.levels.length;
-		case 4:
-			return 1;
-		case 5: 
-			return 1;
-		default: 
-			return 0;
-		}
-	}
-	
-	/**
-	 * Gets the current option in the displayed menu
-	 * @return the current option selected in the displayed menu
-	 */
-	public int getCurrentSelection() {
-		return this.currentSelection;
-	}
-	
-	/**
-	 * Sets the selection cursor
-	 * @param theSelection the menu selection index
-	 */
-	public void setCurrentSelection(int theSelection) {
-		if(theSelection < 0 || theSelection >= this.getNumberOption()) {
-			this.currentSelection = 0;
-		} else {
-			this.currentSelection = theSelection;
-		}
-		
-	}
+
 
 	/**
 	 * Makes the player fall if it's not jumping and there's nothing under it
@@ -701,5 +520,13 @@ public class Game {
 				this.character.fall();
 			}
 		}
+	}
+	
+	/**
+	 * Gets the number of loaded levels in the game
+	 * @return the number of loaded levels in the game
+	 */
+	public int getNumberLevels() {
+		return this.levels.length;
 	}
 }
