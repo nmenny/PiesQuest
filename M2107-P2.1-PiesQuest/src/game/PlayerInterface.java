@@ -357,9 +357,10 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 		while(this.isRunning) {
 			start = System.nanoTime();
 			
-			//Draws the game
-			repaint();
-			
+			//If the parameters are not displayed; we can refresh the all screen
+			if(!this.theParameters.isDisplayed()) {
+				repaint();
+			}
 			//Processing the time passed to display the game
 			elapsed = System.nanoTime() - start;
 			
@@ -384,56 +385,53 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 	 * @param g the graphical component
 	 */
 	public void paintComponent(Graphics g) {
-		//If the parameters are not displayed; we can refresh the all screen
-		if(!this.theParameters.isDisplayed()) {
-			super.paintComponent(g);
+		super.paintComponent(g);
 		
-			//Clears the screen
-			g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
-		
-			//The element displayed varies depending on the menu displayed
-			switch(this.menuDisplayed) {
-			case 0: //The main menu
-				this.theGame.displayMainScreen(g);
-				break;
-			case 1: //The parameters menu
-				this.theParameters.displayMenu(this.frame, this);
-				break;
-			case 2: //The level selection menu
-				try {
-					this.theGame.displayAllLevels(g);
-				} catch(NullPointerException e) {
-					this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
-					this.menuDisplayed = 0;
-				}
-				break;
-			case 3: //The level
-				if(this.playerMovingLeft) {
-					this.theGame.movePlayer(EnumMovements.LEFT.value);
-				}
-				if(this.playerMovingRight) {
-					this.theGame.movePlayer(EnumMovements.RIGHT.value);
-				}
-				if(this.playerJumping) {
-					//If the character hits the ground, he can jump again
-					if(this.theGame.jumpPlayer()) {
-						this.playerJumping = false;
-					}
-				} else {
-					//Tries to make the player fall
-					this.theGame.makeFall();
-				}
-				this.theGame.displayLevel(g);
-				break;
-			case 4: //The game over Screen
-				this.theGame.displayGameOver(g);
-				break;
-			case 5: //The victory Screen
-				this.theGame.displayVictoryScreen(g);
-				break;
-			default:
-				break;
+		//Clears the screen
+		g.clearRect(0,  0, this.theParameters.getWidth(), this.theParameters.getHeight());
+	
+		//The element displayed varies depending on the menu displayed
+		switch(this.menuDisplayed) {
+		case 0: //The main menu
+			this.theGame.displayMainScreen(g);
+			break;
+		case 1: //The parameters menu
+			this.theParameters.displayMenu(this.frame, this);
+			break;
+		case 2: //The level selection menu
+			try {
+				this.theGame.displayAllLevels(g);
+			} catch(NullPointerException e) {
+				this.inform("Error while loading the levels ! Please look at \"LevelNames.txt\"");
+				this.menuDisplayed = 0;
 			}
+			break;
+		case 3: //The level
+			if(this.playerMovingLeft) {
+				this.theGame.movePlayer(EnumMovements.LEFT.value);
+			}
+			if(this.playerMovingRight) {
+				this.theGame.movePlayer(EnumMovements.RIGHT.value);
+			}
+			if(this.playerJumping) {
+				//If the character hits the ground, he can jump again
+				if(this.theGame.jumpPlayer()) {
+					this.playerJumping = false;
+				}
+			} else {
+				//Tries to make the player fall
+				this.theGame.makeFall();
+			}
+			this.theGame.displayLevel(g);
+			break;
+		case 4: //The game over Screen
+			this.theGame.displayGameOver(g);
+			break;
+		case 5: //The victory Screen
+			this.theGame.displayVictoryScreen(g);
+			break;
+		default:
+			break;
 		}
 		
 		//If a message have to be displayed
