@@ -65,7 +65,7 @@ public class Parameter {
 		
 		JLabel formatLabel = new JLabel("Format : ");
 		JComboBox<String> cmb = new JComboBox<String>(Parameter.DISPLAY_FORMATS);
-		cmb.setSelectedIndex(1);
+		cmb.setSelectedIndex(Parameter.findFormatIndex(this.displayFormat));
 		
 		cmb.setVisible(true);
 		formatLabel.setVisible(true);
@@ -93,7 +93,6 @@ public class Parameter {
 	 * @param theFormat the new format of the screen
 	 */
 	public void setFormat(String theFormat) {
-		//TODO implement the method
 	}
 	
 	/**
@@ -142,6 +141,22 @@ public class Parameter {
 	 */
 	public void setDisplay(boolean isDisplayed) {
 		this.isDisplayed = isDisplayed;
+	}
+	
+	/**
+	 * Finds the index in the DISPLAY_FORMATS array of given format
+	 * @param format The searched format
+	 * @return the index corresponding to the format in DISPLAY_FORMATS or -1 if not found
+	 */
+	public static int findFormatIndex(String format) {
+		int formatIndex = 0;
+		while(formatIndex < Parameter.DISPLAY_FORMATS.length) {
+			if(Parameter.DISPLAY_FORMATS[formatIndex].equals(format)) {
+				return formatIndex;
+			}
+			formatIndex++;
+		}
+		return -1;
 	}
 	
 }
