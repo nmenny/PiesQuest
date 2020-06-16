@@ -107,9 +107,6 @@ public class Level {
 		this.loadedLevel = new ArrayList<String>();
 		this.strawberriesCollectedPositions.clear();
 		
-		//Loads the level file
-		String levelName = Level.LEVEL_FILE_PATH +"level" +this.name.split("_")[0] +".txt";
-		
 		String line;
 		
 		//For each line of the file
