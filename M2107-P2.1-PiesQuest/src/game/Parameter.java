@@ -33,11 +33,6 @@ public class Parameter {
 	 * The format in which the game will be displayed (format: width_x_height)
 	 */
 	private String displayFormat;
-	
-	/**
-	 * The game in which the parameters will apply
-	 */
-	private Game game;
 
 	/**
 	 * Is the parameter menu displayed
@@ -46,12 +41,10 @@ public class Parameter {
 	
 	/**
 	 * Give standard parameters
-	 * @param theGame the game which will receive the parameters
 	 */
-	public Parameter(Game theGame) {
+	public Parameter() {
 		this.volume = 50;
 		this.displayFormat = "1080x720"; //The default display format
-		this.game = theGame;
 		this.isDisplayed = false;
 	}
 	

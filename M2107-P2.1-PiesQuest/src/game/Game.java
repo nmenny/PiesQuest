@@ -65,7 +65,7 @@ public class Game {
 	public Game(PlayerInterface theInterface) {
 		this.playerInterface = theInterface;
 		this.character = new Character("Player1", 3);
-		this.parameter = new Parameter(this);
+		this.parameter = new Parameter();
 		this.collectedStrawberries = new HashMap<Integer, Set<Integer>>();
 		
 		//At the initialization, the main menu is displayed
