@@ -13,7 +13,7 @@ How to start the application ?
 		
 			-> directional arrows : moving in the menu
 			-> enter key : select the menu
-			-> escape key : go back to the main menu
+			-> escape key : go back to the main menu (if you are on the main menu it allows you to close the game)
 			
 		In the game:
 		
