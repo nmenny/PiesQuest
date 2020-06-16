@@ -63,9 +63,8 @@ public class Parameter {
 		JPanel panelFormat = new JPanel();
 		panelFormat.setLayout(new GridBagLayout());
 		
-		String[] formatValues = {"800x600", "1080x720", "1920x1080"}; //The values held in the Combo box
 		JLabel formatLabel = new JLabel("Format : ");
-		JComboBox<String> cmb = new JComboBox<String>(formatValues);
+		JComboBox<String> cmb = new JComboBox<String>(Parameter.DISPLAY_FORMATS);
 		cmb.setSelectedIndex(1);
 		
 		cmb.setVisible(true);
