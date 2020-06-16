@@ -223,8 +223,9 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					this.theGame.setCurrentSelection(0);
 					break;
 				case 2: //Parameters Option
-					//this.inform("Functionality unimplemented !");
-					this.menuDisplayed = 1;
+					this.inform("Functionality unimplemented !");
+					
+					//this.menuDisplayed = 1;
 					break;
 				case 3: //Quit option
 					System.exit(0);
