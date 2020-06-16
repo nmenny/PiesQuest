@@ -1,10 +1,14 @@
 package game;
 
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -59,14 +63,57 @@ public class Parameter {
 	public void displayMenu(JFrame frame, PlayerInterface theInterface) {
 		this.isDisplayed = true;
 		
-		//Creating a panel to contain the format selector
-		JPanel panelFormat = new JPanel();
-		panelFormat.setLayout(new GridBagLayout());
+		Font componentFont = new Font("Arial", Font.PLAIN, 15);
 		
+		//Creating a panel to contain all the components
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+		
+		//Adding a constraint to place the components on the grid
+		GridBagConstraints c = new GridBagConstraints();
+		
+		//--- Format components ---
 		JLabel formatLabel = new JLabel("Format : ");
+		formatLabel.setFont(componentFont);
 		JComboBox<String> cmb = new JComboBox<String>(Parameter.DISPLAY_FORMATS);
+		cmb.setFont(componentFont);
 		cmb.setSelectedIndex(Parameter.findFormatIndex(this.displayFormat));
 		
+		cmb.setVisible(true);
+		formatLabel.setVisible(true);
+		
+		//Placing the components on the grid
+		c.gridx = 0;
+		c.gridy = 0;
+		panel.add(formatLabel, c);
+		c.gridx = 1;
+		panel.add(cmb, c);
+		
+		
+		//--- Close button ---
+		JButton quitBtn = new JButton("Back to menu");
+		quitBtn.setFont(componentFont);
+		
+		
+		
+		c.gridwidth = 2;
+		c.gridx = 0;
+		c.gridy = 1;
+		//Adding a top padding
+		c.insets = new Insets(50, 0, 0, 0);
+		panel.add(quitBtn, c);
+		
+		
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		
+		frame.add(panel);
+		
+		
+		frame.setVisible(true);
+		
+		//--- Events ---
+		
+		//When the value of the combobox changes
 		cmb.addActionListener(new ActionListener() {
 			
 			@Override
@@ -74,21 +121,23 @@ public class Parameter {
 				setFormat((String) cmb.getSelectedItem());
 				frame.setSize(getWidth(), getHeight());
 				theInterface.setSize(getWidth(), getHeight());
+				panel.setVisible(false);
+				
 				displayMenu(frame, theInterface);
 			}
 		});
 		
-		cmb.setVisible(true);
-		formatLabel.setVisible(true);
-		
-		panelFormat.add(formatLabel);
-		panelFormat.add(cmb);
-		
-		panelFormat.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		
-		frame.add(panelFormat);
-		
-		frame.setVisible(true);
+		//When we click on the "return to menu" button
+		quitBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				isDisplayed = false;
+				panel.setVisible(false);
+				frame.remove(panel);
+				theInterface.displayMenu(0);
+			}
+		});
 	}
 	
 	/**
