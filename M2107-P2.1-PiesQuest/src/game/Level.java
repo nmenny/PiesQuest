@@ -21,6 +21,11 @@ public class Level {
 	public static final int DEFAULT_TILE_SIZE = 40;
 	
 	/**
+	 * Represents the path to the levels
+	 */
+	public static final String LEVEL_FILE_PATH = "Levels/";
+	
+	/**
 	 * The name of the level
 	 */
 	private final String name;
@@ -102,7 +107,7 @@ public class Level {
 		this.strawberriesCollectedPositions.clear();
 		
 		//Loads the level file
-		String levelName = "Levels/level" +this.name.split("_")[0] +".txt";
+		String levelName = Level.LEVEL_FILE_PATH +"level" +this.name.split("_")[0] +".txt";
 		
 		BufferedReader br = new BufferedReader(new FileReader(levelName));
 		
@@ -216,7 +221,7 @@ public class Level {
 	 */
 	public static Level[] loadAllLevels() throws LevelException, FileNotFoundException, IOException {
 		List<Level> levels = new ArrayList<Level>();
-		String fileName = "Levels/LevelNames.txt";
+		String fileName = Level.LEVEL_FILE_PATH +"LevelNames.txt";
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		
