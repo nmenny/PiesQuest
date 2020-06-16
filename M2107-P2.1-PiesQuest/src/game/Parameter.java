@@ -18,7 +18,7 @@ public class Parameter {
 	/**
 	 * Stores all the different format of the screen
 	 */
-	public static final String[] displayFormats = {"800x600", "1080x720", "1920x1080"};
+	public static final String[] DISPLAY_FORMATS = {"800x600", "1080x720", "1920x1080"};
 	
 	/**
 	 * The sound volume of the game (in percent)
