@@ -32,7 +32,11 @@ public class GameTest extends TestCase {
 		TestCase.assertEquals(game.getCurrentLevel(), 0);
 		
 		game.chooseLevel(5);
-		TestCase.assertEquals(game.getCurrentLevel(), 5); //Since there's at least 6 levels, it load the sixth level
+		if(game.getLevel(5).isLocked()) {
+			TestCase.assertEquals(game.getCurrentLevel(), 0); //If the level is locked, we stay on the level 0
+		} else {
+			TestCase.assertEquals(game.getCurrentLevel(), 5); //Since there's at least 6 levels, it load the sixth level
+		}
 		
 		game.chooseLevel(12);
 		TestCase.assertFalse(game.getCurrentLevel() == 12); //There are 12 levels, so the thirteenth does not exist
