@@ -223,8 +223,8 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 					this.theGame.setCurrentSelection(0);
 					break;
 				case 2: //Parameters Option
-					this.inform("Functionality unimplemented !");
-					//this.menuDisplayed = 1;
+					//this.inform("Functionality unimplemented !");
+					this.menuDisplayed = 1;
 					break;
 				case 3: //Quit option
 					System.exit(0);
@@ -257,8 +257,11 @@ public class PlayerInterface extends JPanel implements Runnable, KeyListener {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				//If the selected level is unlock, we can select it
 				if(!this.theGame.getLevel(this.theGame.getCurrentSelection()).isLocked()) {
+					this.messageDisplayed = false;
 					this.menuDisplayed = 3;
 					this.theGame.chooseLevel(this.theGame.getCurrentSelection());
+				} else {
+					this.inform("Level " +(this.theGame.getCurrentSelection() + 1) + " locked !");
 				}
 			}
 			if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
