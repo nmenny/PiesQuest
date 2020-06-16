@@ -3,11 +3,13 @@ package game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -165,7 +167,8 @@ public class Game {
 			this.playerInterface.initMovements();
 			//Load the level
 			try {
-				this.levels[this.currentLevel].load();
+				String levelFile = Level.LEVEL_FILE_PATH +"level" +this.levels[this.currentLevel].getName().split("_")[0] +".txt";
+				this.levels[this.currentLevel].load(new BufferedReader(new FileReader(levelFile)));
 				//Set the initial position of the character
 				this.character.setPosition(this.levels[this.currentLevel].getInitialPlayerPosition(this.parameter.getHeight(), this.parameter.getWidth()));
 			} catch(FileNotFoundException e) {

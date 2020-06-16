@@ -99,17 +99,16 @@ public class Level {
 	
 	/**
 	 * Load the level in memory
+	 * @param br The BufferedReader used to read a level
 	 * @throws FileNotFoundException If the corresponding file does not exist 
 	 * @throws IOException If an error occurs during the reading of the file
 	 */
-	public void load() throws FileNotFoundException, IOException{
+	public void load(BufferedReader br) throws FileNotFoundException, IOException{
 		this.loadedLevel = new ArrayList<String>();
 		this.strawberriesCollectedPositions.clear();
 		
 		//Loads the level file
 		String levelName = Level.LEVEL_FILE_PATH +"level" +this.name.split("_")[0] +".txt";
-		
-		BufferedReader br = new BufferedReader(new FileReader(levelName));
 		
 		String line;
 		
